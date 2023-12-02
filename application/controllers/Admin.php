@@ -86,6 +86,49 @@ class Admin extends CI_Controller
 		}
 	}
 
+	public function editPasien()
+	{
+
+		$id 			= $this->input->post('id');
+		$nama 			= $this->input->post('nama');
+		$email 			= $this->input->post('email');
+		$whatsapp 		= $this->input->post('whatsapp');
+		$ttl 			= $this->input->post('ttl');
+		$agama 			= $this->input->post('agama');
+		$jk 			= $this->input->post('jk');
+		$alamat 		= $this->input->post('alamat');
+		$kota 			= $this->input->post('kota');
+		$provinsi 		= $this->input->post('provinsi');
+		$negara 		= $this->input->post('negara');
+		$data = [
+			'nama'  => $nama,
+			'email'  => $email,
+			'whatsapp'  => $whatsapp,
+			'tgl_lahir'  => $ttl,
+			'agama'  => $agama,
+			'jk'  => $jk,
+			'alamat'  => $alamat,
+			'kota'  => $kota,
+			'provinsi'  => $provinsi,
+			'negara'  => $negara,
+			'date_created' 		=> date('Y-m-d H:i:sa')
+		];
+		$this->db->where('id', $id);
+		$res = $this->db->update('data_user', $data);
+
+		if ($res) {
+			$this->session->set_flashdata('message', '<div class="alert alert-success  text-center" 												role="alert">
+							  Data Berhasil Diupdate
+							</div>');
+			redirect('admin/pasien');
+		} else {
+			$this->session->set_flashdata('message', '<div class="alert alert-danger  text-center" 												role="alert">
+							  Data Gagal Diupdate
+							</div>');
+			redirect('admin/pasien');
+		}
+	}
+
 	public function hapusUser()
 	{
 		$id = $this->input->post('id');
