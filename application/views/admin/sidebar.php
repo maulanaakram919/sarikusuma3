@@ -33,7 +33,7 @@
             <i class="uil-user"></i><a href="<?= base_url('admin/pasien') ?>"> Daftar Pasien</a>
         </li>
 
-        <li class="has-dropdown">
+        <!-- <li class="has-dropdown">
             <i class="uil-envelope-download fa-fw"></i><a href="#"> Mailbox</a>
             <ul class="sidebar-dropdown list-unstyled">
                 <li><a href="#">Lorem ipsum</a></li>
@@ -62,7 +62,7 @@
                 <li><a href="#">amet consectetur</a></li>
                 <li><a href="#">ipsum dolor sit</a></li>
             </ul>
-        </li>
+        </li> -->
         <li class="">
             <i class="uil-setting"></i><a href="#"> Settings</a>
             <ul class="sidebar-dropdown list-unstyled">
