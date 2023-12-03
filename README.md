@@ -1,1 +1,1 @@
-# sarikusma2
+# Sistem Informasi Sarikusuma
