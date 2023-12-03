@@ -73,7 +73,7 @@
                 <li><a href="#">ipsum dolor sit</a></li>
             </ul>
         </li>
-        <li class="has-dropdown">
+        <!-- <li class="has-dropdown">
             <i class="uil-chart-pie-alt"></i><a href="#"> Components</a>
             <ul class="sidebar-dropdown list-unstyled">
                 <li><a href="#">Lorem ipsum</a></li>
@@ -95,7 +95,7 @@
         </li>
         <li class="">
             <i class="uil-map-marker"></i><a href="#"> Maps</a>
-        </li>
+        </li> -->
     </ul>
 </aside>
 <section id="wrapper">
