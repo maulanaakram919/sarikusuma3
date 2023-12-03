@@ -64,7 +64,7 @@
                 <li><a href="#">ipsum dolor sit</a></li>
             </ul>
         </li> -->
-        <li class="">
+        <li class="has-dropdown">
             <i class="uil-setting"></i><a href="#"> Settings</a>
             <ul class="sidebar-dropdown list-unstyled">
                 <li><a href="#">Lorem ipsum</a></li>
@@ -72,6 +72,15 @@
                 <li><a href="#">dolor ipsum</a></li>
                 <li><a href="#">amet consectetur</a></li>
                 <li><a href="#">ipsum dolor sit</a></li>
+            </ul>
+        </li>
+        <li class="has-dropdown">
+            <i class="uil-setting"></i><a href="#"> Master</a>
+            <ul class="sidebar-dropdown list-unstyled">
+                <li><a href="#">Data Dokter</a></li>
+                <li><a href="#">Data obat Herbal</a></li>
+                <li><a href="#">Data Pasien</a></li>
+
             </ul>
         </li>
         <!-- <li class="has-dropdown">
