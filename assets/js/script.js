@@ -1,4 +1,4 @@
-const base_url = window.location.origin;
+const base_url = window.location.origin + '/sarikusuma3';
 $('.deleteUser').click(function () {
     let id = $(this).data('delete');
 
@@ -13,7 +13,7 @@ $('.deleteUser').click(function () {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: base_url + '/sarikusuma/admin/hapusUser',
+                url: base_url + '/admin/hapusUser',
                 method: 'post',
                 data: {
                     id: id
@@ -29,7 +29,7 @@ $('.deleteUser').click(function () {
                             icon: "success"
                         });
                         setTimeout(function () {
-                            document.location.href = base_url + "/sarikusuma/admin/pasien"
+                            document.location.href = base_url + "/admin/pasien"
                         }, 2000);
                     } else {
                         Swal.fire({
