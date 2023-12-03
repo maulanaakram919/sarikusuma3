@@ -7,7 +7,7 @@ class Dashboard extends CI_Controller
 	{
 		parent::__construct();
 
-		// check();
+		check();
 		$this->load->library('form_validation');
 		date_default_timezone_set('Asia/Jakarta');
 		// $this->load->library('breadcrumb');

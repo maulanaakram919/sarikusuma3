@@ -3,6 +3,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Admin extends CI_Controller
 {
+	public function __construct()
+	{
+		parent::__construct();
+
+		check();
+		$this->load->library('form_validation');
+		date_default_timezone_set('Asia/Jakarta');
+		// $this->load->library('breadcrumb');
+		// $this->load->library('logger');
+	}
 
 
 	public function index()
@@ -44,6 +54,76 @@ class Admin extends CI_Controller
 		// $this->load->view('admin/main', $data);
 		$this->load->view('admin/script', $data);
 		// $this->load->view('admin/footer', $data);
+	}
+	public function rekamMedis()
+	{
+		$data['title'] 					= 'Rekam Medis';
+		$data['username'] 				= $this->session->userdata();
+		$data['detail_user']			= $this->db->get('data_user')->result_array();
+		$this->load->view('admin/header', $data);
+		$this->load->view('admin/sidebar', $data);
+		$this->load->view('admin/navbar', $data);
+		$this->load->view('admin/rekamMedis', $data);
+		// $this->load->view('admin/main', $data);
+		$this->load->view('admin/script', $data);
+		// $this->load->view('admin/footer', $data);
+	}
+
+	public function inputRekamMEdis()
+	{
+		$username 				= $this->session->userdata('username');
+		$cek_terapi 			= $this->db->get_where('login', ['nama' => $username])->row_array();
+		$id_terapi 				= $cek_terapi['id'];
+		$id_user 				= $this->input->post('id');
+		$mata_kanan 			= $this->input->post('mata_kanan');
+		$mata_kanan_pinhole 	= $this->input->post('mata_kanan_pinhole');
+		$mata_kiri 				= $this->input->post('mata_kiri');
+		$mata_kiri_pinhole 		= $this->input->post('mata_kiri_pinhole');
+		$buta_warna 			= $this->input->post('buta_warna');
+		$buta_warna_parsial 	= $this->input->post('buta_warna_parsial');
+		$buta_warna_total 		= $this->input->post('buta_warna_total');
+		$visus_ods 				= $this->input->post('visus_ods');
+		$tio_ods 				= $this->input->post('tio_ods');
+		$segmen_ant_ods 		= $this->input->post('segmen_ant_ods');
+		$fundus_ods 			= $this->input->post('fundus_ods');
+		$ishihara_test_ods 		= $this->input->post('ishihara_test_ods');
+		$obat 					= $this->input->post('obat');
+		$kesimpulan 			= $this->input->post('kesimpulan');
+
+		$data = [
+			'id_user' => $id_user,
+			'id_dokter' => $id_terapi,
+			'mata_kanan' => $mata_kanan,
+			'mata_kanan_pinhole' => $mata_kanan_pinhole,
+			'mata_kiri' => $mata_kiri,
+			'mata_kiri_pinhole' => $mata_kiri_pinhole,
+			'buta_warna' => $buta_warna,
+			'buta_warna_parsial' => $buta_warna_parsial,
+			'buta_warna_total' => $buta_warna_total,
+			'visus_ods' => $visus_ods,
+			'tio_ods' => $tio_ods,
+			'segmen_ant_ods' => $segmen_ant_ods,
+			'fundus_ods' => $fundus_ods,
+			'ishihara_test_ods' => $ishihara_test_ods,
+			'obat' => $obat,
+			'kesimpulan' => $kesimpulan,
+			'tanggal' => date('Y-m-d'),
+			'jam' => date('H:i:sa'),
+			'layanan' => 'Pemeriksaan Mata'
+		];
+
+		$res = $this->db->insert('rekam_medis', $data);
+		if ($res) {
+			$this->session->set_flashdata('message', '<div class="alert alert-success  text-center" 												role="alert">
+							  Rekam Medis Berhasil Ditambahkan
+							</div>');
+			redirect('admin/rekamMedis');
+		} else {
+			$this->session->set_flashdata('message', '<div class="alert alert-danger  text-center" 												role="alert">
+							  Rekam Medis Gagal Ditambahkan
+							</div>');
+			redirect('admin/rekamMedis');
+		}
 	}
 
 	public function addPasien()

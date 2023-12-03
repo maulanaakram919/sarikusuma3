@@ -1,4 +1,5 @@
 const base_url = window.location.origin + '/sarikusuma3';
+
 $('.deleteUser').click(function () {
     let id = $(this).data('delete');
 
@@ -22,6 +23,7 @@ $('.deleteUser').click(function () {
 
                 },
                 success: function (data) {
+                    console.log(data)
                     if (data == 1) {
                         Swal.fire({
                             title: "Terhapus!",
@@ -45,3 +47,84 @@ $('.deleteUser').click(function () {
     });
 
 })
+function $_(selector) {
+    return document.querySelector(selector)
+}
+
+function find(el, selector) {
+    let finded
+    return (finded = el.querySelector(selector)) ? finded : null
+}
+
+function siblings(el) {
+    const siblings = []
+    for (let sibling of el.parentNode.children) {
+        if (sibling !== el) {
+            siblings.push(sibling)
+        }
+    }
+    return siblings
+}
+
+const showAsideBtn = $_('.show-side-btn')
+const sidebar = $_('.sidebar')
+const wrapper = $_('#wrapper')
+
+// showAsideBtn.addEventListener('click', function () {
+//      $_(`# $_{this.dataset.show}`).classList.toggle('show-sidebar')
+//     wrapper.classList.toggle('fullwidth')
+// })
+
+if (window.innerWidth < 767) {
+    sidebar.classList.add('show-sidebar');
+}
+
+window.addEventListener('resize', function () {
+    if (window.innerWidth > 767) {
+        sidebar.classList.remove('show-sidebar')
+    }
+})
+
+// dropdown menu in the side nav
+var slideNavDropdown = $_('.sidebar-dropdown');
+
+$_('.sidebar .categories').addEventListener('click', function () {
+    // event.preventDefault()
+
+    const item = event.target.closest('.has-dropdown')
+
+    if (!item) {
+        return
+    }
+
+    item.classList.toggle('opened')
+
+    siblings(item).forEach(sibling => {
+        sibling.classList.remove('opened')
+    })
+
+    if (item.classList.contains('opened')) {
+        const toOpen = find(item, '.sidebar-dropdown')
+
+        if (toOpen) {
+            toOpen.classList.add('active')
+        }
+
+        siblings(item).forEach(sibling => {
+            const toClose = find(sibling, '.sidebar-dropdown')
+
+            if (toClose) {
+                toClose.classList.remove('active')
+            }
+        })
+    } else {
+        find(item, '.sidebar-dropdown').classList.toggle('active')
+    }
+})
+
+
+
+
+
+
+

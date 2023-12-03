@@ -32,18 +32,19 @@
         <li class="">
             <i class="uil-user"></i><a href="<?= base_url('admin/pasien') ?>"> Daftar Pasien</a>
         </li>
+        <!-- <li class="">
+            <i class="uil-user"></i><a href="<?= base_url('admin/rekamMedis') ?>"> Rekam Medis Pasien</a>
+        </li> -->
 
-        <!-- <li class="has-dropdown">
-            <i class="uil-envelope-download fa-fw"></i><a href="#"> Mailbox</a>
+        <li class="has-dropdown">
+            <i class="uil-envelope-download fa-fw"></i><a href="#"> Rekam Medis</a>
             <ul class="sidebar-dropdown list-unstyled">
-                <li><a href="#">Lorem ipsum</a></li>
-                <li><a href="#">ipsum dolor</a></li>
-                <li><a href="#">dolor ipsum</a></li>
-                <li><a href="#">amet consectetur</a></li>
-                <li><a href="#">ipsum dolor sit</a></li>
+                <li><a href="<?= base_url('admin/rekamMedis') ?>">Pemeriksaan</a></li>
+                <li><a href="" target="_blank">History</a></li>
+
             </ul>
         </li>
-        <li class="has-dropdown">
+        <!--     <li class="has-dropdown">
             <i class="uil-shopping-cart-alt"></i><a href="#"> Ecommerce</a>
             <ul class="sidebar-dropdown list-unstyled">
                 <li><a href="#">Lorem ipsum</a></li>

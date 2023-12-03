@@ -424,4 +424,15 @@
           border-color: #6f6486;
         }
 
+label {
+    color: black;
+    margin-bottom: 3px;
+}
+
+.smaller{
+    font-size: smaller;
+}
+.smaller p{
+    margin-bottom: 0px;
+}
         
