@@ -130,7 +130,7 @@
                         </div>
                     <?php endfor ?>
 
-                    <table>
+                    <table class="table table-sm table-bordered">
                         <thead>
                             <tr>
                                 <th>No</th>

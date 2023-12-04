@@ -55,6 +55,32 @@ class Admin extends CI_Controller
 		$this->load->view('admin/script', $data);
 		// $this->load->view('admin/footer', $data);
 	}
+	public function dataTerapis()
+	{
+		$data['title'] 					= 'Data Terapis';
+		$data['username'] 				= $this->session->userdata();
+		$data['detail_user']			= $this->db->get('data_terapis')->result_array();
+		$this->load->view('admin/header', $data);
+		$this->load->view('admin/sidebar', $data);
+		$this->load->view('admin/navbar', $data);
+		$this->load->view('admin/dataTerapis', $data);
+		// $this->load->view('admin/main', $data);
+		$this->load->view('admin/script', $data);
+		// $this->load->view('admin/footer', $data);
+	}
+	public function dataObat()
+	{
+		$data['title'] 					= 'Data Obat';
+		$data['username'] 				= $this->session->userdata();
+		$data['detail_user']			= $this->db->get('data_obat')->result_array();
+		$this->load->view('admin/header', $data);
+		$this->load->view('admin/sidebar', $data);
+		$this->load->view('admin/navbar', $data);
+		$this->load->view('admin/dataObat', $data);
+		// $this->load->view('admin/main', $data);
+		$this->load->view('admin/script', $data);
+		// $this->load->view('admin/footer', $data);
+	}
 	public function rekamMedis()
 	{
 		$data['title'] 					= 'Rekam Medis';

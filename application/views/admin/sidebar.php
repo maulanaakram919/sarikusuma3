@@ -77,9 +77,9 @@
         <li class="has-dropdown">
             <i class="uil-setting"></i><a href="#"> Master</a>
             <ul class="sidebar-dropdown list-unstyled">
-                <li><a href="#">Data Terapis</a></li>
-                <li><a href="#">Data obat Herbal</a></li>
-                <li><a href="#">Data Pasien</a></li>
+                <li><a href="<?= base_url('admin/dataTerapis') ?>">Data Terapis</a></li>
+                <li><a href="<?= base_url('admin/dataObat') ?>">Data obat Herbal</a></li>
+                <li><a href="<?= base_url('admin/pasien') ?>">Data Pasien</a></li>
 
             </ul>
         </li>

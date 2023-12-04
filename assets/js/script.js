@@ -1,5 +1,8 @@
 const base_url = window.location.origin + '/sarikusuma3';
 
+$('.tabledata').DataTable();
+
+
 $('.deleteUser').click(function () {
     let id = $(this).data('delete');
 
