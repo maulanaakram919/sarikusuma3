@@ -12,59 +12,25 @@
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Pendaftaran Pasien</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Data Terapis</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="<?= base_url('admin/addPasien') ?>" method="POST">
+                        <form action="<?= base_url('admin/addTerapis') ?>" method="POST">
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <label for="nama">Nama</label>
-                                    <input type="text" class="form-control" id="nama" required name="nama" aria-describedby="nama" placeholder="Masukan Nama Pasien">
+                                    <label for="nama">Nama Terapis</label>
+                                    <input type="text" class="form-control" id="nama" required name="nama" aria-describedby="nama" placeholder="Masukan Nama Terapis">
                                 </div>
                                 <div class="form-group mt-3">
-                                    <label for="email">email</label>
-                                    <input type="text" class="form-control" id="email" required name="email" aria-describedby="email" placeholder="Masukan email Pasien">
+                                    <label for="text">Spesialis</label>
+                                    <input type="text" class="form-control" id="spesialis" required name="spesialis" aria-describedby="spesialis" placeholder="Masukan Spesialis">
                                 </div>
                                 <div class="form-group mt-3">
-                                    <label for="whatsapp">whatsapp</label>
-                                    <input type="text" class="form-control" id="whatsapp" required name="whatsapp" aria-describedby="whatsapp" placeholder="Masukan whatsapp Pasien">
+                                    <label for="jabatan">Jabatan</label>
+                                    <input type="text" class="form-control" id="jabatan" required name="jabatan" aria-describedby="jabatan" placeholder="Masukan jabatan Terapis">
                                 </div>
-                                <div class="form-group mt-3">
-                                    <label for="tanggal_lahir">tanggal_lahir</label>
-                                    <input type="date" class="form-control" id="tanggal_lahir" required name="ttl" aria-describedby="tanggal_lahir" placeholder="Masukan Tanggal Lahir Pasien">
-                                </div>
-                                <div class="form-group mt-3">
-                                    <label for="agama">agama</label>
-                                    <input type="text" class="form-control" id="agama" required name="agama" aria-describedby="agama" placeholder="Masukan agama Pasien">
-                                </div>
-                                <div class="form-group mt-3">
-                                    <label for="jk">Jenis Kelamin</label>
-                                    <select required name="jk" id="jk" class="form-control" required name="jk">
-                                        <option value="">Pilih Salah Satu</option>
-                                        <option value="p">Pria</option>
-                                        <option value="w">Wanita</option>
-                                    </select>
-                                </div>
-                                <div class="form-group mt-3">
-                                    <label for="alamat">alamat</label>
-                                    <input type="text" class="form-control" id="alamat" required name="alamat" aria-describedby="alamat" placeholder="Masukan Alamat Pasien">
-                                </div>
-                                <div class="form-group mt-3">
-                                    <label for="kota">kota</label>
-                                    <input type="text" class="form-control" id="kota" required name="negara" aria-describedby="kota" placeholder="Masukan kota Pasien">
-                                </div>
-                                <div class="form-group mt-3">
-                                    <label for="provinsi">provinsi</label>
-                                    <input type="text" class="form-control" id="provinsi" required name="provinsi" aria-describedby="provinsi" placeholder="Masukan provinsi Pasien">
-                                </div>
-                                <div class="form-group mt-3">
-                                    <label for="Negara">Negara</label>
-                                    <input type="text" class="form-control" id="Negara" required name="kota" aria-describedby="Negara" placeholder="Masukan Negara Pasien">
-                                </div>
-
-
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -78,7 +44,7 @@
     </div>
     <div class="row">
         <div class="col table-responsive">
-            <table border="1px white solid" class="table table-bordered table-sm  text-light">
+            <table border="1px white solid" class="table table-bordered table-sm  tabledata">
                 <thead>
                     <tr>
                         <th class="text-center align-middle">No</th>
@@ -110,20 +76,20 @@
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <form action="<?= base_url('admin/editPasien') ?>" method="POST">
+                                            <form action="<?= base_url('admin/editTerapis') ?>" method="POST">
                                                 <div class="modal-body">
                                                     <div class="form-group">
                                                         <input type="text" value="<?= $d['id'] ?>" hidden name="id">
                                                         <label for="nama">Nama Terapis</label>
-                                                        <input type="text" class="form-control" id="nama" required name="nama" aria-describedby="nama" placeholder="Masukan Nama Pasien" value="<?= $d['nama_terapis'] ?>">
+                                                        <input type="text" class="form-control" id="nama" required name="nama" aria-describedby="nama" placeholder="Masukan Nama Terapis" value="<?= $d['nama_terapis'] ?>">
                                                     </div>
                                                     <div class="form-group mt-3">
-                                                        <label for="email">Spesialis</label>
-                                                        <input type="text" class="form-control" id="email" required name="email" aria-describedby="email" placeholder="Masukan email Pasien" value="<?= $d['spesialis'] ?>">
+                                                        <label for="text">Spesialis</label>
+                                                        <input type="text" class="form-control" id="spesialis" required name="spesialis" aria-describedby="spesialis" placeholder="Masukan email Pasien" value="<?= $d['spesialis'] ?>">
                                                     </div>
                                                     <div class="form-group mt-3">
-                                                        <label for="whatsapp">Jabatan</label>
-                                                        <input type="text" class="form-control" id="whatsapp" required name="whatsapp" aria-describedby="whatsapp" placeholder="Masukan whatsapp Pasien" value="<?= $d['jabatan'] ?>">
+                                                        <label for="jabatan">Jabatan</label>
+                                                        <input type="text" class="form-control" id="jabatan" required name="jabatan" aria-describedby="jabatan" placeholder="Masukan jabatan Terapis" value="<?= $d['jabatan'] ?>">
                                                     </div>
 
 
@@ -139,7 +105,7 @@
                                 </div>
 
 
-                                <button data-delete="<?= $d['id'] ?>" class="btn btn-danger deleteUser btn-sm">Delete</button>
+                                <button data-delete="<?= $d['id'] ?>" class="btn btn-danger deleteTerapis btn-sm">Delete</button>
                             </td>
                         </tr>
                         <?php $i++ ?>

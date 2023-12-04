@@ -7,7 +7,7 @@
  <!--card end-->
 
  <!-- first layout start -->
- <div class="container-fluid bg-dark text-light" style="height:100%;">
+ <div class="container-fluid bg-dark tabledata" style="height:100%;">
      <div class="row text-center align-items-center">
          <div class="col-8">
          </div>

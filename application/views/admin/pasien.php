@@ -78,7 +78,7 @@
     </div>
     <div class="row">
         <div class="col table-responsive">
-            <table class="table table-bordered table-sm  text-light">
+            <table class="table table-bordered table-sm tabledata">
                 <thead>
                     <tr>
                         <th class="text-center align-middle">No</th>

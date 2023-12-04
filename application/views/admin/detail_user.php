@@ -1,7 +1,7 @@
 <div class="p-4">
     <div class="row">
         <div class="col">
-            <table class="table table-bordered text-light">
+            <table class="table table-bordered tabledata">
                 <thead>
                     <tr>
                         <th class="text-center align-middle">No</th>

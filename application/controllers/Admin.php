@@ -205,6 +205,32 @@ class Admin extends CI_Controller
 			redirect('admin/pasien');
 		}
 	}
+	public function addTerapis()
+	{
+		$nama 			= $this->input->post('nama');
+		$spesialis 		= $this->input->post('spesialis');
+		$jabatan 		= $this->input->post('jabatan');
+
+
+		$data = [
+			'nama_terapis'  => $nama,
+			'spesialis'  => $spesialis,
+			'jabatan'  => $jabatan,
+			'date_created' 		=> date('Y-m-d H:i:sa')
+		];
+		$res = $this->db->insert('data_terapis', $data);
+		if ($res) {
+			$this->session->set_flashdata('message', '<div class="alert alert-success  text-center" 												role="alert">
+							  Data Berhasil Ditambahkan
+							</div>');
+			redirect('admin/dataTerapis');
+		} else {
+			$this->session->set_flashdata('message', '<div class="alert alert-danger  text-center" 												role="alert">
+							  Data Gagal Ditambahkan
+							</div>');
+			redirect('admin/dataTerapis');
+		}
+	}
 
 	public function editPasien()
 	{
@@ -248,6 +274,35 @@ class Admin extends CI_Controller
 			redirect('admin/pasien');
 		}
 	}
+	public function editTerapis()
+	{
+
+		$id 			= $this->input->post('id');
+		$nama 			= $this->input->post('nama');
+		$spesialis 			= $this->input->post('spesialis');
+		$jabatan 		= $this->input->post('jabatan');
+
+		$data = [
+			'nama_terapis'  => $nama,
+			'spesialis'  => $spesialis,
+			'jabatan'  => $jabatan,
+			'date_modified' 		=> date('Y-m-d H:i:sa')
+		];
+		$this->db->where('id', $id);
+		$res = $this->db->update('data_terapis', $data);
+
+		if ($res) {
+			$this->session->set_flashdata('message', '<div class="alert alert-success  text-center" 												role="alert">
+							  Data Berhasil Diupdate
+							</div>');
+			redirect('admin/dataTerapis');
+		} else {
+			$this->session->set_flashdata('message', '<div class="alert alert-danger  text-center" 												role="alert">
+							  Data Gagal Diupdate
+							</div>');
+			redirect('admin/dataTerapis');
+		}
+	}
 
 	public function hapusUser()
 	{
@@ -255,6 +310,18 @@ class Admin extends CI_Controller
 
 		$this->db->where('id', $id);
 		$res = $this->db->delete('data_user');
+		if ($res) {
+			echo 1;
+		} else {
+			echo 0;
+		}
+	}
+	public function hapusTerapis()
+	{
+		$id = $this->input->post('id');
+
+		$this->db->where('id', $id);
+		$res = $this->db->delete('data_terapis');
 		if ($res) {
 			echo 1;
 		} else {

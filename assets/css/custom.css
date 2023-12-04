@@ -27,7 +27,7 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--dk-darker-bg);
+            /* background-color: var(--dk-darker-bg); */
             font-size: .925rem;
         }
 
@@ -424,7 +424,7 @@
           border-color: #6f6486;
         }
 
-label {
+.modal label {
     color: black;
     margin-bottom: 3px;
 }
@@ -435,4 +435,6 @@ label {
 .smaller p{
     margin-bottom: 0px;
 }
+
+
         

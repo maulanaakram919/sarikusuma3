@@ -78,7 +78,7 @@
     </div>
     <div class="row">
         <div class="col table-responsive">
-            <table class="table table-bordered table-sm  text-light">
+            <table class="table table-bordered table-sm  tabledata mt-3">
                 <thead>
                     <tr>
                         <th class="text-center align-middle">No</th>
@@ -117,7 +117,7 @@
                             <td class="align-middle"><?= $d['kota'] ?></td>
                             <td class="align-middle"><?= $d['provinsi'] ?></td>
                             <td class="align-middle"><?= $d['negara'] ?></td>
-                            <td class="align-middle p-2">
+                            <td class="align-middle p-2 text-nowrap">
 
                                 <div class="row">
                                     <div class="col">
