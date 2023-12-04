@@ -10,10 +10,10 @@
         </div>
     </div>
 
-    <div class="search position-relative text-center px-4 py-3 mt-2">
+    <!-- <div class="search position-relative text-center px-4 py-3 mt-2">
         <input type="text" class="form-control w-100 border-0 bg-transparent" placeholder="Search here">
         <i class="fa fa-search position-absolute d-block fs-6"></i>
-    </div>
+    </div> -->
 
     <ul class="categories list-unstyled">
         <!-- <li class="has-dropdown">
@@ -77,7 +77,7 @@
         <li class="has-dropdown">
             <i class="uil-setting"></i><a href="#"> Master</a>
             <ul class="sidebar-dropdown list-unstyled">
-                <li><a href="#">Data Dokter</a></li>
+                <li><a href="#">Data Terapis</a></li>
                 <li><a href="#">Data obat Herbal</a></li>
                 <li><a href="#">Data Pasien</a></li>
 
