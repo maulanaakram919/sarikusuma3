@@ -126,6 +126,20 @@ class Admin extends CI_Controller
 		}
 	}
 
+	public function kelolaRekamMedis($id)
+	{
+		$data['title'] 					= 'Kelola Rekam Medis';
+		$data['username'] 				= $this->session->userdata();
+		$data['detail_user']			= $this->db->get_where('data_user', ['id' => $id])->result_array();
+		$this->load->view('admin/header', $data);
+		$this->load->view('admin/sidebar', $data);
+		$this->load->view('admin/navbar', $data);
+		$this->load->view('admin/kelolaRekamMedis', $data);
+		// $this->load->view('admin/main', $data);
+		$this->load->view('admin/script', $data);
+		// $this->load->view('admin/footer', $data);
+	}
+
 	public function addPasien()
 	{
 		$nama 			= $this->input->post('nama');

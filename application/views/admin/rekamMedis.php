@@ -395,10 +395,7 @@
 
                                     </div>
                                     <div class="col">
-                                        <button class="btn btn-sm btn-info mt-1 mx-1" data-toggle="modal" data-target="#editUser<?= $d['id'] ?>">Edit Rekam Medis</button>
-                                    </div>
-                                    <div class="col">
-                                        <button data-delete="<?= $d['id'] ?>" class="btn btn-danger mt-1 deleteUser btn-sm">Delete Rekam Medis</button>
+                                        <a href="<?= base_url('admin/kelolaRekamMedis/' . $d['id']) ?>" class="btn btn-info mt-1 kelolaRekamMedis btn-sm" target="_blank">Kelola Rekam Medis</a>
                                     </div>
                                 </div>
 
