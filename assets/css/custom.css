@@ -432,6 +432,8 @@
 .smaller{
     font-size: smaller;
 }
+
+
 .smaller p{
     margin-bottom: 0px;
 }
