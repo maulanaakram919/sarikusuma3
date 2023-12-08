@@ -108,11 +108,11 @@ class Admin extends CI_Controller
 		$buta_warna 			= $this->input->post('buta_warna');
 		$buta_warna_parsial 	= $this->input->post('buta_warna_parsial');
 		$buta_warna_total 		= $this->input->post('buta_warna_total');
-		$visus_ods 				= $this->input->post('visus_ods');
-		$tio_ods 				= $this->input->post('tio_ods');
-		$segmen_ant_ods 		= $this->input->post('segmen_ant_ods');
-		$fundus_ods 			= $this->input->post('fundus_ods');
-		$ishihara_test_ods 		= $this->input->post('ishihara_test_ods');
+		$lampu15Titik 			= $this->input->post('lampu15Titik');
+		$lampuTerangGelap 		= $this->input->post('lampuTerangGelap');
+		$osilatorListrik 		= $this->input->post('osilatorListrik');
+		$stikMagnet 			= $this->input->post('stikMagnet');
+		$snelled 				= $this->input->post('snelled');
 		$obat 					= $this->input->post('obat');
 		$kesimpulan 			= $this->input->post('kesimpulan');
 
@@ -126,11 +126,11 @@ class Admin extends CI_Controller
 			'buta_warna' => $buta_warna,
 			'buta_warna_parsial' => $buta_warna_parsial,
 			'buta_warna_total' => $buta_warna_total,
-			'visus_ods' => $visus_ods,
-			'tio_ods' => $tio_ods,
-			'segmen_ant_ods' => $segmen_ant_ods,
-			'fundus_ods' => $fundus_ods,
-			'ishihara_test_ods' => $ishihara_test_ods,
+			'lampu15Titik' => $lampu15Titik,
+			'lampuTerangGelap' => $lampuTerangGelap,
+			'stikMagnet' => $stikMagnet,
+			'osilatorListrik' => $osilatorListrik,
+			'snelled' => $snelled,
 			'obat' => $obat,
 			'kesimpulan' => $kesimpulan,
 			'tanggal' => date('Y-m-d'),
