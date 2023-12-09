@@ -443,5 +443,9 @@
     width: 20px;
 }
 
+tr:hover{
+    cursor: pointer;
+}
+
 
         

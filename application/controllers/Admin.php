@@ -135,7 +135,8 @@ class Admin extends CI_Controller
 			'kesimpulan' => $kesimpulan,
 			'tanggal' => date('Y-m-d'),
 			'jam' => date('H:i:sa'),
-			'layanan' => 'Pemeriksaan Mata'
+			'layanan' => 'Pemeriksaan Mata',
+			'date_created' => date('Y-m-d H:i:sa')
 		];
 
 		$res = $this->db->insert('rekam_medis', $data);
@@ -151,12 +152,74 @@ class Admin extends CI_Controller
 			redirect('admin/rekamMedis');
 		}
 	}
+	public function updateRekamMEdis($id, $id_user)
+	{
+
+		$mata_kanan 			= $this->input->post('mata_kanan');
+		$mata_kanan_pinhole 	= $this->input->post('mata_kanan_pinhole');
+		$mata_kiri 				= $this->input->post('mata_kiri');
+		$mata_kiri_pinhole 		= $this->input->post('mata_kiri_pinhole');
+		$buta_warna 			= $this->input->post('buta_warna');
+		$buta_warna_parsial 	= $this->input->post('buta_warna_parsial');
+		$buta_warna_total 		= $this->input->post('buta_warna_total');
+		$lampu15Titik 			= $this->input->post('lampu15Titik');
+		$lampuTerangGelap 		= $this->input->post('lampuTerangGelap');
+		$osilatorListrik 		= $this->input->post('osilatorListrik');
+		$stikMagnet 			= $this->input->post('stikMagnet');
+		$snelled 				= $this->input->post('snelled');
+		$obat 					= $this->input->post('obat');
+		$kesimpulan 			= $this->input->post('kesimpulan');
+
+		$data = [
+			'mata_kanan' => $mata_kanan,
+			'mata_kanan_pinhole' => $mata_kanan_pinhole,
+			'mata_kiri' => $mata_kiri,
+			'mata_kiri_pinhole' => $mata_kiri_pinhole,
+			'buta_warna' => $buta_warna,
+			'buta_warna_parsial' => $buta_warna_parsial,
+			'buta_warna_total' => $buta_warna_total,
+			'lampu15Titik' => $lampu15Titik,
+			'lampuTerangGelap' => $lampuTerangGelap,
+			'stikMagnet' => $stikMagnet,
+			'osilatorListrik' => $osilatorListrik,
+			'snelled' => $snelled,
+			'obat' => $obat,
+			'kesimpulan' => $kesimpulan,
+			'tanggal' => date('Y-m-d'),
+			'jam' => date('H:i:sa'),
+			'layanan' => 'Pemeriksaan Mata',
+			'date_modified' => date('Y-m-d H:i:sa')
+		];
+		$this->db->where('id', $id);
+		$res = $this->db->update('rekam_medis', $data);
+		if ($res) {
+			$this->session->set_flashdata('message', '<div class="alert alert-success  text-center" 												role="alert">
+							  Rekam Medis Berhasil Diupdate
+							</div>');
+			redirect('admin/kelolaRekamMedis/' . $id_user);
+		} else {
+			$this->session->set_flashdata('message', '<div class="alert alert-danger  text-center" 												role="alert">
+							  Rekam Medis Gagal Diupdate
+							</div>');
+			redirect('admin/kelolaRekamMedis/' . $id_user);
+		}
+	}
 
 	public function kelolaRekamMedis($id)
 	{
 		$data['title'] 					= 'Kelola Rekam Medis';
 		$data['username'] 				= $this->session->userdata();
 		$data['detail_user']			= $this->db->get_where('data_user', ['id' => $id])->result_array();
+		$this->db->select('*');
+		$this->db->select('rekam_medis.date_created tanggal_periksa');
+		$this->db->select('rekam_medis.id id_rekam');
+		$this->db->from('rekam_medis');
+		$this->db->join('data_terapis', 'data_terapis.id = rekam_medis.id_dokter', 'left');
+		$this->db->join('data_user', 'data_user.id = rekam_medis.id_user', 'left');
+		$this->db->where('rekam_medis.id_user', $id);;
+
+		$data['rekam_medis']			= $this->db->get()->result_array();
+
 		$this->load->view('admin/header', $data);
 		$this->load->view('admin/sidebar', $data);
 		$this->load->view('admin/navbar', $data);
@@ -322,6 +385,18 @@ class Admin extends CI_Controller
 
 		$this->db->where('id', $id);
 		$res = $this->db->delete('data_terapis');
+		if ($res) {
+			echo 1;
+		} else {
+			echo 0;
+		}
+	}
+	public function hapusRekamMedis()
+	{
+		$id = $this->input->post('id');
+
+		$this->db->where('id', $id);
+		$res = $this->db->delete('rekam_medis');
 		if ($res) {
 			echo 1;
 		} else {
