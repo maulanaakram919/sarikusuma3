@@ -30,6 +30,9 @@
             <i class="uil-estate fa-fw"></i><a href="<?= base_url('admin') ?>"> Dashboard</a>
         </li>
         <li class="">
+            <i class="uil uil-file-edit-alt"></i><a href="<?= base_url('admin/reservasi') ?>"> Reservasi</a>
+        </li>
+        <li class="">
             <i class="uil-user"></i><a href="<?= base_url('admin/pasien') ?>"> Daftar Pasien</a>
         </li>
         <!-- <li class="">
