@@ -245,6 +245,7 @@ class Admin extends CI_Controller
 	public function addPasien()
 	{
 		$nama 			= $this->input->post('nama');
+		$no_ktp 			= $this->input->post('no_ktp');
 		$email 			= $this->input->post('email');
 		$whatsapp 		= $this->input->post('whatsapp');
 		$ttl 			= $this->input->post('ttl');
@@ -257,6 +258,7 @@ class Admin extends CI_Controller
 
 		$data = [
 			'nama'  => $nama,
+			'no_ktp'  => $no_ktp,
 			'email'  => $email,
 			'whatsapp'  => $whatsapp,
 			'tgl_lahir'  => $ttl,

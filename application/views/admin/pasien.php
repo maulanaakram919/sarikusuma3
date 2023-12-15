@@ -23,6 +23,10 @@
                                     <label for="nama">Nama</label>
                                     <input type="text" class="form-control" id="nama" required name="nama" aria-describedby="nama" placeholder="Masukan Nama Pasien">
                                 </div>
+                                <div class="form-group">
+                                    <label for="no_ktp">No KTP</label>
+                                    <input type="text" class="form-control" id="no_ktp" required name="no_ktp" aria-describedby="no_ktp" placeholder="Masukan No KTP Pasien">
+                                </div>
                                 <div class="form-group mt-3">
                                     <label for="email">email</label>
                                     <input type="text" class="form-control" id="email" required name="email" aria-describedby="email" placeholder="Masukan email Pasien">
