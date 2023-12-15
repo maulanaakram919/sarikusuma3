@@ -83,6 +83,7 @@
                     <tr>
                         <th class="text-center align-middle">No</th>
                         <th class="text-center align-middle">Nama</th>
+                        <th class="text-center align-middle">No KTP</th>
                         <th class="text-center align-middle">Email</th>
                         <th class="text-center align-middle">WhatsApp</th>
                         <th class="text-center align-middle">Tanggal Lahir</th>
@@ -101,6 +102,7 @@
                         <tr>
                             <td class="align-middle text-center"><?= $i ?></td>
                             <td class="align-middle"><?= $d['nama'] ?></td>
+                            <td class="align-middle"><?= $d['no_ktp'] ?></td>
                             <td class="align-middle"><?= $d['email'] ?></td>
                             <td class="align-middle"><?= $d['whatsapp'] ?></td>
                             <td class="align-middle text-center"><?= $d['tgl_lahir'] ?></td>
