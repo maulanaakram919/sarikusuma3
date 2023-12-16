@@ -10,6 +10,7 @@ class Admin extends CI_Controller
 		check();
 		$this->load->library('form_validation');
 		date_default_timezone_set('Asia/Jakarta');
+		$this->load->model('Admin_model');
 		// $this->load->library('breadcrumb');
 		// $this->load->library('logger');
 	}
@@ -59,7 +60,7 @@ class Admin extends CI_Controller
 	{
 		$data['title'] 					= 'Daftar Reservasi';
 		$data['username'] 				= $this->session->userdata();
-		$data['detail_user']			= $this->db->get('data_user')->result_array();
+		$data['detail_user']			= $this->Admin_model->reservasi();
 		$data['nik']					= $this->db->get('data_user')->result_array();
 		$this->load->view('admin/header', $data);
 		$this->load->view('admin/sidebar', $data);
@@ -88,6 +89,29 @@ class Admin extends CI_Controller
 		if ($insert) {
 			$this->session->set_flashdata('message', '<div class="alert alert-success  text-center" 												role="alert">
 							  Reservasi Berhasil Ditambahkan
+							</div>');
+			redirect('admin/reservasi');
+		}
+	}
+	public function editReservasi()
+	{
+		$id 						= $this->input->post('id');
+		$terapi 					= $this->input->post('terapi');
+		$tanggal_terapi 			= $this->input->post('tanggal_terapi');
+
+
+		$data = [
+
+
+			'terapi' => $terapi,
+			'tanggal_terapi' => $tanggal_terapi,
+			'date_created' => date('Y-m-d H:i:sa')
+		];
+		$this->db->where('id', $id);
+		$update = $this->db->update('reservasi', $data);
+		if ($update) {
+			$this->session->set_flashdata('message', '<div class="alert alert-success  text-center" 												role="alert">
+							  Reservasi Berhasil Diupdate
 							</div>');
 			redirect('admin/reservasi');
 		}
@@ -436,6 +460,18 @@ class Admin extends CI_Controller
 
 		$this->db->where('id', $id);
 		$res = $this->db->delete('rekam_medis');
+		if ($res) {
+			echo 1;
+		} else {
+			echo 0;
+		}
+	}
+	public function hapusReservasi()
+	{
+		$id = $this->input->post('id');
+
+		$this->db->where('id', $id);
+		$res = $this->db->delete('reservasi');
 		if ($res) {
 			echo 1;
 		} else {

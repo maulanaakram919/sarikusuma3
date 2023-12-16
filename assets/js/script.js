@@ -148,6 +148,53 @@ $('.delete_rekam_medis').click(function () {
     });
 
 })
+$('.deleteReservasi').click(function () {
+    let id = $(this).data('delete');
+
+    Swal.fire({
+        title: "Apakah Anda Yakin?",
+        text: "Data yang terhapus tidak dapat dikembalikan!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Hapus!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: base_url + '/admin/hapusReservasi',
+                method: 'post',
+                data: {
+                    id: id
+                },
+                beforeSend: function () {
+
+                },
+                success: function (data) {
+                    // console.log(data)
+                    if (data == 1) {
+                        Swal.fire({
+                            title: "Terhapus!",
+                            text: "Data anda berhasil dihapus.",
+                            icon: "success"
+                        });
+                        setTimeout(function () {
+                            document.location.href = base_url + "/admin/reservasi/"
+                        }, 2000);
+                    } else {
+                        Swal.fire({
+                            title: "Gagal!",
+                            text: "Data anda Gagal dihapus.",
+                            icon: "error"
+                        });
+                    }
+                }
+            })
+
+        }
+    });
+
+})
 
 function $_(selector) {
     return document.querySelector(selector)
