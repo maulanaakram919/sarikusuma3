@@ -6,69 +6,176 @@
         </div>
 
         <div class="col-sm-3">
-            <button class="btn btn-purple" data-toggle="modal" data-target="#addUser">Tambah Data</button>
+            <button class="btn btn-purple" data-toggle="modal" data-target="#addReservasi">Tambah Reservasi</button>
             <!-- Modal -->
-            <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="addReservasi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Pendaftaran Pasien</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Reservasi</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="<?= base_url('admin/addPasien') ?>" method="POST">
+                        <form action="<?= base_url('admin/addReservasi') ?>" method="POST">
                             <div class="modal-body">
-                                <div class="form-group">
-                                    <label for="nama">Nama</label>
-                                    <input type="text" class="form-control" id="nama" required name="nama" aria-describedby="nama" placeholder="Masukan Nama Pasien">
-                                </div>
-                                <div class="form-group mt-3">
-                                    <label for="email">email</label>
-                                    <input type="text" class="form-control" id="email" required name="email" aria-describedby="email" placeholder="Masukan email Pasien">
-                                </div>
-                                <div class="form-group mt-3">
-                                    <label for="whatsapp">whatsapp</label>
-                                    <input type="text" class="form-control" id="whatsapp" required name="whatsapp" aria-describedby="whatsapp" placeholder="Masukan whatsapp Pasien">
-                                </div>
-                                <div class="form-group mt-3">
-                                    <label for="tanggal_lahir">tanggal_lahir</label>
-                                    <input type="date" class="form-control" id="tanggal_lahir" required name="ttl" aria-describedby="tanggal_lahir" placeholder="Masukan Tanggal Lahir Pasien">
-                                </div>
-                                <div class="form-group mt-3">
-                                    <label for="agama">agama</label>
-                                    <input type="text" class="form-control" id="agama" required name="agama" aria-describedby="agama" placeholder="Masukan agama Pasien">
-                                </div>
-                                <div class="form-group mt-3">
-                                    <label for="jk">Jenis Kelamin</label>
-                                    <select required name="jk" id="jk" class="form-control" required name="jk">
-                                        <option value="">Pilih Salah Satu</option>
-                                        <option value="p">Pria</option>
-                                        <option value="w">Wanita</option>
-                                    </select>
-                                </div>
-                                <div class="form-group mt-3">
-                                    <label for="alamat">alamat</label>
-                                    <input type="text" class="form-control" id="alamat" required name="alamat" aria-describedby="alamat" placeholder="Masukan Alamat Pasien">
-                                </div>
-                                <div class="form-group mt-3">
-                                    <label for="kota">kota</label>
-                                    <input type="text" class="form-control" id="kota" required name="negara" aria-describedby="kota" placeholder="Masukan kota Pasien">
-                                </div>
-                                <div class="form-group mt-3">
-                                    <label for="provinsi">provinsi</label>
-                                    <input type="text" class="form-control" id="provinsi" required name="provinsi" aria-describedby="provinsi" placeholder="Masukan provinsi Pasien">
-                                </div>
-                                <div class="form-group mt-3">
-                                    <label for="Negara">Negara</label>
-                                    <input type="text" class="form-control" id="Negara" required name="kota" aria-describedby="Negara" placeholder="Masukan Negara Pasien">
-                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="cari">Cari Pasien</label>
+                                            <select name="cari" class="cari select2 form-control">
+                                                <option value="">Input NIK Pasien</option>
+                                                <?php foreach ($nik as $n) : ?>
+                                                    <option value="<?= $n['no_ktp'] ?>"><?= $n['no_ktp'] ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
 
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="smaller">
+                                            <div class="row text-dark">
+                                                <div class="col-sm-2">
+                                                    <p>Nama</p>
+                                                </div>
+                                                <div class="col-sm-1 text-center">
+                                                    <p>:</p>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <p id="nama"></p>
+                                                </div>
+                                                <div class="col-sm-1"></div>
+                                                <div class="col-sm-2">
+                                                    <p>Tanggal Lahir</p>
+                                                </div>
+                                                <div class="col-sm-1 text-center">
+                                                    <p>:</p>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <p id="tgl_lahir"></p>
+                                                </div>
+                                            </div>
+                                            <div class="row text-dark">
+                                                <div class="col-sm-2">
+                                                    <p>Email</p>
+                                                </div>
+                                                <div class="col-sm-1 text-center">
+                                                    <p>:</p>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <p id="email"></p>
+                                                </div>
+                                                <div class="col-sm-1"></div>
+                                                <div class="col-sm-2">
+                                                    <p>Agama</p>
+                                                </div>
+                                                <div class="col-sm-1 text-center">
+                                                    <p>:</p>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <p id="agama"></p>
+                                                </div>
+                                            </div>
+                                            <div class="row text-dark">
+                                                <div class="col-sm-2">
+                                                    <p>Whatsapp</p>
+                                                </div>
+                                                <div class="col-sm-1 text-center">
+                                                    <p>:</p>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <p id="whatsapp"></p>
+                                                </div>
+                                                <div class="col-sm-1"></div>
+                                                <div class="col-sm-2">
+                                                    <p>Jenis Kelamin</p>
+                                                </div>
+                                                <div class="col-sm-1 text-center">
+                                                    <p>:</p>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <p id="jk"></p>
 
+                                                </div>
+                                            </div>
+                                            <div class="row text-dark">
+                                                <div class="col-sm-2">
+                                                    <p>Alamat</p>
+                                                </div>
+                                                <div class="col-sm-1 text-center">
+                                                    <p>:</p>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <p id="alamat"></p>
+                                                </div>
+                                                <div class="col-sm-1"></div>
+                                                <div class="col-sm-2">
+                                                    <p>Kota</p>
+                                                </div>
+                                                <div class="col-sm-1 text-center">
+                                                    <p>:</p>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <p id="kota"></p>
+                                                </div>
+                                            </div>
+                                            <div class="row text-dark">
+                                                <div class="col-sm-2">
+                                                    <p>Provinsi</p>
+                                                </div>
+                                                <div class="col-sm-1 text-center">
+                                                    <p>:</p>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <p id="provinsi"></p>
+                                                </div>
+                                                <div class="col-sm-1"></div>
+                                                <div class="col-sm-2">
+                                                    <p>Negara</p>
+                                                </div>
+                                                <div class="col-sm-1 text-center">
+                                                    <p>:</p>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <p id="negara"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label class="mt-3" for="">Tujuan Terapi</label>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <select name="terapi" id="" class="form-control">
+                                                    <option value="">Pilih Terapi</option>
+                                                    <option value="mata">Terapi Mata</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label class="mt-3" for="">Tanggal Terapi</label>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <div class="input-group date">
+                                                    <input type="text" name="tanggal_terapi" class="form-control datepicker mt-2" value="<?= date('d-m-Y') ?>">
+                                                    <div class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-th"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                <button type="submit" class="btn btn-primary">Tambah Reservasi</button>
                             </div>
                         </form>
                     </div>

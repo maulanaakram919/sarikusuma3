@@ -57,9 +57,10 @@ class Admin extends CI_Controller
 	}
 	public function reservasi()
 	{
-		$data['title'] 					= 'Daftar Pasien';
+		$data['title'] 					= 'Daftar Reservasi';
 		$data['username'] 				= $this->session->userdata();
 		$data['detail_user']			= $this->db->get('data_user')->result_array();
+		$data['nik']					= $this->db->get('data_user')->result_array();
 		$this->load->view('admin/header', $data);
 		$this->load->view('admin/sidebar', $data);
 		$this->load->view('admin/navbar', $data);
@@ -67,6 +68,29 @@ class Admin extends CI_Controller
 		// $this->load->view('admin/main', $data);
 		$this->load->view('admin/script', $data);
 		// $this->load->view('admin/footer', $data);
+	}
+
+	public function addReservasi()
+	{
+		$nik 						= $this->input->post('cari');
+		$terapi 					= $this->input->post('terapi');
+		$tanggal_terapi 			= $this->input->post('tanggal_terapi');
+		$res 						= $this->db->get_where('data_user', ['no_ktp' => $nik])->row_array();
+		$data = [
+
+			'id_user' => $res['id'],
+			'terapi' => $terapi,
+			'tanggal_terapi' => $tanggal_terapi,
+			'date_created' => date('Y-m-d H:i:sa')
+		];
+
+		$insert = $this->db->insert('reservasi', $data);
+		if ($insert) {
+			$this->session->set_flashdata('message', '<div class="alert alert-success  text-center" 												role="alert">
+							  Reservasi Berhasil Ditambahkan
+							</div>');
+			redirect('admin/reservasi');
+		}
 	}
 	public function dataTerapis()
 	{
@@ -417,5 +441,13 @@ class Admin extends CI_Controller
 		} else {
 			echo 0;
 		}
+	}
+
+
+	public function cariPasien()
+	{
+		$cari = $this->input->post('cari');
+		$res = $this->db->get_where('data_user', ['no_ktp' => $cari])->row_array();
+		echo json_encode($res);
 	}
 }

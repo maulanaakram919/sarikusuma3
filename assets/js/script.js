@@ -1,7 +1,10 @@
 const base_url = window.location.origin + '/sarikusuma3';
 
 $('.tabledata').DataTable();
-
+$('.datepicker').datepicker({
+    format: 'dd-mm-yyyy',
+    startDate: '-3d'
+});
 
 $('.deleteUser').click(function () {
     let id = $(this).data('delete');
@@ -219,6 +222,51 @@ $_('.sidebar .categories').addEventListener('click', function () {
     } else {
         find(item, '.sidebar-dropdown').classList.toggle('active')
     }
+})
+
+$('.select2').select2({
+    dropdownParent: $('#addReservasi')
+});
+
+
+$('.cari').change(function () {
+    let cari = $(this).val();
+    $.ajax({
+        url: base_url + '/admin/cariPasien',
+        method: 'post',
+        dataType: 'json',
+        data: {
+            cari: cari
+        },
+        beforeSend: function () {
+
+        },
+        success: function (data) {
+            $('#nama').html('')
+            $('#email').html('')
+            $('#whatsapp').html('')
+            $('#tgl_lahir').html('')
+            $('#agama').html('')
+            $('#jk').html('')
+            $('#alamat').html('')
+            $('#kota').html('')
+            $('#provinsi').html('')
+            $('#negara').html('')
+            let jenis_kelamin = data.jk == 'p' ? 'Pria' : 'Wanita'
+
+            $('#nama').html(data.nama)
+            $('#email').html(data.email)
+            $('#whatsapp').html(data.whatsapp)
+            $('#tgl_lahir').html(data.tgl_lahir)
+            $('#agama').html(data.agama)
+            $('#jk').html(jenis_kelamin)
+            $('#alamat').html(data.alamat)
+            $('#kota').html(data.kota)
+            $('#provinsi').html(data.provinsi)
+            $('#negara').html(data.negara)
+        }
+
+    })
 })
 
 
