@@ -3,7 +3,8 @@ const base_url = window.location.origin + '/sarikusuma3';
 $('.tabledata').DataTable();
 $('.datepicker').datepicker({
     format: 'dd-mm-yyyy',
-    startDate: '-3d'
+    startDate: '-3d',
+    todayHighlight: true
 });
 
 $('.deleteUser').click(function () {

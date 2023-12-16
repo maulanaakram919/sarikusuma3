@@ -150,7 +150,7 @@
                                                 <label class="mt-3" for="">Tujuan Terapi</label>
                                             </div>
                                             <div class="col-sm-5">
-                                                <select name="terapi" id="" class="form-control">
+                                                <select name="terapi" id="" class="form-control" required>
                                                     <option value="">Pilih Terapi</option>
                                                     <option value="mata">Terapi Mata</option>
                                                 </select>
@@ -162,7 +162,7 @@
                                             </div>
                                             <div class="col-sm-5">
                                                 <div class="input-group date">
-                                                    <input type="text" name="tanggal_terapi" class="form-control datepicker mt-2" value="<?= date('d-m-Y') ?>">
+                                                    <input type="text" name="tanggal_terapi" class="form-control datepicker mt-2" value="<?= date('d-m-Y') ?>" required>
                                                     <div class="input-group-addon">
                                                         <span class="glyphicon glyphicon-th"></span>
                                                     </div>
@@ -368,7 +368,7 @@
                                                             <label class="mt-3" for="">Tujuan Terapi</label>
                                                         </div>
                                                         <div class="col-sm-5">
-                                                            <select name="terapi" id="" class="form-control">
+                                                            <select name="terapi" id="" class="form-control" required>
                                                                 <option selected value="<?= $d['terapi'] ?>">Terapi <?= $d['terapi'] ?></option>
                                                                 <option value="mata">Terapi Mata</option>
                                                             </select>
@@ -380,7 +380,7 @@
                                                         </div>
                                                         <div class="col-sm-5">
                                                             <div class="input-group date">
-                                                                <input type="text" name="tanggal_terapi" class="form-control datepicker mt-2" value="<?= $d['tanggal_terapi'] ?>">
+                                                                <input type="text" required name="tanggal_terapi" class="form-control datepicker mt-2" value="<?= $d['tanggal_terapi'] ?>">
                                                                 <div class="input-group-addon">
                                                                     <span class="glyphicon glyphicon-th"></span>
                                                                 </div>
