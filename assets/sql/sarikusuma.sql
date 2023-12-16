@@ -11,11 +11,60 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 04/12/2023 02:05:11
+ Date: 16/12/2023 19:27:06
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for data_obat
+-- ----------------------------
+DROP TABLE IF EXISTS `data_obat`;
+CREATE TABLE `data_obat`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nama_obat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `harga` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `date_created` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `date_modified` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of data_obat
+-- ----------------------------
+INSERT INTO `data_obat` VALUES (1, 'Madu Lambungku', '120000', NULL, NULL);
+INSERT INTO `data_obat` VALUES (2, 'Billberry', '35000', NULL, NULL);
+INSERT INTO `data_obat` VALUES (3, 'Madu mata', '65000', NULL, NULL);
+INSERT INTO `data_obat` VALUES (4, 'madu hutan', '90000', NULL, NULL);
+INSERT INTO `data_obat` VALUES (5, 'Renko gamat', '165000', NULL, NULL);
+INSERT INTO `data_obat` VALUES (6, 'madu penambah darah', '75000', NULL, NULL);
+INSERT INTO `data_obat` VALUES (7, 'Habbatussauda kapsul', '65000', NULL, NULL);
+INSERT INTO `data_obat` VALUES (8, 'Habbatussauda cair', '65000', NULL, NULL);
+INSERT INTO `data_obat` VALUES (9, 'Utsu', '1800000', NULL, NULL);
+INSERT INTO `data_obat` VALUES (10, 'tsubarashi', '1800000', NULL, NULL);
+INSERT INTO `data_obat` VALUES (11, 'minyak zaitun', '65000', NULL, NULL);
+
+-- ----------------------------
+-- Table structure for data_terapis
+-- ----------------------------
+DROP TABLE IF EXISTS `data_terapis`;
+CREATE TABLE `data_terapis`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nama_terapis` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `spesialis` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `jabatan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `date_created` datetime NULL DEFAULT NULL,
+  `date_modified` datetime NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of data_terapis
+-- ----------------------------
+INSERT INTO `data_terapis` VALUES (1, 'dr. DWI RATNA SARI HANDAYANI STr.Kes,MKK,MSi ', 'Patah Tulang', NULL, NULL, NULL);
+INSERT INTO `data_terapis` VALUES (2, 'JENG JULIE', 'Praktisi Bekam', NULL, NULL, NULL);
+INSERT INTO `data_terapis` VALUES (3, 'LUKMAN HAKIM', 'Praktisi Bekam', NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for data_user
@@ -25,6 +74,7 @@ CREATE TABLE `data_user`  (
   `id` int NOT NULL AUTO_INCREMENT,
   `id_user` int NOT NULL,
   `nama` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `no_ktp` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `email` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `whatsapp` varchar(35) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `tgl_lahir` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
@@ -41,9 +91,8 @@ CREATE TABLE `data_user`  (
 -- ----------------------------
 -- Records of data_user
 -- ----------------------------
-INSERT INTO `data_user` VALUES (1, 0, 'agus', 'agus1010@gmail.com', '81388227', '1990-02-21', 'Islam', 'p', 'Kalibata', 'Jakarta Selatan', 'DKI Jakarta', 'Indonesia', '2023-12-02 20:34:39');
-INSERT INTO `data_user` VALUES (8, 0, 'vinna', 'vinna1010@gmail.com', '2147483647', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-10-16 00:00:00');
-INSERT INTO `data_user` VALUES (11, 10, 'Tes', 'hahahahah123@gmail.c', '66787878', '1994-01-11', 'Islam', 'p', 'kalibata utara II', 'Jakarta Selatan', 'DKI Jakarta', 'Indonesia', '2023-12-02 20:35:50');
+INSERT INTO `data_user` VALUES (8, 0, 'vinna', '3174085904950005', 'vinna1010@gmail.com', '2147483647', '1998-06-16', 'Islam', '', 'Jl kalibata utara II no 70', 'Jakarta Selatan', 'Dki Jakarta', 'Indonesia', '2023-12-16 10:41:31');
+INSERT INTO `data_user` VALUES (11, 10, 'Tes', NULL, 'hahahahah123@gmail.c', '66787878', '1994-01-11', 'Islam', 'p', 'kalibata utara II', 'Jakarta Selatan', 'DKI Jakarta', 'Indonesia', '2023-12-02 20:35:50');
 
 -- ----------------------------
 -- Table structure for hubungisaya
@@ -132,21 +181,44 @@ CREATE TABLE `rekam_medis`  (
   `buta_warna` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `buta_warna_parsial` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `buta_warna_total` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `visus_ods` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `lampu15Titik` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `status` int NOT NULL,
-  `tio_ods` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `segmen_ant_ods` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `fundus_ods` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `ishihara_test_ods` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `lampuTerangGelap` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `stikMagnet` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `osilatorListrik` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `snelled` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `kesimpulan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `obat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `date_created` datetime NULL DEFAULT NULL,
+  `date_modified` date NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of rekam_medis
 -- ----------------------------
-INSERT INTO `rekam_medis` VALUES (3, 7, 0, 'periksa mata', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `rekam_medis` VALUES (4, 1, 1, 'Pemeriksaan Mata', '2023-12-04', '01:53:29am', 'tidak_kacamata', 'tidak_kacamata', 'tidak_kacamata', 'tidak_kacamata', 'tidak', 'tidak', 'tidak', 'ok', 0, 'ok', 'ok', 'ok', 'ok', 'semua normal', 'Tidak ada ');
+INSERT INTO `rekam_medis` VALUES (3, 7, 0, 'periksa mata', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `rekam_medis` VALUES (4, 1, 2, 'Pemeriksaan Mata', '2023-12-04', '01:53:29am', 'tidak_kacamata', 'tidak_kacamata', 'tidak_kacamata', 'tidak_kacamata', 'tidak', 'tidak', 'tidak', 'ok', 0, 'ok', 'ok', 'ok', 'ok', 'semua normal', 'Tidak ada ', '2023-12-09 02:15:54', NULL);
+INSERT INTO `rekam_medis` VALUES (5, 11, 1, 'Pemeriksaan Mata', '2023-12-09', '23:35:14pm', '', '', '', '', '', '', '', '', 0, '', '', '', '', '', '', NULL, NULL);
+
+-- ----------------------------
+-- Table structure for reservasi
+-- ----------------------------
+DROP TABLE IF EXISTS `reservasi`;
+CREATE TABLE `reservasi`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_user` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `tanggal_terapi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `terapi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `date_created` datetime NULL DEFAULT NULL,
+  `date_modified` datetime NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of reservasi
+-- ----------------------------
+INSERT INTO `reservasi` VALUES (3, '8', '16-12-2023', 'mata', '2023-12-16 18:43:13', NULL);
+INSERT INTO `reservasi` VALUES (4, '8', '30-12-2023', 'mata', '2023-12-16 18:43:40', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
