@@ -42,7 +42,7 @@
         <li class="has-dropdown">
             <i class="uil-envelope-download fa-fw"></i><a href="#"> Rekam Medis</a>
             <ul class="sidebar-dropdown list-unstyled">
-                <li><a href="<?= base_url('admin/rekamMedis') ?>">Pemeriksaan</a></li>
+                <li><a href="<?= base_url('admin/pemeriksaan') ?>">Pemeriksaan</a></li>
                 <li><a href="" target="_blank">History</a></li>
 
             </ul>

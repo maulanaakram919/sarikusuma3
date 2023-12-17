@@ -5,7 +5,7 @@
             <?= $this->session->flashdata('message') ?>
         </div>
 
-        <div class="col-sm-3">
+        <div class="col-sm-4">
             <button class="btn btn-purple" data-toggle="modal" data-target="#addReservasi">Tambah Reservasi</button>
             <!-- Modal -->
             <div class="modal fade" id="addReservasi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -23,7 +23,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="cari">Cari Pasien</label>
-                                            <select name="cari" class="cari select2 form-control">
+                                            <select name="cari" class="cari select2 form-control" required>
                                                 <option value="">Input NIK Pasien</option>
                                                 <?php foreach ($nik as $n) : ?>
                                                     <option value="<?= $n['no_ktp'] ?>"><?= $n['no_ktp'] ?></option>
@@ -34,6 +34,7 @@
                                     </div>
                                 </div>
                                 <hr>
+
                                 <div class="row">
                                     <div class="col">
                                         <div class="smaller">
@@ -181,6 +182,8 @@
                     </div>
                 </div>
             </div>
+
+            <a href="<?= base_url('admin/pasien') ?>" class="btn btn-info text-light">Daftar Pasien</a>
         </div>
     </div>
     <div class="row">
@@ -200,30 +203,18 @@
                 </thead>
                 <tbody>
                     <?php $i = 1; ?>
-                    <?php function hitung_umur($tanggal_lahir)
-                    {
-                        $birthDate = new DateTime($tanggal_lahir);
-                        $today = new DateTime("today");
-                        if ($birthDate > $today) {
-                            exit("0 tahun 0 bulan 0 hari");
-                        }
-                        $y = $today->diff($birthDate)->y;
-                        $m = $today->diff($birthDate)->m;
-                        $d = $today->diff($birthDate)->d;
-                        return $y . " tahun " . $m . " bulan " . $d . " hari";
-                    }
 
-                    ?>
                     <?php foreach ($detail_user as $d) : ?>
+
                         <tr>
                             <td class="align-middle text-center"><?= $i ?></td>
                             <td class="align-middle"><?= $d['nama'] ?></td>
                             <td class="align-middle text-center"><?= $d['tgl_lahir'] ?></td>
                             <td class="align-middle text-center"><?= hitung_umur($d['tgl_lahir']) ?></td>
 
-                            <?php if ($d['jk'] == 'l') : ?>
+                            <?php if ($d['jk'] == 'p') : ?>
                                 <td class="align-middle text-center">Laki laki</td>
-                            <?php elseif ($d['jk'] == 'p') : ?>
+                            <?php elseif ($d['jk'] == 'w') : ?>
                                 <td class="align-middle text-center">Perempuan</td>
                             <?php else : ?>
                                 <td class="align-middle text-center"></td>

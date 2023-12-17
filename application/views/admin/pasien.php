@@ -78,6 +78,8 @@
                     </div>
                 </div>
             </div>
+
+            <a href="<?= base_url('admin/reservasi') ?>" class="btn btn-info text-light">Reservasi</a>
         </div>
     </div>
     <div class="row">
@@ -96,7 +98,7 @@
                         <th class="text-center align-middle">Alamat</th>
                         <th class="text-center align-middle">Kota</th>
                         <th class="text-center align-middle">Provinsi</th>
-                        <th class="text-center align-middle">Negara</th>
+                        <!-- <th class="text-center align-middle">Negara</th> -->
                         <th class="text-center align-middle">Action</th>
                     </tr>
                 </thead>
@@ -122,7 +124,7 @@
                             <td class="align-middle"><?= $d['alamat'] ?></td>
                             <td class="align-middle"><?= $d['kota'] ?></td>
                             <td class="align-middle"><?= $d['provinsi'] ?></td>
-                            <td class="align-middle"><?= $d['negara'] ?></td>
+                            <!-- <td class="align-middle"><?= $d['negara'] ?></td> -->
                             <td class="align-middle p-2">
                                 <button class="btn btn-sm btn-info mx-1" data-toggle="modal" data-target="#editUser<?= $d['id'] ?>">Edit</button>
 

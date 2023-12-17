@@ -61,11 +61,28 @@ class Admin extends CI_Controller
 		$data['title'] 					= 'Daftar Reservasi';
 		$data['username'] 				= $this->session->userdata();
 		$data['detail_user']			= $this->Admin_model->reservasi();
+
 		$data['nik']					= $this->db->get('data_user')->result_array();
 		$this->load->view('admin/header', $data);
 		$this->load->view('admin/sidebar', $data);
 		$this->load->view('admin/navbar', $data);
 		$this->load->view('admin/reservasi', $data);
+		// $this->load->view('admin/main', $data);
+		$this->load->view('admin/script', $data);
+		// $this->load->view('admin/footer', $data);
+	}
+	public function pemeriksaan()
+	{
+		$data['title'] 					= 'Pemeriksaan';
+		$data['username'] 				= $this->session->userdata();
+		$data['detail_user']			= $this->Admin_model->reservasi();
+		$today							= date('d-m-Y');
+		$data['pemeriksaan']			= $this->Admin_model->pemeriksaan($today);
+
+		$this->load->view('admin/header', $data);
+		$this->load->view('admin/sidebar', $data);
+		$this->load->view('admin/navbar', $data);
+		$this->load->view('admin/pemeriksaan', $data);
 		// $this->load->view('admin/main', $data);
 		$this->load->view('admin/script', $data);
 		// $this->load->view('admin/footer', $data);
@@ -77,6 +94,13 @@ class Admin extends CI_Controller
 		$terapi 					= $this->input->post('terapi');
 		$tanggal_terapi 			= $this->input->post('tanggal_terapi');
 		$res 						= $this->db->get_where('data_user', ['no_ktp' => $nik])->row_array();
+		$cek 						= $this->db->get_where('reservasi', ['id_user' => $res['id'], 'tanggal_terapi' => $tanggal_terapi, 'terapi' => $terapi])->num_rows();
+		if ($cek > 0) {
+			$this->session->set_flashdata('message', '<div class="alert alert-warning  text-center" 												role="alert">
+							  Sudah Melakukan Reservasi
+							</div>');
+			redirect('admin/reservasi');
+		}
 		$data = [
 
 			'id_user' => $res['id'],
@@ -357,6 +381,31 @@ class Admin extends CI_Controller
 			redirect('admin/dataTerapis');
 		}
 	}
+	public function addObat()
+	{
+
+		$nama_obat 		= $this->input->post('nama_obat');
+		$harga 		= $this->input->post('harga');
+
+
+		$data = [
+			'nama_obat'  => $nama_obat,
+			'harga'  => $harga,
+			'date_created' 		=> date('Y-m-d H:i:sa')
+		];
+		$res = $this->db->insert('data_obat', $data);
+		if ($res) {
+			$this->session->set_flashdata('message', '<div class="alert alert-success  text-center" 												role="alert">
+							  Data Berhasil Ditambahkan
+							</div>');
+			redirect('admin/dataObat');
+		} else {
+			$this->session->set_flashdata('message', '<div class="alert alert-danger  text-center" 												role="alert">
+							  Data Gagal Ditambahkan
+							</div>');
+			redirect('admin/dataObat');
+		}
+	}
 
 	public function editPasien()
 	{
@@ -398,6 +447,32 @@ class Admin extends CI_Controller
 							  Data Gagal Diupdate
 							</div>');
 			redirect('admin/pasien');
+		}
+	}
+	public function editObat()
+	{
+
+		$id 				= $this->input->post('id');
+		$nama_obat 			= $this->input->post('nama_obat');
+		$harga 				= $this->input->post('harga');
+		$data = [
+			'nama_obat'  => $nama_obat,
+			'harga'  => $harga,
+			'date_modified' => date('Y-m-d H:i:sa')
+		];
+		$this->db->where('id', $id);
+		$res = $this->db->update('data_obat', $data);
+
+		if ($res) {
+			$this->session->set_flashdata('message', '<div class="alert alert-success  text-center" 												role="alert">
+							  Data Berhasil Diupdate
+							</div>');
+			redirect('admin/dataObat');
+		} else {
+			$this->session->set_flashdata('message', '<div class="alert alert-danger  text-center" 												role="alert">
+							  Data Gagal Diupdate
+							</div>');
+			redirect('admin/dataObat');
 		}
 	}
 	public function editTerapis()
@@ -448,6 +523,18 @@ class Admin extends CI_Controller
 
 		$this->db->where('id', $id);
 		$res = $this->db->delete('data_terapis');
+		if ($res) {
+			echo 1;
+		} else {
+			echo 0;
+		}
+	}
+	public function hapusObat()
+	{
+		$id = $this->input->post('id');
+
+		$this->db->where('id', $id);
+		$res = $this->db->delete('data_obat');
 		if ($res) {
 			echo 1;
 		} else {
