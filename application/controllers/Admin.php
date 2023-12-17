@@ -295,6 +295,7 @@ class Admin extends CI_Controller
 		$data['title'] 					= 'Kelola Rekam Medis';
 		$data['username'] 				= $this->session->userdata();
 		$data['detail_user']			= $this->db->get_where('data_user', ['id' => $id])->result_array();
+
 		$this->db->select('*');
 		$this->db->select('rekam_medis.date_created tanggal_periksa');
 		$this->db->select('rekam_medis.id id_rekam');
