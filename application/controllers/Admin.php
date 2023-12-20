@@ -105,6 +105,7 @@ class Admin extends CI_Controller
 
 			'id_user' => $res['id'],
 			'terapi' => $terapi,
+			'status' => 0,
 			'tanggal_terapi' => $tanggal_terapi,
 			'date_created' => date('Y-m-d H:i:sa')
 		];
@@ -122,6 +123,7 @@ class Admin extends CI_Controller
 		$id 						= $this->input->post('id');
 		$terapi 					= $this->input->post('terapi');
 		$tanggal_terapi 			= $this->input->post('tanggal_terapi');
+		$status 					= $this->input->post('status');
 
 
 		$data = [
@@ -129,6 +131,7 @@ class Admin extends CI_Controller
 
 			'terapi' => $terapi,
 			'tanggal_terapi' => $tanggal_terapi,
+			'status' => $status,
 			'date_created' => date('Y-m-d H:i:sa')
 		];
 		$this->db->where('id', $id);

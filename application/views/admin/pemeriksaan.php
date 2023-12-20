@@ -48,7 +48,7 @@
 
                                     </div>
                                     <div class="col">
-                                        <a href="<?= base_url('admin/kelolaRekamMedis/' . $d['id_user']) ?>" class="btn btn-info mt-1 kelolaRekamMedis btn-sm" target="_blank">Kelola Rekam Medis</a>
+                                        <a href="<?= base_url('admin/kelolaRekamMedis/' . $d['id_user']) ?>" class="btn btn-info mt-1 kelolaRekamMedis btn-sm" target="_blank">Lihat Rekam Medis</a>
                                     </div>
                                 </div>
 

@@ -198,6 +198,7 @@
                         <th class="text-center align-middle">Jenis Kelamin</th>
                         <th class="text-center align-middle">Jenis Terapi</th>
                         <th class="text-center align-middle">Tanggal Terapi</th>
+                        <th class="text-center align-middle">Status</th>
                         <th class="text-center align-middle">Action</th>
                     </tr>
                 </thead>
@@ -222,6 +223,11 @@
 
                             <td class="align-middle">Terapi <?= $d['terapi'] ?></td>
                             <td class="align-middle"><?= $d['tanggal_terapi'] ?></td>
+                            <?php if ($d['status'] == 1) : ?>
+                                <td class="align-middle text-success">Selesai</td>
+                            <?php else : ?>
+                                <td class="align-middle text-danger">Menunggu</td>
+                            <?php endif ?>
 
                             <td class="align-middle p-2">
                                 <button class="btn btn-sm btn-info mx-1" data-toggle="modal" data-target="#editReservasi<?= $d['id_reservasi'] ?>">Edit</button>
@@ -375,6 +381,24 @@
                                                                 <div class="input-group-addon">
                                                                     <span class="glyphicon glyphicon-th"></span>
                                                                 </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-2">
+                                                            <label class="mt-3" for="">Status</label>
+                                                        </div>
+                                                        <div class="col-sm-5">
+                                                            <div class="input-group status">
+                                                                <select name="status" id="" class="form-control mt-2" required>
+                                                                    <?php if ($d['status'] == 1) : ?>
+                                                                        <option value="1">Selesai</option>
+                                                                        <option value="0">Menunggu</option>
+                                                                    <?php else : ?>
+                                                                        <option value="0">Menunggu</option>
+                                                                        <option value="1">Selesai</option>
+                                                                    <?php endif ?>
+                                                                </select>
                                                             </div>
                                                         </div>
                                                     </div>
