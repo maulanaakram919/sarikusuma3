@@ -17,6 +17,7 @@
                         <th class="text-center align-middle">Jenis Kelamin</th>
                         <th class="text-center align-middle">Terapi</th>
                         <th class="text-center align-middle">Tanggal Terapi</th>
+                        <th class="text-center align-middle">Status</th>
                         <th class="text-center align-middle">Action</th>
                     </tr>
                 </thead>
@@ -38,17 +39,18 @@
 
                             <td class="align-middle"><?= $d['terapi'] ?></td>
                             <td class="align-middle"><?= $d['tanggal_terapi'] ?></td>
+                            <?php if ($d['status_reservasi'] == 1) : ?>
+                                <td class="align-middle text-success">Selesai</td>
+                            <?php else : ?>
+                                <td class="align-middle text-danger">Menunggu</td>
+                            <?php endif ?>
 
 
                             <td class="align-middle p-2 text-nowrap">
 
                                 <div class="row">
                                     <div class="col">
-
-
-                                    </div>
-                                    <div class="col">
-                                        <a href="<?= base_url('admin/kelolaRekamMedis/' . $d['id_user']) ?>" class="btn btn-info mt-1 kelolaRekamMedis btn-sm" target="_blank">Lihat Rekam Medis</a>
+                                        <a href="<?= base_url('admin/kelolaRekamMedis/' . $d['id_reservasi'] . '/' . $d['id_user']) ?>" class="btn btn-info mt-1 kelolaRekamMedis btn-sm" target="_blank">Lihat Rekam Medis</a>
                                     </div>
                                 </div>
 

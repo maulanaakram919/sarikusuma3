@@ -20,7 +20,9 @@ class Admin_model extends CI_Model
     public function pemeriksaan($date)
     {
         $query = "SELECT
-                    *
+                    *,
+                    reservasi.status status_reservasi,
+                    reservasi.id id_reservasi
                     FROM
                     reservasi
                     LEFT JOIN
@@ -32,7 +34,9 @@ class Admin_model extends CI_Model
                     ON
                     rekam_medis.id_user = reservasi.id_user
                     WHERE
-                    reservasi.tanggal_terapi LIKE '%" . $date . "%'";
+                    reservasi.tanggal_terapi LIKE '%" . $date . "%'
+                    GROUP BY reservasi.tanggal_terapi
+                    ";
         $res = $this->db->query($query);
         return $res->result_array();
     }

@@ -7,9 +7,9 @@
     </div>
     <div class="row mb-3">
         <div class="col">
-            <button class="btn btn-sm btn-primary mt-1 mx-1" data-toggle="modal" data-target="#inputRekamMedis<?= $this->uri->segment(3) ?>">Input Rekam Medis</button>
+            <button class="btn btn-sm btn-primary mt-1 mx-1" data-toggle="modal" data-target="#inputRekamMedis<?= $this->uri->segment(4) ?>">Input Rekam Medis</button>
 
-            <div class="modal fade text-dark" id="inputRekamMedis<?= $this->uri->segment(3) ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade text-dark" id="inputRekamMedis<?= $this->uri->segment(4) ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header text-dark">
@@ -18,7 +18,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="<?= base_url('admin/inputRekamMEdis') ?>" method="POST">
+                        <form action="<?= base_url('admin/inputRekamMEdis/' . $this->uri->segment(3) . '/' . $this->uri->segment(4)) ?>" method="POST">
                             <div class="modal-body">
                                 <input type="text" value="<?= $this->uri->segment(3) ?>" hidden name="id">
                                 <?php foreach ($detail_user as $d) : ?>
@@ -142,48 +142,36 @@
                                 <ol type="a">
                                     <li>Tajam Pengelihatan Minus
                                         <div class="form-group row mt-3">
-                                            <label for="mata_kanan" class="col col-form-label">Mata Kanan</label>
+                                            <label for="mata_kanan_minus" class="col col-form-label">Mata Kanan</label>
                                             <div class="col">
-                                                <select name="mata_kanan" id="mata_kanan" class="form-control">
-                                                    <option value="">Pilih Salah Satu</option>
-                                                    <option value="kacamata">Pakai kaca mata</option>
-                                                    <option value="tidak_kacamata">tanpa kaca mata</option>
-                                                </select>
+                                                <input type="text" class="form-control" name="mata_kanan_minus" id="mata_kanan_minus">
+
                                             </div>
                                         </div>
 
                                         <div class="form-group row mt-3">
-                                            <label for="mata_kiri" class="col col-form-label">Mata Kiri</label>
+                                            <label for="mata_kiri_minus" class="col col-form-label">Mata Kiri</label>
                                             <div class="col">
-                                                <select name="mata_kiri" id="mata_kiri" class="form-control">
-                                                    <option value="">Pilih Salah Satu</option>
-                                                    <option value="kacamata">Pakai kaca mata</option>
-                                                    <option value="tidak_kacamata">tanpa kaca mata</option>
-                                                </select>
+                                                <input type="text" class="form-control" name="mata_kiri_minus" id="mata_kiri_minus">
+
                                             </div>
                                         </div>
 
                                     </li>
                                     <li>Tajam Pengelihatan Plus
                                         <div class="form-group row mt-3">
-                                            <label for="mata_kanan" class="col col-form-label">Mata Kanan</label>
+                                            <label for="mata_kanan_plus" class="col col-form-label">Mata Kanan</label>
                                             <div class="col">
-                                                <select name="mata_kanan" id="mata_kanan" class="form-control">
-                                                    <option value="">Pilih Salah Satu</option>
-                                                    <option value="kacamata">Pakai kaca mata</option>
-                                                    <option value="tidak_kacamata">tanpa kaca mata</option>
-                                                </select>
+                                                <input type="text" class="form-control" name="mata_kanan_plus" id="mata_kanan_plus">
+
                                             </div>
                                         </div>
 
                                         <div class="form-group row mt-3">
-                                            <label for="mata_kiri" class="col col-form-label">Mata Kiri</label>
+                                            <label for="mata_kiri_plus" class="col col-form-label">Mata Kiri</label>
                                             <div class="col">
-                                                <select name="mata_kiri" id="mata_kiri" class="form-control">
-                                                    <option value="">Pilih Salah Satu</option>
-                                                    <option value="kacamata">Pakai kaca mata</option>
-                                                    <option value="tidak_kacamata">tanpa kaca mata</option>
-                                                </select>
+                                                <input type="text" class="form-control" name="mata_kiri_plus" id="mata_kiri_plus">
+
                                             </div>
                                         </div>
 
@@ -565,44 +553,30 @@
                                                                 <div class="form-group row mt-3">
                                                                     <label for="mata_kanan" class="col col-form-label">Mata Kanan</label>
                                                                     <div class="col">
-                                                                        <select name="mata_kanan" id="mata_kanan" class="form-control">
-                                                                            <option value="<?= $re['mata_kanan'] ?>"><?= $re['mata_kanan'] == 'kacamata' ? 'Pakai kaca mata' : 'tanpa kaca mata' ?></option>
-                                                                            <option value="kacamata">Pakai kaca mata</option>
-                                                                            <option value="tidak_kacamata">tanpa kaca mata</option>
-                                                                        </select>
+                                                                        <input type="text" class="form-control" name="mata_kanan_minus" value="<?= $re['mata_kanan_minus'] ?>">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row mt-3">
                                                                     <label for="mata_kiri" class="col col-form-label">Mata Kiri</label>
                                                                     <div class="col">
-                                                                        <select name="mata_kiri" id="mata_kiri" class="form-control">
-                                                                            <option value="<?= $re['mata_kiri'] ?>"><?= $re['mata_kiri'] == 'kacamata' ? 'Pakai kaca mata' : 'tanpa kaca mata' ?></option>
-                                                                            <option value="kacamata">Pakai kaca mata</option>
-                                                                            <option value="tidak_kacamata">tanpa kaca mata</option>
-                                                                        </select>
+                                                                        <input type="text" class="form-control" name="mata_kiri_minus" value="<?= $re['mata_kiri_minus'] ?>">
                                                                     </div>
                                                                 </div>
 
                                                             </li>
                                                             <li>Tajam Pengelihatan Plus
                                                                 <div class="form-group row mt-3">
-                                                                    <label for="mata_kanan" class="col col-form-label">Mata Kanan</label>
+                                                                    <label for="mata_kanan_plus" class="col col-form-label">Mata Kanan</label>
                                                                     <div class="col">
-                                                                        <select name="mata_kanan" id="mata_kanan" class="form-control">
-                                                                            <option value="<?= $re['mata_kanan'] ?>"><?= $re['mata_kanan'] == 'kacamata' ? 'Pakai kaca mata' : 'tanpa kaca mata' ?></option>
-                                                                            <option value="kacamata">Pakai kaca mata</option>
-                                                                            <option value="tidak_kacamata">tanpa kaca mata</option>
-                                                                        </select>
+                                                                        <input type="text" class="form-control" name="mata_kanan_plus" value="<?= $re['mata_kanan_plus'] ?>">
+
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row mt-3">
-                                                                    <label for="mata_kiri" class="col col-form-label">Mata Kiri</label>
+                                                                    <label for="mata_kiri_plus" class="col col-form-label">Mata Kiri</label>
                                                                     <div class="col">
-                                                                        <select name="mata_kiri" id="mata_kiri" class="form-control">
-                                                                            <option value="<?= $re['mata_kiri'] ?>"><?= $re['mata_kiri'] == 'kacamata' ? 'Pakai kaca mata' : 'tanpa kaca mata' ?></option>
-                                                                            <option value="kacamata">Pakai kaca mata</option>
-                                                                            <option value="tidak_kacamata">tanpa kaca mata</option>
-                                                                        </select>
+                                                                        <input type="text" class="form-control" name="mata_kiri_plus" value="<?= $re['mata_kiri_plus'] ?>">
+
                                                                     </div>
                                                                 </div>
 

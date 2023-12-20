@@ -183,16 +183,16 @@ class Admin extends CI_Controller
 		// $this->load->view('admin/footer', $data);
 	}
 
-	public function inputRekamMEdis()
+	public function inputRekamMEdis($id_reservasi, $id_pasien)
 	{
 		$username 				= $this->session->userdata('username');
 		$cek_terapi 			= $this->db->get_where('login', ['nama' => $username])->row_array();
 		$id_terapi 				= $cek_terapi['id'];
 		$id_user 				= $this->input->post('id');
-		$mata_kanan 			= $this->input->post('mata_kanan');
-		$mata_kanan_pinhole 	= $this->input->post('mata_kanan_pinhole');
-		$mata_kiri 				= $this->input->post('mata_kiri');
-		$mata_kiri_pinhole 		= $this->input->post('mata_kiri_pinhole');
+		$mata_kanan_minus 		= $this->input->post('mata_kanan_minus');
+		$mata_kiri_minus 		= $this->input->post('mata_kiri_minus');
+		$mata_kanan_plus 		= $this->input->post('mata_kanan_plus');
+		$mata_kiri_plus 		= $this->input->post('mata_kiri_plus');
 		$buta_warna 			= $this->input->post('buta_warna');
 		$buta_warna_parsial 	= $this->input->post('buta_warna_parsial');
 		$buta_warna_total 		= $this->input->post('buta_warna_total');
@@ -205,12 +205,12 @@ class Admin extends CI_Controller
 		$kesimpulan 			= $this->input->post('kesimpulan');
 
 		$data = [
-			'id_user' => $id_user,
+			'id_user' => $id_pasien,
 			'id_dokter' => $id_terapi,
-			'mata_kanan' => $mata_kanan,
-			'mata_kanan_pinhole' => $mata_kanan_pinhole,
-			'mata_kiri' => $mata_kiri,
-			'mata_kiri_pinhole' => $mata_kiri_pinhole,
+			'mata_kanan_minus' => $mata_kanan_minus,
+			'mata_kiri_minus' => $mata_kiri_minus,
+			'mata_kanan_plus' => $mata_kanan_plus,
+			'mata_kiri_plus' => $mata_kiri_plus,
 			'buta_warna' => $buta_warna,
 			'buta_warna_parsial' => $buta_warna_parsial,
 			'buta_warna_total' => $buta_warna_total,
@@ -224,20 +224,26 @@ class Admin extends CI_Controller
 			'tanggal' => date('Y-m-d'),
 			'jam' => date('H:i:sa'),
 			'layanan' => 'Pemeriksaan Mata',
+			'status' => 1,
 			'date_created' => date('Y-m-d H:i:sa')
 		];
+		$data_reservasi = [
+			'status' => 1
+		];
+		$this->db->where('id', $id_reservasi);
+		$this->db->update('reservasi', $data_reservasi);
 
 		$res = $this->db->insert('rekam_medis', $data);
 		if ($res) {
 			$this->session->set_flashdata('message', '<div class="alert alert-success  text-center" 												role="alert">
 							  Rekam Medis Berhasil Ditambahkan
 							</div>');
-			redirect('admin/rekamMedis');
+			redirect('admin/pemeriksaan');
 		} else {
 			$this->session->set_flashdata('message', '<div class="alert alert-danger  text-center" 												role="alert">
 							  Rekam Medis Gagal Ditambahkan
 							</div>');
-			redirect('admin/rekamMedis');
+			redirect('admin/pemeriksaan');
 		}
 	}
 	public function updateRekamMEdis($id, $id_user)
@@ -293,7 +299,7 @@ class Admin extends CI_Controller
 		}
 	}
 
-	public function kelolaRekamMedis($id)
+	public function kelolaRekamMedis($id_reservasi, $id)
 	{
 		$data['title'] 					= 'Kelola Rekam Medis';
 		$data['username'] 				= $this->session->userdata();
@@ -305,7 +311,8 @@ class Admin extends CI_Controller
 		$this->db->from('rekam_medis');
 		$this->db->join('data_terapis', 'data_terapis.id = rekam_medis.id_dokter', 'left');
 		$this->db->join('data_user', 'data_user.id = rekam_medis.id_user', 'left');
-		$this->db->where('rekam_medis.id_user', $id);;
+		$this->db->where('rekam_medis.id_user', $id);
+		$this->db->order_by('rekam_medis.date_created', 'DESC');
 
 		$data['rekam_medis']			= $this->db->get()->result_array();
 
