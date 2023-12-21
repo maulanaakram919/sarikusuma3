@@ -249,10 +249,10 @@ class Admin extends CI_Controller
 	public function updateRekamMEdis($id, $id_user)
 	{
 
-		$mata_kanan 			= $this->input->post('mata_kanan');
-		$mata_kanan_pinhole 	= $this->input->post('mata_kanan_pinhole');
-		$mata_kiri 				= $this->input->post('mata_kiri');
-		$mata_kiri_pinhole 		= $this->input->post('mata_kiri_pinhole');
+		$mata_kanan_minus 		= $this->input->post('mata_kanan_minus');
+		$mata_kanan_plus 		= $this->input->post('mata_kanan_plus');
+		$mata_kiri_minus 		= $this->input->post('mata_kiri_minus');
+		$mata_kiri_plus 		= $this->input->post('mata_kiri_plus');
 		$buta_warna 			= $this->input->post('buta_warna');
 		$buta_warna_parsial 	= $this->input->post('buta_warna_parsial');
 		$buta_warna_total 		= $this->input->post('buta_warna_total');
@@ -265,10 +265,10 @@ class Admin extends CI_Controller
 		$kesimpulan 			= $this->input->post('kesimpulan');
 
 		$data = [
-			'mata_kanan' => $mata_kanan,
-			'mata_kanan_pinhole' => $mata_kanan_pinhole,
-			'mata_kiri' => $mata_kiri,
-			'mata_kiri_pinhole' => $mata_kiri_pinhole,
+			'mata_kanan_minus' 	=> $mata_kanan_minus,
+			'mata_kanan_plus' 	=> $mata_kanan_plus,
+			'mata_kiri_minus' 	=> $mata_kiri_minus,
+			'mata_kiri_plus' 	=> $mata_kiri_plus,
 			'buta_warna' => $buta_warna,
 			'buta_warna_parsial' => $buta_warna_parsial,
 			'buta_warna_total' => $buta_warna_total,
@@ -290,12 +290,12 @@ class Admin extends CI_Controller
 			$this->session->set_flashdata('message', '<div class="alert alert-success  text-center" 												role="alert">
 							  Rekam Medis Berhasil Diupdate
 							</div>');
-			redirect('admin/kelolaRekamMedis/' . $id_user);
+			redirect('admin/kelolaRekamMedis/' . $id . '/' . $id_user);
 		} else {
 			$this->session->set_flashdata('message', '<div class="alert alert-danger  text-center" 												role="alert">
 							  Rekam Medis Gagal Diupdate
 							</div>');
-			redirect('admin/kelolaRekamMedis/' . $id_user);
+			redirect('admin/kelolaRekamMedis/' . $id . '/' . $id_user);
 		}
 	}
 

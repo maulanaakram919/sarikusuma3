@@ -21,16 +21,13 @@
                             <div class="modal-body">
                                 <div class="form-group">
 
-                                    <label for="nama">Nama Obat</label>
-                                    <input type="text" class="form-control" id="nama" required name="nama_obat" aria-describedby="nama" placeholder="Masukan Nama Obat">
+                                    <label for="nama">Nama Vitamin</label>
+                                    <input type="text" class="form-control" id="nama" required name="nama_obat" aria-describedby="nama" placeholder="Masukan Nama Vitamin">
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="harga">Harga</label>
-                                    <input type="text" class="form-control" id="harga" required name="harga" aria-describedby="harga" placeholder="Masukan harga Obat">
+                                    <input type="text" class="form-control rupiah" id="harga" required name="harga" aria-describedby="harga" placeholder="Masukan harga Vitamin">
                                 </div>
-
-
-
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -48,7 +45,7 @@
                 <thead>
                     <tr>
                         <th class="text-center align-middle">No</th>
-                        <th class="text-center align-middle">Nama Obat</th>
+                        <th class="text-center align-middle">Nama Vitamin</th>
                         <th class="text-center align-middle">Harga</th>
                         <th class="text-center align-middle">Action</th>
                     </tr>
@@ -59,7 +56,7 @@
                         <tr>
                             <td class="align-middle text-center"><?= $i ?></td>
                             <td class="align-middle"><?= $d['nama_obat'] ?></td>
-                            <td class="align-middle"><?= $d['harga'] ?></td>
+                            <td class="align-middle rupiah"><?= $d['harga'] ?></td>
 
                             <td class="align-middle p-2">
                                 <button class="btn btn-sm btn-info mx-1" data-toggle="modal" data-target="#editObat<?= $d['id'] ?>">Edit</button>
@@ -82,7 +79,7 @@
                                                     </div>
                                                     <div class="form-group mt-3">
                                                         <label for="harga">Harga</label>
-                                                        <input type="text" class="form-control" id="harga" required name="harga" aria-describedby="harga" placeholder="Masukan harga Obat" value="<?= $d['harga'] ?>">
+                                                        <input type="text" class="form-control rupiah" id="harga" required name="harga" aria-describedby="harga" placeholder="Masukan harga Obat" value="<?= $d['harga'] ?>">
                                                     </div>
 
 

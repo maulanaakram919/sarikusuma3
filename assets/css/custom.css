@@ -451,6 +451,11 @@ tr:hover{
     width: 100%!important;
 }
 
+.dataTables_wrapper .dataTables_filter input{
+    border: 1px solid black!important;
+    margin-bottom: 10px;
+}
+
 
 
 

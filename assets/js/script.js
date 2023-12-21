@@ -7,6 +7,25 @@ $('.datepicker').datepicker({
     todayHighlight: true
 });
 
+new AutoNumeric.multiple('.rupiah', {
+    onInvalidPaste: 'truncate',
+    modifyValueOnWheel: false,
+    watchExternalChanges: true,
+    decimalPlaces: 0,
+    currencySymbol: 'Rp. ',
+    decimalPlacesRawValue: 0,
+    decimalPlacesShownOnBlur: 0,
+    unformatOnSubmit: true,
+    styleRules: {
+        "positive": "autoNumeric-positive",
+        "negative": "autoNumeric-negative"
+    },
+    decimalCharacterAlternative: '.',
+
+    // negativeBracketsTypeOnBlur: '(,)'
+
+});
+
 $('.deleteUser').click(function () {
     let id = $(this).data('delete');
 
@@ -152,6 +171,7 @@ $('body').on('click', '.deleteObat', function () {
 $('.delete_rekam_medis').click(function () {
     let id = $(this).data('delete');
     let id_user = $(this).data('user');
+    let id_reservasi = $(this).data('reservasi');
 
     Swal.fire({
         title: "Apakah Anda Yakin?",
@@ -181,7 +201,7 @@ $('.delete_rekam_medis').click(function () {
                             icon: "success"
                         });
                         setTimeout(function () {
-                            document.location.href = base_url + "/admin/kelolaRekamMedis/" + id_user
+                            document.location.href = base_url + "/admin/kelolaRekamMedis/" + id_reservasi + "/" + id_user
                         }, 2000);
                     } else {
                         Swal.fire({

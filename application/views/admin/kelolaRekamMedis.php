@@ -1,11 +1,12 @@
 <div class="p-4">
-    <div class="row mb-3">
+    <!-- <div class="row mb-3">
 
         <div class="flash mt-5 mb-3">
-            <?= $this->session->flashdata('message') ?>
+
         </div>
-    </div>
+    </div> -->
     <div class="row mb-3">
+        <?= $this->session->flashdata('message') ?>
         <div class="col">
             <button class="btn btn-sm btn-primary mt-1 mx-1" data-toggle="modal" data-target="#inputRekamMedis<?= $this->uri->segment(4) ?>">Input Rekam Medis</button>
 
@@ -241,17 +242,17 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row mt-3">
-                                                <label for="snelled" class="col col-form-label"> Snellend Chart minus & plus</label>
+                                                <label for="snelled" class="col col-form-label"> Snellen Chart minus & plus</label>
                                                 <div class="col">
                                                     <input type="text" class="form-control" name="snelled">
                                                 </div>
                                             </div>
-                                            <div class="form-group row mt-3">
+                                            <!-- <div class="form-group row mt-3">
                                                 <label for="obat" class="col col-form-label"> OBAT</label>
                                                 <div class="col">
                                                     <input type="text" class="form-control" name="obat">
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             <div class="form-group row mt-3">
                                                 <label for="kesimpulan" class="col-sm-12 col-form-label">KESIMPULAN </label>
                                                 <div class="col-sm-12">
@@ -289,7 +290,7 @@
 
 
                     <?php for ($i = 0; $i < count($detail_user); $i++) : ?>
-                        <div class="smaller">
+                        <div class="smaller mb-5">
                             <div class="row text-dark">
                                 <div class="col-sm-2">
                                     <p>Nama</p>
@@ -403,7 +404,7 @@
                         </div>
                     <?php endfor ?>
 
-                    <table class="table table-sm table-bordered table-hover table-striped mt-5">
+                    <table class="table table-sm table-bordered table-hover table-striped mt-5 tabledata">
                         <thead>
                             <tr>
                                 <th class="align-middle text-center">No</th>
@@ -414,6 +415,7 @@
                         </thead>
                         <tbody>
                             <?php $i = 1; ?>
+
                             <?php foreach ($rekam_medis as $re) : ?>
                                 <tr data-toggle="modal" data-target="#updateRekamMedis<?= $re['id_rekam'] ?>">
                                     <td class="text-center"><?= $i; ?></td>
@@ -551,13 +553,13 @@
                                                         <ol type="a">
                                                             <li>Tajam Pengelihatan Minus
                                                                 <div class="form-group row mt-3">
-                                                                    <label for="mata_kanan" class="col col-form-label">Mata Kanan</label>
+                                                                    <label for="mata_kanan_minus" class="col col-form-label">Mata Kanan</label>
                                                                     <div class="col">
                                                                         <input type="text" class="form-control" name="mata_kanan_minus" value="<?= $re['mata_kanan_minus'] ?>">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row mt-3">
-                                                                    <label for="mata_kiri" class="col col-form-label">Mata Kiri</label>
+                                                                    <label for="mata_kiri_minus" class="col col-form-label">Mata Kiri</label>
                                                                     <div class="col">
                                                                         <input type="text" class="form-control" name="mata_kiri_minus" value="<?= $re['mata_kiri_minus'] ?>">
                                                                     </div>
@@ -647,17 +649,17 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row mt-3">
-                                                                        <label for="snelled" class="col col-form-label"> Snellend Chart minus & plus</label>
+                                                                        <label for="snelled" class="col col-form-label"> Snellen Chart minus & plus</label>
                                                                         <div class="col">
                                                                             <input type="text" value="<?= $re['snelled'] ?>" class="form-control" name="snelled">
                                                                         </div>
                                                                     </div>
-                                                                    <div class="form-group row mt-3">
+                                                                    <!-- <div class="form-group row mt-3">
                                                                         <label for="obat" class="col col-form-label"> OBAT</label>
                                                                         <div class="col">
                                                                             <input type="text" class="form-control" name="obat" value="<?= $re['obat'] ?>">
                                                                         </div>
-                                                                    </div>
+                                                                    </div> -->
                                                                     <div class="form-group row mt-3">
                                                                         <label for="kesimpulan" class="col-sm-12 col-form-label">KESIMPULAN </label>
                                                                         <div class="col-sm-12">
@@ -669,7 +671,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" data-delete="<?= $re['id_rekam'] ?>" data-user="<?= $re['id'] ?>" class="btn btn-danger delete_rekam_medis" data-dismiss="modal">Delete</button>
+                                                        <button type="button" data-delete="<?= $re['id_rekam'] ?>" data-reservasi="<?= $this->uri->segment(3) ?>" data-user="<?= $re['id'] ?>" class="btn btn-danger delete_rekam_medis" data-dismiss="modal">Delete</button>
                                                         <button type="submit" class="btn btn-primary">Update</button>
                                                     </div>
                                                 </form>

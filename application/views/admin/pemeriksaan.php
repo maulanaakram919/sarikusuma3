@@ -6,6 +6,7 @@
         </div>
     </div>
     <div class="row">
+
         <div class="col table-responsive">
             <table class="table table-bordered table-sm  tabledata mt-3">
                 <thead>
@@ -50,7 +51,7 @@
 
                                 <div class="row">
                                     <div class="col">
-                                        <a href="<?= base_url('admin/kelolaRekamMedis/' . $d['id_reservasi'] . '/' . $d['id_user']) ?>" class="btn btn-info mt-1 kelolaRekamMedis btn-sm" target="_blank">Lihat Rekam Medis</a>
+                                        <a href="<?= base_url('admin/kelolaRekamMedis/' . $d['id_reservasi'] . '/' . $d['iduser']) ?>" class="btn btn-info mt-1 kelolaRekamMedis btn-sm" target="_blank">Lihat Rekam Medis</a>
                                     </div>
                                 </div>
 

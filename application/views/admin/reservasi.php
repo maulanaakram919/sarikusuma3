@@ -188,7 +188,7 @@
     </div>
     <div class="row">
         <div class="col table-responsive">
-            <table class="table table-bordered table-sm tabledata">
+            <table class="table table-bordered table-sm tabledata table-striped" style="border: 1px solid black;">
                 <thead>
                     <tr>
                         <th class="text-center align-middle">No</th>
