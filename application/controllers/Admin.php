@@ -62,6 +62,7 @@ class Admin extends CI_Controller
 		$data['username'] 				= $this->session->userdata();
 		$data['detail_user']			= $this->Admin_model->reservasi();
 
+
 		$data['nik']					= $this->db->get('data_user')->result_array();
 		$this->load->view('admin/header', $data);
 		$this->load->view('admin/sidebar', $data);
