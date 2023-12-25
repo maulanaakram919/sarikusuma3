@@ -11,24 +11,28 @@ $(document).ready(function () {
         todayHighlight: true
     });
 
-    new AutoNumeric.multiple('.rupiah', {
-        onInvalidPaste: 'truncate',
-        modifyValueOnWheel: false,
-        watchExternalChanges: true,
-        decimalPlaces: 0,
-        currencySymbol: 'Rp. ',
-        decimalPlacesRawValue: 0,
-        decimalPlacesShownOnBlur: 0,
-        unformatOnSubmit: true,
-        styleRules: {
-            "positive": "autoNumeric-positive",
-            "negative": "autoNumeric-negative"
-        },
-        decimalCharacterAlternative: '.',
+    function rupiah() {
+        new AutoNumeric.multiple('.rupiah', {
+            onInvalidPaste: 'truncate',
+            modifyValueOnWheel: false,
+            watchExternalChanges: true,
+            decimalPlaces: 0,
+            currencySymbol: 'Rp. ',
+            decimalPlacesRawValue: 2,
+            decimalPlacesShownOnBlur: 0,
+            unformatOnSubmit: true,
+            styleRules: {
+                "positive": "autoNumeric-positive",
+                "negative": "autoNumeric-negative"
+            },
+            decimalCharacterAlternative: '.',
 
-        // negativeBracketsTypeOnBlur: '(,)'
+            // negativeBracketsTypeOnBlur: '(,)'
 
-    });
+        });
+    }
+    rupiah();
+
 
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
@@ -683,6 +687,14 @@ $(document).ready(function () {
 
     })
 
+    const rp = (number) => {
+        return new Intl.NumberFormat("id-ID", {
+            style: "currency",
+            currency: "IDR",
+            decimal: ''
+        }).format(number);
+    }
+
 
 
     $('.detNota').click(function () {
@@ -727,68 +739,80 @@ $(document).ready(function () {
                 $('.detail_nota').html(data_nota);
                 $('.detail_nota_footer').html(data_nota_footer);
 
-                $('.cash').data('cash', total)
-                console.log(total)
-                new AutoNumeric.multiple('.rupiah', {
-                    onInvalidPaste: 'truncate',
-                    modifyValueOnWheel: false,
-                    watchExternalChanges: true,
-                    decimalPlaces: 0,
-                    currencySymbol: 'Rp. ',
-                    decimalPlacesRawValue: 0,
-                    decimalPlacesShownOnBlur: 0,
-                    unformatOnSubmit: true,
-                    styleRules: {
-                        "positive": "autoNumeric-positive",
-                        "negative": "autoNumeric-negative"
-                    },
-                    decimalCharacterAlternative: '.',
-
-                    // negativeBracketsTypeOnBlur: '(,)'
-
-                });
+                $('.cash').attr('data-cash', rp(total))
+                $('.cash').attr('data-rawcash', total)
+                $('.cash').attr('data-reservasi', data.resep[0]['id_reservasi'])
+                // console.log(total)
+                rupiah();
             }
         })
     })
 
     $('.cash').click(function () {
-        $('.modal').modal('hide')
+        $('.modal').modal('hide');
+        let total = $(this).data('cash');
+        let totalraw = $(this).data('rawcash');
+        let input = 0;
+
+        let reservasi = $(this).data('reservasi');
         Swal.fire({
-            title: "Masukan Nominal",
+            title: "Masukan Nominal Pembayaran",
+            inputLabel: "Total " + total,
             input: "text",
+            customClass: {
+                input: 'rupiah'
+            },
+
             inputAttributes: {
                 autocapitalize: "off"
             },
             showCancelButton: true,
-            confirmButtonText: "Look up",
+            confirmButtonText: "Payment",
             showLoaderOnConfirm: true,
-            preConfirm: async (login) => {
-                try {
-                    const githubUrl = `
-        https://api.github.com/users/${login}
-      `;
-                    const response = await fetch(githubUrl);
-                    if (!response.ok) {
-                        return Swal.showValidationMessage(`
+            preConfirm: async (inputTotal) => {
+                input = inputTotal.replace(",", "");
+                input = input.replace("Rp. ", "");
+
+                if (input < totalraw) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Nominal Tidak Cukup"
+                    });
+                    return false;
+                } else {
+                    try {
+                        const githubUrl = base_url + `/admin/cash/${reservasi}`;
+                        const response = await fetch(githubUrl);
+                        if (!response.ok) {
+                            return Swal.showValidationMessage(`
           ${JSON.stringify(await response.json())}
         `);
-                    }
-                    return response.json();
-                } catch (error) {
-                    Swal.showValidationMessage(`
+                        }
+                        return response.json();
+                    } catch (error) {
+                        Swal.showValidationMessage(`
         Request failed: ${error}
       `);
+                    }
                 }
+
             },
             allowOutsideClick: () => !Swal.isLoading()
         }).then((result) => {
             if (result.isConfirmed) {
+
+                let sisa = parseInt(input.replace(",", "")) - parseInt(totalraw)
                 Swal.fire({
-                    title: `${result.value.login}'s avatar`,
-                    imageUrl: result.value.avatar_url
+                    title: "Kembali " + rp(sisa),
+                    timer: '5000'
                 });
+                location.reload();
+
             }
         });
+
+        rupiah();
     })
 
 

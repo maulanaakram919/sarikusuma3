@@ -51,7 +51,7 @@
                                 <td class="align-middle text-center"></td>
                             <?php endif; ?>
 
-                            <td class="align-middle"><?= $d['terapi'] ?></td>
+                            <td class="align-middle"><?= $d['layanan'] ?></td>
                             <td class="align-middle"><?= $d['tanggal_terapi'] ?></td>
                             <?php if ($d['status_payment'] == 1) : ?>
                                 <td class="align-middle text-success">Selesai</td>

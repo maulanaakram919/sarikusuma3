@@ -157,6 +157,19 @@ class Admin extends CI_Controller
 		]);
 	}
 
+	public function cash($id_reservasi)
+	{
+		$data = [
+			'id_reservasi' => $id_reservasi,
+			'metode_pembayaran' => 'Cash',
+			'status_pembayaran' => 1,
+			'date_created' => date('Y-m-d H:i:sa')
+		];
+		$res = $this->db->insert('nota', $data);
+		if ($res) {
+			echo json_encode(1);
+		}
+	}
 	public function addReservasi()
 	{
 		$nik 						= $this->input->post('cari');
