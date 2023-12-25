@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
 
 
-    <script src="autoNumeric.min.js" type="text/javascript"></script>
+
     <!-- ...or, you may also directly use a CDN :-->
     <script src="https://cdn.jsdelivr.net/npm/autonumeric@4.8.1"></script>
     <!-- ...or -->

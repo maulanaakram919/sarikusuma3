@@ -4,7 +4,7 @@
         <img class="rounded-pill img-fluid" width="65" src="<?= base_url('assets/image/logo1.jpeg') ?>" alt="">
         <div class="ms-2">
             <h5 class="fs-6 mb-0">
-                <a class="text-decoration-none" href="#">Admin Sari Kusuma</a>
+                <a class="text-decoration-none" href="#">Admin Sari Kusuma 99</a>
             </h5>
             <p class="mt-1 mb-0">Sehat Optimal | Ibadah Sempurna</p>
         </div>
@@ -32,6 +32,15 @@
         <li class="">
             <i class="uil uil-file-edit-alt"></i><a href="<?= base_url('admin/reservasi') ?>"> Reservasi</a>
         </li>
+        <li class="has-dropdown">
+
+            <i class="uil uil-usd-circle fa-fw"></i><a href="#"> Transaksi</a>
+            <ul class="sidebar-dropdown list-unstyled">
+                <li><a href="<?= base_url('admin/pembayaran') ?>">pembayaran</a></li>
+                <li><a href="<?= base_url('admin/historyPembayaran') ?>" target="_blank">History</a></li>
+
+            </ul>
+        </li>
         <li class="">
             <i class="uil-user"></i><a href="<?= base_url('admin/pasien') ?>"> Daftar Pasien</a>
         </li>
@@ -43,7 +52,7 @@
             <i class="uil-envelope-download fa-fw"></i><a href="#"> Rekam Medis</a>
             <ul class="sidebar-dropdown list-unstyled">
                 <li><a href="<?= base_url('admin/pemeriksaan') ?>">Pemeriksaan</a></li>
-                <li><a href="" target="_blank">History</a></li>
+                <li><a href="<?= base_url('admin/historyRekamMedis') ?>" target="_blank">History</a></li>
 
             </ul>
         </li>
@@ -67,7 +76,7 @@
                 <li><a href="#">ipsum dolor sit</a></li>
             </ul>
         </li> -->
-        <li class="has-dropdown">
+        <!-- <li class="has-dropdown">
             <i class="uil-setting"></i><a href="#"> Settings</a>
             <ul class="sidebar-dropdown list-unstyled">
                 <li><a href="#">Lorem ipsum</a></li>
@@ -76,13 +85,14 @@
                 <li><a href="#">amet consectetur</a></li>
                 <li><a href="#">ipsum dolor sit</a></li>
             </ul>
-        </li>
+        </li> -->
         <li class="has-dropdown">
             <i class="uil-setting"></i><a href="#"> Master</a>
             <ul class="sidebar-dropdown list-unstyled">
                 <li><a href="<?= base_url('admin/dataTerapis') ?>">Data Terapis</a></li>
                 <li><a href="<?= base_url('admin/dataObat') ?>">Data Vitamin</a></li>
                 <li><a href="<?= base_url('admin/pasien') ?>">Data Pasien</a></li>
+                <li><a href="<?= base_url('admin/layanan') ?>">Data Layanan</a></li>
 
             </ul>
         </li>

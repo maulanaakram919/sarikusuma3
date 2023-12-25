@@ -1,4 +1,7 @@
 <?php
+
+use SebastianBergmann\CodeCoverage\Driver\Selector;
+
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Admin extends CI_Controller
@@ -61,8 +64,7 @@ class Admin extends CI_Controller
 		$data['title'] 					= 'Daftar Reservasi';
 		$data['username'] 				= $this->session->userdata();
 		$data['detail_user']			= $this->Admin_model->reservasi();
-
-
+		$data['layanan']				= $this->db->get('layanan')->result_array();
 		$data['nik']					= $this->db->get('data_user')->result_array();
 		$this->load->view('admin/header', $data);
 		$this->load->view('admin/sidebar', $data);
@@ -87,6 +89,72 @@ class Admin extends CI_Controller
 		// $this->load->view('admin/main', $data);
 		$this->load->view('admin/script', $data);
 		// $this->load->view('admin/footer', $data);
+	}
+	public function historyRekamMedis()
+	{
+		$data['title'] 					= 'History Rekam Medis';
+		$data['username'] 				= $this->session->userdata();
+		$data['detail_user']			= $this->Admin_model->reservasi();
+		$today							= '';
+		$data['pemeriksaan']			= $this->Admin_model->pemeriksaan($today);
+
+		$this->load->view('admin/header', $data);
+		$this->load->view('admin/sidebar', $data);
+		$this->load->view('admin/navbar', $data);
+		$this->load->view('admin/pemeriksaan', $data);
+		// $this->load->view('admin/main', $data);
+		$this->load->view('admin/script', $data);
+		// $this->load->view('admin/footer', $data);
+	}
+	public function pembayaran()
+	{
+		$data['title'] 					= 'Pembayaran';
+		$data['username'] 				= $this->session->userdata();
+		$data['detail_user']			= $this->Admin_model->reservasi();
+		$today							= date('d-m-Y');
+		$data['pembayaran']			= $this->Admin_model->pembayaran($today);
+
+		$this->load->view('admin/header', $data);
+		$this->load->view('admin/sidebar', $data);
+		$this->load->view('admin/navbar', $data);
+		$this->load->view('admin/pembayaran', $data);
+		// $this->load->view('admin/main', $data);
+		$this->load->view('admin/script', $data);
+		// $this->load->view('admin/footer', $data);
+	}
+	public function historyPembayaran()
+	{
+		$data['title'] 					= 'History Pembayaran';
+		$data['username'] 				= $this->session->userdata();
+		$data['detail_user']			= $this->Admin_model->reservasi();
+		$today							= '';
+		$data['pembayaran']			= $this->Admin_model->pembayaran($today);
+
+		$this->load->view('admin/header', $data);
+		$this->load->view('admin/sidebar', $data);
+		$this->load->view('admin/navbar', $data);
+		$this->load->view('admin/historyPembayaran', $data);
+		// $this->load->view('admin/main', $data);
+		$this->load->view('admin/script', $data);
+		// $this->load->view('admin/footer', $data);
+	}
+
+	public function loadTransaksi()
+	{
+		$day = $this->input->post('day');
+		$res = $this->Admin_model->pembayaran($day);
+		echo json_encode($res);
+	}
+
+	public function detNota()
+	{
+		$id_reservasi = $this->input->post('id_reservasi');
+		$resep = $this->Admin_model->resep($id_reservasi);
+		$layanan = $this->Admin_model->layanan($id_reservasi);
+		echo json_encode([
+			'resep' => $resep,
+			'layanan' => $layanan
+		]);
 	}
 
 	public function addReservasi()
@@ -170,6 +238,19 @@ class Admin extends CI_Controller
 		$this->load->view('admin/script', $data);
 		// $this->load->view('admin/footer', $data);
 	}
+	public function layanan()
+	{
+		$data['title'] 					= 'Data Layanan';
+		$data['username'] 				= $this->session->userdata();
+		$data['detail_user']			= $this->db->get('layanan')->result_array();
+		$this->load->view('admin/header', $data);
+		$this->load->view('admin/sidebar', $data);
+		$this->load->view('admin/navbar', $data);
+		$this->load->view('admin/layanan', $data);
+		// $this->load->view('admin/main', $data);
+		$this->load->view('admin/script', $data);
+		// $this->load->view('admin/footer', $data);
+	}
 	public function rekamMedis()
 	{
 		$data['title'] 					= 'Rekam Medis';
@@ -190,6 +271,7 @@ class Admin extends CI_Controller
 		$cek_terapi 			= $this->db->get_where('login', ['nama' => $username])->row_array();
 		$id_terapi 				= $cek_terapi['id'];
 		$id_user 				= $this->input->post('id');
+		$id_reservasi 			= $this->input->post('id_reservasi');
 		$mata_kanan_minus 		= $this->input->post('mata_kanan_minus');
 		$mata_kiri_minus 		= $this->input->post('mata_kiri_minus');
 		$mata_kanan_plus 		= $this->input->post('mata_kanan_plus');
@@ -204,10 +286,21 @@ class Admin extends CI_Controller
 		$snelled 				= $this->input->post('snelled');
 		$obat 					= $this->input->post('obat');
 		$kesimpulan 			= $this->input->post('kesimpulan');
+		$vitamin 				= $this->db->query("select * from data_obat where id in(" . implode(",", $obat) . ")")->result_array();
+		$dataVitamin 			= [];
+		foreach ($vitamin as $v) {
+			$dataVitamin 			= [
+				'id_reservasi' => $id_reservasi,
+				'id_vitamin' => $v['id'],
+				'date_created' => date('Y-m-d H:i:sa')
+			];
+			$this->db->insert('resep', $dataVitamin);
+		}
 
 		$data = [
 			'id_user' => $id_pasien,
 			'id_dokter' => $id_terapi,
+			'id_reservasi' => $id_reservasi,
 			'mata_kanan_minus' => $mata_kanan_minus,
 			'mata_kiri_minus' => $mata_kiri_minus,
 			'mata_kanan_plus' => $mata_kanan_plus,
@@ -220,11 +313,11 @@ class Admin extends CI_Controller
 			'stikMagnet' => $stikMagnet,
 			'osilatorListrik' => $osilatorListrik,
 			'snelled' => $snelled,
-			'obat' => $obat,
+			'obat' => implode(",", $obat),
 			'kesimpulan' => $kesimpulan,
 			'tanggal' => date('Y-m-d'),
 			'jam' => date('H:i:sa'),
-			'layanan' => 'Pemeriksaan Mata',
+			'layanan' => 'Terapi Mata',
 			'status' => 1,
 			'date_created' => date('Y-m-d H:i:sa')
 		];
@@ -251,6 +344,7 @@ class Admin extends CI_Controller
 	{
 
 		$mata_kanan_minus 		= $this->input->post('mata_kanan_minus');
+		$id_reservasi 			= $this->input->post('id_reservasi');
 		$mata_kanan_plus 		= $this->input->post('mata_kanan_plus');
 		$mata_kiri_minus 		= $this->input->post('mata_kiri_minus');
 		$mata_kiri_plus 		= $this->input->post('mata_kiri_plus');
@@ -264,6 +358,18 @@ class Admin extends CI_Controller
 		$snelled 				= $this->input->post('snelled');
 		$obat 					= $this->input->post('obat');
 		$kesimpulan 			= $this->input->post('kesimpulan');
+		$vitamin 				= $this->db->query("select * from data_obat where id in(" . implode(",", $obat) . ")")->result_array();
+		$this->db->where('id_reservasi', $id_reservasi);
+		$this->db->delete('resep');
+		$dataVitamin 			= [];
+		foreach ($vitamin as $v) {
+			$dataVitamin 			= [
+				'id_reservasi' => $id_reservasi,
+				'id_vitamin' => $v['id'],
+				'date_modified' => date('Y-m-d H:i:sa')
+			];
+			$this->db->insert('resep', $dataVitamin);
+		}
 
 		$data = [
 			'mata_kanan_minus' 	=> $mata_kanan_minus,
@@ -278,11 +384,11 @@ class Admin extends CI_Controller
 			'stikMagnet' => $stikMagnet,
 			'osilatorListrik' => $osilatorListrik,
 			'snelled' => $snelled,
-			'obat' => $obat,
+			'obat' => implode(",", $obat),
 			'kesimpulan' => $kesimpulan,
 			'tanggal' => date('Y-m-d'),
 			'jam' => date('H:i:sa'),
-			'layanan' => 'Pemeriksaan Mata',
+			'layanan' => 'Terapi Mata',
 			'date_modified' => date('Y-m-d H:i:sa')
 		];
 		$this->db->where('id', $id);
@@ -291,12 +397,12 @@ class Admin extends CI_Controller
 			$this->session->set_flashdata('message', '<div class="alert alert-success  text-center" 												role="alert">
 							  Rekam Medis Berhasil Diupdate
 							</div>');
-			redirect('admin/kelolaRekamMedis/' . $id . '/' . $id_user);
+			redirect('admin/kelolaRekamMedis/' . $id_reservasi . '/' . $id_user);
 		} else {
 			$this->session->set_flashdata('message', '<div class="alert alert-danger  text-center" 												role="alert">
 							  Rekam Medis Gagal Diupdate
 							</div>');
-			redirect('admin/kelolaRekamMedis/' . $id . '/' . $id_user);
+			redirect('admin/kelolaRekamMedis/' . $id_reservasi . '/' . $id_user);
 		}
 	}
 
@@ -305,6 +411,7 @@ class Admin extends CI_Controller
 		$data['title'] 					= 'Kelola Rekam Medis';
 		$data['username'] 				= $this->session->userdata();
 		$data['detail_user']			= $this->db->get_where('data_user', ['id' => $id])->result_array();
+		$data['vitamin']				= $this->db->get('data_obat')->result_array();
 
 		$this->db->select('*');
 		$this->db->select('rekam_medis.date_created tanggal_periksa');
@@ -316,6 +423,8 @@ class Admin extends CI_Controller
 		$this->db->order_by('rekam_medis.date_created', 'DESC');
 
 		$data['rekam_medis']			= $this->db->get()->result_array();
+		// var_dump($data['rekam_medis']);
+		// die;
 
 		$this->load->view('admin/header', $data);
 		$this->load->view('admin/sidebar', $data);
@@ -418,6 +527,31 @@ class Admin extends CI_Controller
 			redirect('admin/dataObat');
 		}
 	}
+	public function addLayanan()
+	{
+
+		$nama_layanan 		= $this->input->post('nama_layanan');
+		$harga 		= $this->input->post('harga');
+
+
+		$data = [
+			'layanan'  => $nama_layanan,
+			'harga'  => $harga,
+			'date_created' 		=> date('Y-m-d H:i:sa')
+		];
+		$res = $this->db->insert('layanan', $data);
+		if ($res) {
+			$this->session->set_flashdata('message', '<div class="alert alert-success  text-center" 												role="alert">
+							  Data Berhasil Ditambahkan
+							</div>');
+			redirect('admin/layanan');
+		} else {
+			$this->session->set_flashdata('message', '<div class="alert alert-danger  text-center" 												role="alert">
+							  Data Gagal Ditambahkan
+							</div>');
+			redirect('admin/layanan');
+		}
+	}
 
 	public function editPasien()
 	{
@@ -487,6 +621,32 @@ class Admin extends CI_Controller
 			redirect('admin/dataObat');
 		}
 	}
+	public function editLayanan()
+	{
+
+		$id 				= $this->input->post('id');
+		$layanan 			= $this->input->post('nama_layanan');
+		$harga 				= $this->input->post('harga');
+		$data = [
+			'layanan'  => $layanan,
+			'harga'  => $harga,
+			'date_modified' => date('Y-m-d H:i:sa')
+		];
+		$this->db->where('id', $id);
+		$res = $this->db->update('layanan', $data);
+
+		if ($res) {
+			$this->session->set_flashdata('message', '<div class="alert alert-success  text-center" 												role="alert">
+							  Data Berhasil Diupdate
+							</div>');
+			redirect('admin/layanan');
+		} else {
+			$this->session->set_flashdata('message', '<div class="alert alert-danger  text-center" 												role="alert">
+							  Data Gagal Diupdate
+							</div>');
+			redirect('admin/layanan');
+		}
+	}
 	public function editTerapis()
 	{
 
@@ -547,6 +707,18 @@ class Admin extends CI_Controller
 
 		$this->db->where('id', $id);
 		$res = $this->db->delete('data_obat');
+		if ($res) {
+			echo 1;
+		} else {
+			echo 0;
+		}
+	}
+	public function hapusLayanan()
+	{
+		$id = $this->input->post('id');
+
+		$this->db->where('id', $id);
+		$res = $this->db->delete('layanan');
 		if ($res) {
 			echo 1;
 		} else {
