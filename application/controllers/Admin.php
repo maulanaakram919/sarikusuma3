@@ -21,6 +21,10 @@ class Admin extends CI_Controller
 
 	public function index()
 	{
+
+		if ($this->session->userdata('role_id') == 2) {
+			redirect('admin/pemeriksaan');
+		}
 		$data['title'] 					= 'Admin';
 		$data['username'] 				= $this->session->userdata();
 		$data['jumlah_register']		= $this->db->query("select count(id) id from data_user")->row_array();
@@ -455,7 +459,7 @@ class Admin extends CI_Controller
 		$this->db->select('rekam_medis.date_created tanggal_periksa');
 		$this->db->select('rekam_medis.id id_rekam');
 		$this->db->from('rekam_medis');
-		$this->db->join('data_terapis', 'data_terapis.id = rekam_medis.id_dokter', 'left');
+		$this->db->join('data_terapis', 'data_terapis.id_login = rekam_medis.id_dokter', 'left');
 		$this->db->join('data_user', 'data_user.id = rekam_medis.id_user', 'left');
 		$this->db->where('rekam_medis.id_user', $id);
 		$this->db->order_by('rekam_medis.date_created', 'DESC');

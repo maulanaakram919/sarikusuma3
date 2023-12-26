@@ -854,11 +854,12 @@ $(document).ready(function () {
         rupiah();
     })
     $('body').on("click", ".print", function () {
-        print();
+        let id_reservasi = $(this).data('reservasi');
+        print(id_reservasi);
     });
-    function print() {
+    function print(id_reservasi) {
         const section = $("section");
-        const modalBody = $(".modal-body").detach();
+        const modalBody = $(".modal-body-" + id_reservasi).detach();
 
         const content = $(".content").detach();
         section.append(modalBody);

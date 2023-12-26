@@ -22,20 +22,20 @@
                     <small><a href="<?= base_url('admin/detail_user') ?>">detail</a></small>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
+            <!-- <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
                 <div class="box bg-warning p-3">
                     <i class="uil-shopping-cart"></i>
                     <h3>5,154</h3>
                     <p class="lead">Product sales</p>
                 </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
+            </div> -->
+            <!-- <div class="col-md-6 col-lg-3">
                 <div class="box bg-success p-3">
                     <i class="uil-feedback"></i>
                     <h3>5,154</h3>
                     <p class="lead">Transactions</p>
                 </div>
-            </div>
+            </div> -->
         </div>
     </section>
 

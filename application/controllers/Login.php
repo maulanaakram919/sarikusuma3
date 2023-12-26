@@ -34,11 +34,7 @@ class Login extends CI_Controller
 				'role_id' => $user['role_id']
 			];
 			$this->session->set_userdata($data);
-			if ($user['role_id'] == 1) {
-				redirect('admin');
-			} else {
-				redirect('dashboard');
-			}
+			redirect('admin');
 		}
 	}
 }

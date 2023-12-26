@@ -74,7 +74,7 @@
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body-wrapper">
-                                                        <div class="modal-body">
+                                                        <div class="modal-body modal-body-<?= $d['id_reservasi'] ?>">
 
                                                             <div class="sidebar-header d-flex  align-items-center px-3 py-4">
                                                                 <div class="logo">
@@ -252,7 +252,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <a href="<?= base_url('admin/pembayaran') ?>" class="btn btn-info print">Print</a>
+                                                        <a href="<?= base_url('admin/pembayaran') ?>" class="btn btn-info print" data-reservasi="<?= $d['id_reservasi'] ?>">Print</a>
 
                                                         <!-- <button class="btn btn-info print">Print</button> -->
 
