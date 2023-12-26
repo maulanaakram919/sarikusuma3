@@ -460,6 +460,15 @@ tr:hover{
     display: none;
 }
 
+.logo{
+    background-image: url('../image/logo1.jpeg')!important;
+    width: 65px!important;
+    height: 65px!important;
+    background-size: cover!important;
+    background-repeat: no-repeat!important;
+     -webkit-print-color-adjust: exact;
+}
+
 /* .modal-body-wrapper {  
   overflow-y: scroll;  
   height: 60vh;       

@@ -696,9 +696,7 @@ $(document).ready(function () {
     }
 
 
-
-    $('.detNota').click(function () {
-        let id_reservasi = $(this).data('rekam');
+    function updateNota(id_reservasi) {
         $.ajax({
             url: base_url + "/admin/detNota",
             type: 'post',
@@ -767,12 +765,18 @@ $(document).ready(function () {
                 rupiah();
             }
         })
+    }
+
+    $('.detNota').click(function () {
+        let id_reservasi = $(this).data('rekam');
+        updateNota(id_reservasi);
     })
 
     $('.cash').click(function () {
-        $('.modal').modal('hide');
+        // $('.modal').modal('hide');
         let total = $(this).data('cash');
         let totalraw = $(this).data('rawcash');
+        let id_reservasi = $(this).data('reservasi');
         let input = 0;
 
         let reservasi = $(this).data('reservasi');
@@ -824,20 +828,34 @@ $(document).ready(function () {
             if (result.isConfirmed) {
 
                 let sisa = parseInt(input.replace(",", "")) - parseInt(totalraw)
+
                 Swal.fire({
                     title: "Kembali " + rp(sisa),
-                    timer: '5000'
+                    showDenyButton: false,
+                    showCancelButton: true,
+                    confirmButtonText: "Ok"
+                }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+
+                        location.reload();
+                    } else if (result.isDenied) {
+                        Swal.fire("Changes are not saved", "", "info");
+                    }
                 });
 
-                location.reload();
+
+
+
 
             }
         });
 
         rupiah();
     })
-
-
+    $('body').on("click", ".print", function () {
+        print();
+    });
     function print() {
         const section = $("section");
         const modalBody = $(".modal-body").detach();
@@ -849,9 +867,13 @@ $(document).ready(function () {
         section.append(content);
         $(".modal-body-wrapper").append(modalBody);
     }
-    $('body').on("click", ".print", function () {
-        print()
-    });
+
+
+
+
+
+
+
 
 
 

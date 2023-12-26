@@ -66,7 +66,7 @@
                                     <div class="col">
                                         <button class="btn btn-primary detNota" data-rekam="<?= $d['id_reservasi'] ?>" data-bs-toggle="modal" data-bs-target="#pembayaran<?= $d['id_reservasi'] ?>">Lihat Nota</button>
                                         <!-- Modal -->
-                                        <div class="modal fade" id="pembayaran<?= $d['id_reservasi'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal fade" data-bs-focus="false" id="pembayaran<?= $d['id_reservasi'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-lg">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -77,7 +77,11 @@
                                                         <div class="modal-body">
 
                                                             <div class="sidebar-header d-flex  align-items-center px-3 py-4">
-                                                                <img class="rounded-pill img-fluid" width="65" src="<?= base_url('assets/image/logo1.jpeg') ?>" alt="">
+                                                                <div class="logo">
+                                                                    <!-- <img class="rounded-pill img-fluid" width="65" src="<?= base_url('assets/image/logo1.jpeg') ?>" alt=""> -->
+                                                                </div>
+
+
                                                                 <div class="ms-2">
                                                                     <h5 class="fs-6 mb-0">
                                                                         <a class="text-decoration-none" href="#">Sari Kusuma 99</a>
@@ -238,7 +242,7 @@
                                                             <div class="row metodePembayaran">
                                                                 <h5>Metode Pembayaran</h5>
                                                                 <div class="col-sm-1 text-center">
-                                                                    <button class="btn btn-primary cash">Cash</button>
+                                                                    <button class="btn btn-primary cash" data-reservasi="<?= $d['id_reservasi'] ?>">Cash</button>
 
                                                                     <button class="btn btn-info">Online</button>
                                                                 </div>
@@ -248,7 +252,10 @@
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-info print">Print</button>
+                                                        <a href="<?= base_url('admin/pembayaran') ?>" class="btn btn-info print">Print</a>
+
+                                                        <!-- <button class="btn btn-info print">Print</button> -->
+
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 
                                                     </div>

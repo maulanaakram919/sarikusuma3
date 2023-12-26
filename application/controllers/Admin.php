@@ -112,7 +112,7 @@ class Admin extends CI_Controller
 		$data['username'] 				= $this->session->userdata();
 		$data['detail_user']			= $this->Admin_model->reservasi();
 		$today							= date('d-m-Y');
-		$data['pembayaran']			= $this->Admin_model->pembayaran($today);
+		$data['pembayaran']				= $this->Admin_model->pembayaran($today);
 
 		$this->load->view('admin/header', $data);
 		$this->load->view('admin/sidebar', $data);
@@ -159,6 +159,20 @@ class Admin extends CI_Controller
 			'pembayaran' => $pembayaran,
 			'history' => $history
 		]);
+	}
+
+	public function printNota($id)
+	{
+		$this->load->library('pdfgenerator');
+		$today							= date('d-m-Y');
+		$data['pembayaran']				= $this->Admin_model->pembayaran($today);
+		$data['title'] = "Data Random";
+		$file_pdf = $data['title'];
+		$paper = 'A4';
+		$orientation = "landscape";
+		$html = $this->load->view('admin/printNota', $data, true);
+		// $html = 'tes';
+		$this->pdfgenerator->generate($html, $file_pdf, $paper, $orientation);
 	}
 
 	public function cash($id_reservasi, $nominal)
