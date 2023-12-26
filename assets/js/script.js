@@ -797,7 +797,8 @@ $(document).ready(function () {
             preConfirm: async (inputTotal) => {
                 input = inputTotal.replace(",", "");
                 input = input.replace("Rp. ", "");
-
+                input = input.replace(",", "");
+                console.log(input)
                 if (input < totalraw) {
                     Swal.fire({
                         icon: "error",

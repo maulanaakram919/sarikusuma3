@@ -156,12 +156,12 @@
 
         <form method="POST" action="<?= base_url('login') ?>">
             <div class="input-group">
-                <input type="text" id="username" name="username" class="input-field" placeholder="Email">
+                <input type="text" id="username" autocomplete="off" name="username" class="input-field" placeholder="Email">
                 <?= form_error('username', '<small class="text-danger mt-1">', '</small>') ?>
             </div>
 
             <div class="input-group">
-                <input type="password" id="password" name="password" class="input-field" placeholder="Password">
+                <input type="password" autocomplete="off" id="password" name="password" class="input-field" placeholder="Password">
                 <?= form_error('password', '<small class="text-danger mt-1">', '</small>') ?>
             </div>
 
