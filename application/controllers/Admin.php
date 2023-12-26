@@ -128,7 +128,7 @@ class Admin extends CI_Controller
 		$data['username'] 				= $this->session->userdata();
 		$data['detail_user']			= $this->Admin_model->reservasi();
 		$today							= '';
-		$data['pembayaran']			= $this->Admin_model->pembayaran($today);
+		$data['pembayaran']				= $this->Admin_model->pembayaran($today);
 
 		$this->load->view('admin/header', $data);
 		$this->load->view('admin/sidebar', $data);
@@ -148,16 +148,20 @@ class Admin extends CI_Controller
 
 	public function detNota()
 	{
-		$id_reservasi = $this->input->post('id_reservasi');
-		$resep = $this->Admin_model->resep($id_reservasi);
-		$layanan = $this->Admin_model->layanan($id_reservasi);
+		$id_reservasi 	= $this->input->post('id_reservasi');
+		$resep 			= $this->Admin_model->resep($id_reservasi);
+		$layanan 		= $this->Admin_model->layanan($id_reservasi);
+		$pembayaran 	= $this->db->get_where('nota', ['id_reservasi' => $id_reservasi])->result_array();
+		$history 		= $this->db->get_where('history_transaksi', ['id_reservasi' => $id_reservasi])->result_array();
 		echo json_encode([
 			'resep' => $resep,
-			'layanan' => $layanan
+			'layanan' => $layanan,
+			'pembayaran' => $pembayaran,
+			'history' => $history
 		]);
 	}
 
-	public function cash($id_reservasi)
+	public function cash($id_reservasi, $nominal)
 	{
 		$data = [
 			'id_reservasi' => $id_reservasi,
@@ -165,6 +169,13 @@ class Admin extends CI_Controller
 			'status_pembayaran' => 1,
 			'date_created' => date('Y-m-d H:i:sa')
 		];
+		$data_history = [
+			'id_reservasi' => $id_reservasi,
+			'metode_pembayaran' => 'Cash',
+			'nominal' => $nominal,
+			'date_created' => date('Y-m-d H:i:sa')
+		];
+		$this->db->insert('history_transaksi', $data_history);
 		$res = $this->db->insert('nota', $data);
 		if ($res) {
 			echo json_encode(1);

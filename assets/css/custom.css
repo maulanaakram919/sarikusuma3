@@ -456,6 +456,14 @@ tr:hover{
     margin-bottom: 10px;
 }
 
+.tutup{
+    display: none;
+}
+
+/* .modal-body-wrapper {  
+  overflow-y: scroll;  
+  height: 60vh;       
+} */
 
 
 

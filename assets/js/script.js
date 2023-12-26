@@ -714,6 +714,8 @@ $(document).ready(function () {
                 let data_nota = '';
                 let data_nota_footer = '';
                 let total = 0;
+                let nominal = 0;
+                let metode = '';
 
                 data.layanan.forEach(l => {
                     total += parseInt(l.harga);
@@ -728,12 +730,29 @@ $(document).ready(function () {
                                             <td>`+ r['nama_obat'] + `</td>
                                             <td class="rupiah text-end">`+ r['harga'] + `</td>
                                         </tr>`;
+                    });
 
+                    data.pembayaran.forEach(p => {
+                        metode = p['metode_pembayaran'];
+                    });
+                    data.history.forEach(h => {
+                        nominal = h['nominal'];
                     });
                 });
-                data_nota_footer = `  <tr>
+                let change = nominal == 0 ? 0 : nominal - total
+                let hidden = data.pembayaran.length == 0 ? '' : 'tutup';
+                console.log(hidden)
+                data_nota_footer += `  <tr>
                                             <th class="text-center">Total</th>
                                             <th class="rupiah text-end">`+ total + `</th>
+                                        </tr>`;
+                data_nota_footer += `  <tr>
+                                            <th class="text-left">Metode Pembayaran `+ metode + `</th>
+                                            <th class="rupiah text-end">`+ nominal + `</th>
+                                        </tr>`;
+                data_nota_footer += `  <tr>
+                                            <th class="text-left">Change</th>
+                                            <th class="rupiah text-end">`+ change + `</th>
                                         </tr>`;
 
                 $('.detail_nota').html(data_nota);
@@ -741,6 +760,8 @@ $(document).ready(function () {
 
                 $('.cash').attr('data-cash', rp(total))
                 $('.cash').attr('data-rawcash', total)
+                $('.metodePembayaran').removeClass(hidden)
+                $('.metodePembayaran').addClass(hidden)
                 $('.cash').attr('data-reservasi', data.resep[0]['id_reservasi'])
                 // console.log(total)
                 rupiah();
@@ -782,7 +803,7 @@ $(document).ready(function () {
                     return false;
                 } else {
                     try {
-                        const githubUrl = base_url + `/admin/cash/${reservasi}`;
+                        const githubUrl = base_url + `/admin/cash/${reservasi}/${input}`;
                         const response = await fetch(githubUrl);
                         if (!response.ok) {
                             return Swal.showValidationMessage(`
@@ -807,6 +828,7 @@ $(document).ready(function () {
                     title: "Kembali " + rp(sisa),
                     timer: '5000'
                 });
+
                 location.reload();
 
             }
@@ -816,10 +838,28 @@ $(document).ready(function () {
     })
 
 
+    function print() {
+        const section = $("section");
+        const modalBody = $(".modal-body").detach();
+
+        const content = $(".content").detach();
+        section.append(modalBody);
+        window.print();
+        section.empty();
+        section.append(content);
+        $(".modal-body-wrapper").append(modalBody);
+    }
+    $('body').on("click", ".print", function () {
+        print()
+    });
+
+
 
 
 
 });
+
+
 
 
 

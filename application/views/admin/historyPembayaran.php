@@ -39,7 +39,7 @@
                                 <td class="align-middle text-center"></td>
                             <?php endif; ?>
 
-                            <td class="align-middle"><?= $d['terapi'] ?></td>
+                            <td class="align-middle"><?= $d['layanan'] ?></td>
                             <td class="align-middle"><?= $d['tanggal_terapi'] ?></td>
                             <?php if ($d['status_payment'] == 1) : ?>
                                 <td class="align-middle text-success">Selesai</td>
@@ -219,8 +219,18 @@
                                                                         </tr>
                                                                     </tbody>
                                                                     <tfoot class="detail_nota_footer"></tfoot>
+
                                                                 </table>
                                                             </div>
+                                                        </div>
+                                                        <div class="row metodePembayaran">
+                                                            <h5>Metode Pembayaran</h5>
+                                                            <div class="col-sm-1 text-center">
+                                                                <button class="btn btn-primary cash">Cash</button>
+
+                                                                <button class="btn btn-info">Online</button>
+                                                            </div>
+
                                                         </div>
 
 

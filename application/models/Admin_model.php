@@ -76,11 +76,14 @@ class Admin_model extends CI_Model
                     LEFT JOIN
                     nota
                     ON nota.id_reservasi = reservasi.id
+                    LEFT JOIN 
+                    history_transaksi
+                    ON history_transaksi.id_reservasi = reservasi.id
                     WHERE
                     reservasi.tanggal_terapi LIKE '%" . $date . "%'
                     AND 
                     reservasi.status = 1
-                    AND nota.status_pembayaran IS NULL
+                  
                     GROUP BY reservasi.tanggal_terapi,data_user.id
                     ORDER BY reservasi.id asc
                     ";
