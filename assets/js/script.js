@@ -760,7 +760,10 @@ $(document).ready(function () {
                 $('.cash').attr('data-rawcash', total)
                 $('.metodePembayaran').removeClass(hidden)
                 $('.metodePembayaran').addClass(hidden)
-                $('.cash').attr('data-reservasi', data.resep[0]['id_reservasi'])
+                if (data.resep.length > 0) {
+                    $('.cash').attr('data-reservasi', data.resep[0]['id_reservasi'])
+                }
+
                 // console.log(total)
                 rupiah();
             }
@@ -852,7 +855,6 @@ $(document).ready(function () {
 
             }
         });
-
         rupiah();
     })
     $('body').on("click", ".print", function () {
@@ -871,7 +873,7 @@ $(document).ready(function () {
         $(".modal-body-wrapper").append(modalBody);
     }
 
-
+    $.fn.modal.Constructor.prototype._enforceFocus = function () { };
 
 
 
