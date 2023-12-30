@@ -199,6 +199,26 @@ class Admin extends CI_Controller
 			echo json_encode(1);
 		}
 	}
+	public function ewalet($id_reservasi, $ewalet, $total)
+	{
+		$data = [
+			'id_reservasi' => $id_reservasi,
+			'metode_pembayaran' => $ewalet,
+			'status_pembayaran' => 1,
+			'date_created' => date('Y-m-d H:i:sa')
+		];
+		$data_history = [
+			'id_reservasi' => $id_reservasi,
+			'metode_pembayaran' => $ewalet,
+			'nominal' => $total,
+			'date_created' => date('Y-m-d H:i:sa')
+		];
+		$this->db->insert('history_transaksi', $data_history);
+		$res = $this->db->insert('nota', $data);
+		if ($res) {
+			echo json_encode(1);
+		}
+	}
 	public function addReservasi()
 	{
 		$nik 						= $this->input->post('cari');

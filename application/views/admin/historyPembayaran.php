@@ -194,12 +194,17 @@
 
 
                                                         <div class="row">
-                                                            <div class="col-sm-1">Tanggal</div>
+                                                            <div class="col-sm-2">Tanggal Terapi</div>
+                                                            <div class="col-sm-1 text-center">:</div>
+                                                            <div class="col-sm-3"><?= $d['tanggal_terapi'] ?></div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-2">Tanggal</div>
                                                             <div class="col-sm-1 text-center">:</div>
                                                             <div class="col-sm-3"><?= date('d-m-Y H:i:sa') ?></div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-sm-1">Layanan</div>
+                                                            <div class="col-sm-2">Layanan</div>
                                                             <div class="col-sm-1 text-center">:</div>
                                                             <div class="col-sm-3"><?= $d['layanan'] ?></div>
                                                         </div>
@@ -228,7 +233,7 @@
                                                             <div class="col-sm-1 text-center">
                                                                 <button class="btn btn-primary cash">Cash</button>
 
-                                                                <button class="btn btn-info">Online</button>
+                                                                <button class="btn btn-info ewalet">e-Wallet</button>
                                                             </div>
 
                                                         </div>

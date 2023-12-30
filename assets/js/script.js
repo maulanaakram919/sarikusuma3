@@ -660,7 +660,7 @@ $(document).ready(function () {
                                                                     <div class="col-sm-1 text-center">
                                                                         <button class="btn btn-primary cash">Cash</button>
                                                                         <button class="btn btn-secondary">CC</button>
-                                                                        <button class="btn btn-info">Online</button>
+                                                                        <button class="btn btn-info ewalet">e-Wallet</button>
                                                                     </div>
 
                                                                 </div>
@@ -697,6 +697,7 @@ $(document).ready(function () {
 
 
     function updateNota(id_reservasi) {
+        console.log(id_reservasi)
         $.ajax({
             url: base_url + "/admin/detNota",
             type: 'post',
@@ -714,6 +715,8 @@ $(document).ready(function () {
                 let total = 0;
                 let nominal = 0;
                 let metode = '';
+                $('.metodePembayaran').removeClass('tutup')
+                $('.metodePembayaran').removeClass('buka')
 
                 data.layanan.forEach(l => {
                     total += parseInt(l.harga);
@@ -738,8 +741,8 @@ $(document).ready(function () {
                     });
                 });
                 let change = nominal == 0 ? 0 : nominal - total
-                let hidden = data.pembayaran.length == 0 ? '' : 'tutup';
-                console.log(hidden)
+                let hidden = data.pembayaran.length == 0 ? 'buka' : 'tutup';
+                // console.log(hidden)
                 data_nota_footer += `  <tr>
                                             <th class="text-center">Total</th>
                                             <th class="rupiah text-end">`+ total + `</th>
@@ -757,12 +760,17 @@ $(document).ready(function () {
                 $('.detail_nota_footer').html(data_nota_footer);
 
                 $('.cash').attr('data-cash', rp(total))
+                $('.ewalet').attr('data-ewalet', rp(total))
                 $('.cash').attr('data-rawcash', total)
-                $('.metodePembayaran').removeClass(hidden)
+                $('.ewalet').attr('data-rawcash', total)
+
                 $('.metodePembayaran').addClass(hidden)
-                if (data.resep.length > 0) {
-                    $('.cash').attr('data-reservasi', data.resep[0]['id_reservasi'])
-                }
+                $('.buka').show();
+                $('.tutup').hide();
+                // if (data.resep.length > 0) {
+                $('.cash').attr('data-reservasi', id_reservasi)
+                $('.ewalet').attr('data-reservasi', id_reservasi)
+                // }
 
                 // console.log(total)
                 rupiah();
@@ -774,6 +782,7 @@ $(document).ready(function () {
         let id_reservasi = $(this).data('rekam');
         updateNota(id_reservasi);
     })
+
 
     $('.cash').click(function () {
         // $('.modal').modal('hide');
@@ -813,6 +822,94 @@ $(document).ready(function () {
                 } else {
                     try {
                         const githubUrl = base_url + `/admin/cash/${reservasi}/${input}`;
+                        const response = await fetch(githubUrl);
+                        if (!response.ok) {
+                            return Swal.showValidationMessage(`
+          ${JSON.stringify(await response.json())}
+        `);
+                        }
+                        return response.json();
+                    } catch (error) {
+                        Swal.showValidationMessage(`
+        Request failed: ${error}
+      `);
+                    }
+                }
+
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                let sisa = parseInt(input.replace(",", "")) - parseInt(totalraw)
+
+                Swal.fire({
+                    title: "Kembali " + rp(sisa),
+                    showDenyButton: false,
+                    showCancelButton: true,
+                    confirmButtonText: "Ok"
+                }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+
+                        location.reload();
+                    } else if (result.isDenied) {
+                        Swal.fire("Changes are not saved", "", "info");
+                    }
+                });
+
+
+
+
+
+            }
+        });
+        rupiah();
+    })
+    $('.ewalet').click(function () {
+        // $('.modal').modal('hide');
+        let total = $(this).data('ewalet');
+        let totalraw = $(this).data('rawcash');
+        let id_reservasi = $(this).data('reservasi');
+        let input = 0;
+
+        let reservasi = $(this).data('reservasi');
+        Swal.fire({
+            title: "Masukan e-wallet",
+            inputLabel: "Total " + total,
+            input: "select",
+            inputOptions: {
+                "": "Pilih Salah Satu",
+                "E-wallet": {
+                    Dana: "Dana",
+                    OVO: "OVO",
+                    Gopay: "Gopay",
+                    LinkAja: "LinkAja",
+                    ShopeePay: "Shopee Pay"
+                },
+            },
+            inputAttributes: {
+                autocapitalize: "off"
+            },
+            showCancelButton: true,
+            confirmButtonText: "Payment",
+            showLoaderOnConfirm: true,
+            preConfirm: async (inputTotal) => {
+                input = inputTotal.replace(",", "");
+                input = input.replace("Rp. ", "");
+                input = input.replace(",", "");
+                input = input.replace(",", "");
+                // console.log(input)
+                if (input < totalraw) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Nominal Tidak Cukup"
+                    });
+                    return false;
+                } else {
+                    try {
+                        const githubUrl = base_url + `/admin/ewalet/${reservasi}/${input}/${totalraw}`;
                         const response = await fetch(githubUrl);
                         if (!response.ok) {
                             return Swal.showValidationMessage(`
