@@ -16,7 +16,7 @@ class Admin_model extends CI_Model
                     ON
                     data_user.id = reservasi.id_user
                     LEFT JOIN
-                                    layanan ON layanan.id = reservasi.terapi
+                                    layanan ON layanan.id = reservasi.id_layanan
                                     ORDER BY
                                     reservasi.id DESC";
 
@@ -46,7 +46,7 @@ class Admin_model extends CI_Model
                     LEFT JOIN
 					layanan
 					ON
-					layanan.id = reservasi.terapi
+					layanan.id = reservasi.id_layanan
                     WHERE
                     reservasi.tanggal_terapi LIKE '%" . $date . "%'
                     GROUP BY reservasi.tanggal_terapi,data_user.id
@@ -112,7 +112,7 @@ class Admin_model extends CI_Model
                     FROM
                     reservasi
                     LEFT JOIN
-                    layanan ON layanan.id = reservasi.terapi
+                    layanan ON layanan.id = reservasi.id_layanan
                     WHERE
                     reservasi.id = " . $id_reservasi . "";
         $res = $this->db->query($query)->result_array();

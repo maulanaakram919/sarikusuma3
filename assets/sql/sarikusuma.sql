@@ -11,11 +11,33 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 26/12/2023 22:53:48
+ Date: 01/01/2024 22:45:42
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for data_admin
+-- ----------------------------
+DROP TABLE IF EXISTS `data_admin`;
+CREATE TABLE `data_admin`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_login` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `nama_terapis` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `spesialis` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `jabatan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `date_created` datetime NULL DEFAULT NULL,
+  `date_modified` datetime NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of data_admin
+-- ----------------------------
+INSERT INTO `data_admin` VALUES (1, '', 'dr. DWI RATNA SARI HANDAYANI STr.Kes,MKK,MSi ', 'Ahli Spesialis Terapi', ' Pemilik', NULL, '2023-12-26 22:37:15');
+INSERT INTO `data_admin` VALUES (2, '2', 'JENG JULIE', 'Spesialis Mata', 'Pengelola', NULL, '2023-12-26 22:36:42');
+INSERT INTO `data_admin` VALUES (3, '1', 'LUKMAN HAKIM', 'Spesialis Mata', 'Marketing', NULL, '2023-12-26 22:37:44');
 
 -- ----------------------------
 -- Table structure for data_obat
@@ -40,28 +62,6 @@ INSERT INTO `data_obat` VALUES (7, 'Habbatussauda kapsul', '65000', NULL, NULL);
 INSERT INTO `data_obat` VALUES (8, 'Habbatussauda cair', '65000', NULL, NULL);
 INSERT INTO `data_obat` VALUES (9, 'Utsu', '1800000', NULL, NULL);
 INSERT INTO `data_obat` VALUES (10, 'tsubarashi', '1800000', NULL, NULL);
-
--- ----------------------------
--- Table structure for data_terapis
--- ----------------------------
-DROP TABLE IF EXISTS `data_terapis`;
-CREATE TABLE `data_terapis`  (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `id_login` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `nama_terapis` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `spesialis` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `jabatan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `date_created` datetime NULL DEFAULT NULL,
-  `date_modified` datetime NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of data_terapis
--- ----------------------------
-INSERT INTO `data_terapis` VALUES (1, '', 'dr. DWI RATNA SARI HANDAYANI STr.Kes,MKK,MSi ', 'Ahli Spesialis Terapi', ' Pemilik', NULL, '2023-12-26 22:37:15');
-INSERT INTO `data_terapis` VALUES (2, '2', 'JENG JULIE', 'Spesialis Mata', 'Pengelola', NULL, '2023-12-26 22:36:42');
-INSERT INTO `data_terapis` VALUES (3, '1', 'LUKMAN HAKIM', 'Spesialis Mata', 'Marketing', NULL, '2023-12-26 22:37:44');
 
 -- ----------------------------
 -- Table structure for data_user
@@ -106,12 +106,20 @@ CREATE TABLE `history_transaksi`  (
   `date_created` datetime NULL DEFAULT NULL,
   `date_modified` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of history_transaksi
 -- ----------------------------
 INSERT INTO `history_transaksi` VALUES (12, '21', 'Cash', '315000', '2023-12-26 22:31:21', NULL);
+INSERT INTO `history_transaksi` VALUES (13, '20', 'Cash', '1000000', '2023-12-26 23:17:41', NULL);
+INSERT INTO `history_transaksi` VALUES (14, '15', 'Cash', '1000000000', '2023-12-26 23:18:58', NULL);
+INSERT INTO `history_transaksi` VALUES (22, '13', 'OVO', '250000', '2023-12-31 01:05:12', NULL);
+INSERT INTO `history_transaksi` VALUES (23, '22', 'OVO', '315000', '2023-12-31 01:11:36', NULL);
+INSERT INTO `history_transaksi` VALUES (24, '12', 'OVO', '250000', '2024-01-01 21:06:13', NULL);
+INSERT INTO `history_transaksi` VALUES (25, '16', 'Dana', '2215000', '2024-01-01 21:08:24', NULL);
+INSERT INTO `history_transaksi` VALUES (26, '17', 'Dana', '2180000', '2024-01-01 21:09:08', NULL);
+INSERT INTO `history_transaksi` VALUES (27, '18', 'Gopay', '285000', '2024-01-01 21:11:33', NULL);
 
 -- ----------------------------
 -- Table structure for hubungisaya
@@ -182,12 +190,21 @@ CREATE TABLE `nota`  (
   `date_created` datetime NULL DEFAULT NULL,
   `date_modified` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of nota
 -- ----------------------------
 INSERT INTO `nota` VALUES (19, 21, 'Cash', '1', '2023-12-26 22:31:21', NULL);
+INSERT INTO `nota` VALUES (20, 20, 'Cash', '1', '2023-12-26 23:17:41', NULL);
+INSERT INTO `nota` VALUES (21, 15, 'Cash', '1', '2023-12-26 23:18:58', NULL);
+INSERT INTO `nota` VALUES (24, 15, 'Cash', '1', '2023-12-31 00:45:13', NULL);
+INSERT INTO `nota` VALUES (25, 14, 'Cash', '1', '2023-12-31 00:48:03', NULL);
+INSERT INTO `nota` VALUES (29, 13, 'OVO', '1', '2023-12-31 01:05:12', NULL);
+INSERT INTO `nota` VALUES (30, 22, 'OVO', '1', '2023-12-31 01:11:36', NULL);
+INSERT INTO `nota` VALUES (31, 12, 'OVO', '1', '2024-01-01 21:06:13', NULL);
+INSERT INTO `nota` VALUES (32, 16, 'Dana', '1', '2024-01-01 21:08:24', NULL);
+INSERT INTO `nota` VALUES (33, 17, 'Dana', '1', '2024-01-01 21:09:08', NULL);
 
 -- ----------------------------
 -- Table structure for rekam_medis
@@ -219,7 +236,7 @@ CREATE TABLE `rekam_medis`  (
   `date_created` datetime NULL DEFAULT NULL,
   `date_modified` date NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of rekam_medis
@@ -235,6 +252,7 @@ INSERT INTO `rekam_medis` VALUES (19, 11, 2, 17, 'Terapi Mata', '2023-12-25', '2
 INSERT INTO `rekam_medis` VALUES (20, 15, 2, 18, 'Terapi Mata', '2023-12-25', '21:57:40pm', 'ok', 'ok', 'ok', 'ok', 'tidak', 'tidak', 'tidak', 'ok', 1, 'ok', 'ok', 'ok', 'ok', 'sudah cukup baik ', '2', '2023-12-25 21:57:40', NULL);
 INSERT INTO `rekam_medis` VALUES (21, 15, 2, 20, 'Terapi Mata', '2023-12-26', '01:13:30am', 'fdsa', 'fdsa', 'fdsa', 'fdsa', 'ya', 'ya', 'ya', 'fdsa', 1, 'fdsa', 'fdsa', 'fdsa', 'fdsa', 'fdsa', '8', '2023-12-26 01:13:30', NULL);
 INSERT INTO `rekam_medis` VALUES (22, 18, 2, 21, 'Terapi Mata', '2023-12-26', '22:30:49pm', 'ok', 'ok', 'ok', 'ok', 'tidak', 'ya', 'tidak', 'ok', 1, 'ok', 'ok', 'ok', 'ok', 'sehat wal afiat', '3', '2023-12-26 22:30:49', NULL);
+INSERT INTO `rekam_medis` VALUES (23, 11, 1, 22, 'Terapi Mata', '2024-01-01', '21:14:08pm', 'www', 'wert', 'www', 'tret', '  Ya', 'Tidak', ' Ya', 'lampu15Titik', 1, 'lampuTerangGelap', 'trewt', 'trew', 'trewt', 'afdsfa', '3', '2023-12-31 01:10:07', '2024-01-01');
 
 -- ----------------------------
 -- Table structure for resep
@@ -247,7 +265,7 @@ CREATE TABLE `resep`  (
   `date_created` datetime NULL DEFAULT NULL,
   `date_modified` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 46 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 48 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of resep
@@ -266,6 +284,8 @@ INSERT INTO `resep` VALUES (42, 20, 8, '2023-12-26 01:13:30', NULL);
 INSERT INTO `resep` VALUES (43, 21, 3, '2023-12-26 22:30:49', NULL);
 INSERT INTO `resep` VALUES (44, 15, 3, '2023-12-26 22:49:36', NULL);
 INSERT INTO `resep` VALUES (45, 15, 6, '2023-12-26 22:49:36', NULL);
+INSERT INTO `resep` VALUES (46, 22, 3, '2023-12-31 01:10:07', NULL);
+INSERT INTO `resep` VALUES (47, 9, 3, NULL, '2024-01-01 21:14:08');
 
 -- ----------------------------
 -- Table structure for reservasi
@@ -275,12 +295,12 @@ CREATE TABLE `reservasi`  (
   `id` int NOT NULL AUTO_INCREMENT,
   `id_user` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `tanggal_terapi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `terapi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `id_layanan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `status` int NULL DEFAULT NULL,
   `date_created` datetime NULL DEFAULT NULL,
   `date_modified` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of reservasi
@@ -297,5 +317,6 @@ INSERT INTO `reservasi` VALUES (18, '15', '25-12-2023', '1', 1, '2023-12-25 21:5
 INSERT INTO `reservasi` VALUES (19, '11', '25-12-2023', '1', 0, '2023-12-25 23:35:57', NULL);
 INSERT INTO `reservasi` VALUES (20, '15', '26-12-2023', '1', 1, '2023-12-26 01:12:56', NULL);
 INSERT INTO `reservasi` VALUES (21, '18', '26-12-2023', '1', 1, '2023-12-26 22:29:44', NULL);
+INSERT INTO `reservasi` VALUES (22, '11', '31-12-2023', '1', 1, '2023-12-31 01:09:28', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -445,6 +445,8 @@ $(document).ready(function () {
         })
     })
 
+
+
     $('.tanggal_transaksi').change(function () {
         let day = $(this).val();
         $.ajax({
@@ -932,7 +934,7 @@ $(document).ready(function () {
                 let sisa = parseInt(input.replace(",", "")) - parseInt(totalraw)
 
                 Swal.fire({
-                    title: "Kembali " + rp(sisa),
+                    title: "Pembayaran Berhasil",
                     showDenyButton: false,
                     showCancelButton: true,
                     confirmButtonText: "Ok"
@@ -945,11 +947,6 @@ $(document).ready(function () {
                         Swal.fire("Changes are not saved", "", "info");
                     }
                 });
-
-
-
-
-
             }
         });
         rupiah();

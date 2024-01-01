@@ -278,7 +278,7 @@ class Admin extends CI_Controller
 	{
 		$data['title'] 					= 'Data Terapis';
 		$data['username'] 				= $this->session->userdata();
-		$data['detail_user']			= $this->db->get('data_terapis')->result_array();
+		$data['detail_user']			= $this->db->get('data_admin')->result_array();
 		$this->load->view('admin/header', $data);
 		$this->load->view('admin/sidebar', $data);
 		$this->load->view('admin/navbar', $data);
@@ -473,17 +473,17 @@ class Admin extends CI_Controller
 		$data['title'] 					= 'Kelola Rekam Medis';
 		$username 						= $this->session->userdata('username');
 		$cek 							= $this->db->get_where('login', ['nama' => $username])->row_array();
-		$id_login 						= $this->db->get_where('data_terapis', ['id_login' => $cek['id']])->row_array();
+		$id_login 						= $this->db->get_where('data_admin', ['id_login' => $cek['id']])->row_array();
 		$data['id_terapis']				= $id_login['id'];
 		$data['detail_user']			= $this->db->get_where('data_user', ['id' => $id])->result_array();
 		$data['vitamin']				= $this->db->get('data_obat')->result_array();
 
 		$this->db->select('*');
-		$this->db->select('data_terapis.id id_terapis');
+		$this->db->select('data_admin.id id_terapis');
 		$this->db->select('rekam_medis.date_created tanggal_periksa');
 		$this->db->select('rekam_medis.id id_rekam');
 		$this->db->from('rekam_medis');
-		$this->db->join('data_terapis', 'data_terapis.id_login = rekam_medis.id_dokter', 'left');
+		$this->db->join('data_admin', 'data_admin.id_login = rekam_medis.id_dokter', 'left');
 		$this->db->join('data_user', 'data_user.id = rekam_medis.id_user', 'left');
 		$this->db->where('rekam_medis.id_user', $id);
 		$this->db->order_by('rekam_medis.date_created', 'DESC');
@@ -554,7 +554,7 @@ class Admin extends CI_Controller
 			'jabatan'  => $jabatan,
 			'date_created' 		=> date('Y-m-d H:i:sa')
 		];
-		$res = $this->db->insert('data_terapis', $data);
+		$res = $this->db->insert('data_admin', $data);
 		if ($res) {
 			$this->session->set_flashdata('message', '<div class="alert alert-success  text-center" 												role="alert">
 							  Data Berhasil Ditambahkan
@@ -727,7 +727,7 @@ class Admin extends CI_Controller
 			'date_modified' 		=> date('Y-m-d H:i:sa')
 		];
 		$this->db->where('id', $id);
-		$res = $this->db->update('data_terapis', $data);
+		$res = $this->db->update('data_admin', $data);
 
 		if ($res) {
 			$this->session->set_flashdata('message', '<div class="alert alert-success  text-center" 												role="alert">
@@ -759,7 +759,7 @@ class Admin extends CI_Controller
 		$id = $this->input->post('id');
 
 		$this->db->where('id', $id);
-		$res = $this->db->delete('data_terapis');
+		$res = $this->db->delete('data_admin');
 		if ($res) {
 			echo 1;
 		} else {
