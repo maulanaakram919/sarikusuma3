@@ -418,6 +418,9 @@
                             <?php $i = 1; ?>
 
                             <?php foreach ($rekam_medis as $re) : ?>
+                                <?php
+                                $diss = $id_terapis == $re['id_terapis'] ? "" : "disabled";
+                                ?>
                                 <tr data-toggle="modal" data-target="#updateRekamMedis<?= $re['id_rekam'] ?>">
                                     <td class="text-center"><?= $i; ?></td>
                                     <td><?= $re['nama_terapis']; ?></td>
@@ -557,13 +560,13 @@
                                                                     <input type="text" hidden name="id_reservasi" required value="<?= $this->uri->segment(3) ?>">
                                                                     <label for="mata_kanan_minus" class="col col-form-label">Mata Kanan</label>
                                                                     <div class="col">
-                                                                        <input type="text" class="form-control" name="mata_kanan_minus" value="<?= $re['mata_kanan_minus'] ?>">
+                                                                        <input type="text" <?= $diss ?> class="form-control" name="mata_kanan_minus" value="<?= $re['mata_kanan_minus'] ?>">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row mt-3">
                                                                     <label for="mata_kiri_minus" class="col col-form-label">Mata Kiri</label>
                                                                     <div class="col">
-                                                                        <input type="text" class="form-control" required name="mata_kiri_minus" value="<?= $re['mata_kiri_minus'] ?>">
+                                                                        <input type="text" <?= $diss ?> class="form-control" required name="mata_kiri_minus" value="<?= $re['mata_kiri_minus'] ?>">
                                                                     </div>
                                                                 </div>
 
@@ -572,14 +575,14 @@
                                                                 <div class="form-group row mt-3">
                                                                     <label for="mata_kanan_plus" class="col col-form-label">Mata Kanan</label>
                                                                     <div class="col">
-                                                                        <input type="text" class="form-control" required name="mata_kanan_plus" value="<?= $re['mata_kanan_plus'] ?>">
+                                                                        <input type="text" <?= $diss ?> class="form-control" required name="mata_kanan_plus" value="<?= $re['mata_kanan_plus'] ?>">
 
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row mt-3">
                                                                     <label for="mata_kiri_plus" class="col col-form-label">Mata Kiri</label>
                                                                     <div class="col">
-                                                                        <input type="text" class="form-control" required name="mata_kiri_plus" value="<?= $re['mata_kiri_plus'] ?>">
+                                                                        <input type="text" <?= $diss ?> class="form-control" required name="mata_kiri_plus" value="<?= $re['mata_kiri_plus'] ?>">
 
                                                                     </div>
                                                                 </div>
@@ -592,7 +595,7 @@
                                                                 <div class="form-group row mt-3">
                                                                     <label for="buta_warna" class="col col-form-label">Buta Warna </label>
                                                                     <div class="col">
-                                                                        <select name="buta_warna" required id="buta_warna" class="form-control">
+                                                                        <select name="buta_warna" <?= $diss ?> required id="buta_warna" class="form-control">
                                                                             <option value="  <?= ucwords($re['buta_warna']) ?>"> <?= ucwords($re['buta_warna']) ?></option>
                                                                             <option value="ya">Ya</option>
                                                                             <option value="tidak">Tidak</option>
@@ -602,7 +605,7 @@
                                                                 <div class="form-group row mt-3">
                                                                     <label for="buta_warna_parsial" class="col col-form-label"> Buta Warna Parsial</label>
                                                                     <div class="col">
-                                                                        <select name="buta_warna_parsial" required id="buta_warna_parsial" class="form-control">
+                                                                        <select <?= $diss ?> name="buta_warna_parsial" required id="buta_warna_parsial" class="form-control">
                                                                             <option value="<?= ucwords($re['buta_warna_parsial']) ?>"><?= ucwords($re['buta_warna_parsial']) ?></option>
                                                                             <option value="ya">Ya</option>
                                                                             <option value="tidak">Tidak</option>
@@ -612,7 +615,7 @@
                                                                 <div class="form-group row mt-3">
                                                                     <label for="buta_warna_total" class="col col-form-label"> Buta Warna Total</label>
                                                                     <div class="col">
-                                                                        <select name="buta_warna_total" required id="buta_warna_total" class="form-control">
+                                                                        <select <?= $diss ?> name="buta_warna_total" required id="buta_warna_total" class="form-control">
                                                                             <option value=" <?= ucwords($re['buta_warna_total']) ?>"> <?= ucwords($re['buta_warna_total']) ?></option>
                                                                             <option value="ya">Ya</option>
                                                                             <option value="tidak">Tidak</option>
@@ -629,31 +632,31 @@
                                                                     <div class="form-group row mt-3">
                                                                         <label for="lampu15Titik" class="col col-form-label"> Lampu 15 Titik</label>
                                                                         <div class="col">
-                                                                            <input type="text" required class="form-control" name="lampu15Titik" value="lampu15Titik">
+                                                                            <input type="text" <?= $diss ?> required class="form-control" name="lampu15Titik" value="lampu15Titik">
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row mt-3">
                                                                         <label for="lampuTerangGelap" class="col col-form-label">Lampu Terang Gelap</label>
                                                                         <div class="col">
-                                                                            <input type="text" required class="form-control" name="lampuTerangGelap" value="lampuTerangGelap">
+                                                                            <input type="text" <?= $diss ?> required class="form-control" name="lampuTerangGelap" value="lampuTerangGelap">
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row mt-3">
                                                                         <label for="osilatorListrik" class="col col-form-label"> Osilator Listrik</label>
                                                                         <div class="col">
-                                                                            <input type="text" required class="form-control" name="osilatorListrik" value="<?= $re['osilatorListrik'] ?>">
+                                                                            <input type="text" <?= $diss ?> required class="form-control" name="osilatorListrik" value="<?= $re['osilatorListrik'] ?>">
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row mt-3">
                                                                         <label for="stikMagnet" class="col col-form-label"> Stik Magnet</label>
                                                                         <div class="col">
-                                                                            <input type="text" required class="form-control" value="<?= $re['stikMagnet'] ?>" name="stikMagnet">
+                                                                            <input type="text" <?= $diss ?> required class="form-control" value="<?= $re['stikMagnet'] ?>" name="stikMagnet">
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row mt-3">
                                                                         <label for="snelled" class="col col-form-label"> Snellen Chart minus & plus</label>
                                                                         <div class="col">
-                                                                            <input type="text" required value="<?= $re['snelled'] ?>" class="form-control" name="snelled">
+                                                                            <input type="text" <?= $diss ?> required value="<?= $re['snelled'] ?>" class="form-control" name="snelled">
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row mt-3">
@@ -668,7 +671,7 @@
                                                                         ?>
                                                                         <label for="obat" class="col col-form-label"> Vitamin</label>
                                                                         <div class="col">
-                                                                            <select name="obat[]" required class="form-control multiple" id="" multiple="multiple">
+                                                                            <select name="obat[]" <?= $diss ?> required class="form-control multiple" id="" multiple="multiple">
                                                                                 <?php if ($re['obat'] != null || $re['obat'] != '') : ?>
                                                                                     <option selected value="<?= $vitaminLoad['id'] ?>"><?= $vitaminLoad['nama_obat'] ?></option>
                                                                                 <?php endif ?>
@@ -685,7 +688,7 @@
                                                                     <div class="form-group row mt-3">
                                                                         <label for="kesimpulan" required class="col-sm-12 col-form-label">KESIMPULAN </label>
                                                                         <div class="col-sm-12">
-                                                                            <textarea class="form-control" name="kesimpulan" id="" cols="30" rows="10"><?= $re['kesimpulan'] ?></textarea>
+                                                                            <textarea <?= $diss ?> class="form-control" name="kesimpulan" id="" cols="30" rows="10"><?= $re['kesimpulan'] ?></textarea>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -693,8 +696,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" data-delete="<?= $re['id_rekam'] ?>" data-reservasi="<?= $this->uri->segment(3) ?>" data-user="<?= $re['id'] ?>" class="btn btn-danger delete_rekam_medis" data-dismiss="modal">Delete</button>
-                                                        <button type="submit" class="btn btn-primary">Update</button>
+                                                        <button type="button" <?= $diss ?> data-delete="<?= $re['id_rekam'] ?>" data-reservasi="<?= $this->uri->segment(3) ?>" data-user="<?= $re['id'] ?>" class="btn btn-danger delete_rekam_medis" data-dismiss="modal">Delete</button>
+                                                        <button type="submit" <?= $diss ?> class="btn btn-primary">Update</button>
                                                     </div>
                                                 </form>
                                             </div>

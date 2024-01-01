@@ -471,11 +471,15 @@ class Admin extends CI_Controller
 	public function kelolaRekamMedis($id_reservasi, $id)
 	{
 		$data['title'] 					= 'Kelola Rekam Medis';
-		$data['username'] 				= $this->session->userdata();
+		$username 						= $this->session->userdata('username');
+		$cek 							= $this->db->get_where('login', ['nama' => $username])->row_array();
+		$id_login 						= $this->db->get_where('data_terapis', ['id_login' => $cek['id']])->row_array();
+		$data['id_terapis']				= $id_login['id'];
 		$data['detail_user']			= $this->db->get_where('data_user', ['id' => $id])->result_array();
 		$data['vitamin']				= $this->db->get('data_obat')->result_array();
 
 		$this->db->select('*');
+		$this->db->select('data_terapis.id id_terapis');
 		$this->db->select('rekam_medis.date_created tanggal_periksa');
 		$this->db->select('rekam_medis.id id_rekam');
 		$this->db->from('rekam_medis');
@@ -485,8 +489,7 @@ class Admin extends CI_Controller
 		$this->db->order_by('rekam_medis.date_created', 'DESC');
 
 		$data['rekam_medis']			= $this->db->get()->result_array();
-		// var_dump($data['rekam_medis']);
-		// die;
+
 
 		$this->load->view('admin/header', $data);
 		$this->load->view('admin/sidebar', $data);
