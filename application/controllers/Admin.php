@@ -260,7 +260,7 @@ class Admin extends CI_Controller
 		$data = [
 
 
-			'terapi' => $terapi,
+			'id_terapi' => $terapi,
 			'tanggal_terapi' => $tanggal_terapi,
 			'status' => $status,
 			'date_created' => date('Y-m-d H:i:sa')
