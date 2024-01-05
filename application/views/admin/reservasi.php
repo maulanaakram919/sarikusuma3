@@ -368,8 +368,11 @@
                                                         </div>
                                                         <div class="col-sm-5">
                                                             <select name="terapi" <?= $d['status'] == 1 ? 'disabled' : '' ?> id="" class="form-control" required>
-                                                                <option selected value="<?= $d['layanan'] ?>"><?= $d['layanan'] ?></option>
-                                                                <option value="mata">Terapi Mata</option>
+
+                                                                <?php foreach ($layanan as $l) : ?>
+                                                                    <option <?= $l['id'] == $d['id_layanan'] ? 'selected' : '' ?> value="<?= $l['id'] ?>"><?= $l['layanan'] ?></option>
+                                                                <?php endforeach; ?>
+
                                                             </select>
                                                         </div>
                                                     </div>
