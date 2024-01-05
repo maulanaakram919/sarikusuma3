@@ -225,7 +225,7 @@ class Admin extends CI_Controller
 		$terapi 					= $this->input->post('terapi');
 		$tanggal_terapi 			= $this->input->post('tanggal_terapi');
 		$res 						= $this->db->get_where('data_user', ['no_ktp' => $nik])->row_array();
-		$cek 						= $this->db->get_where('reservasi', ['id_user' => $res['id'], 'tanggal_terapi' => $tanggal_terapi, 'terapi' => $terapi])->num_rows();
+		$cek 						= $this->db->get_where('reservasi', ['id_user' => $res['id'], 'tanggal_terapi' => $tanggal_terapi, 'id_layanan' => $terapi])->num_rows();
 		if ($cek > 0) {
 			$this->session->set_flashdata('message', '<div class="alert alert-warning  text-center" 												role="alert">
 							  Sudah Melakukan Reservasi
@@ -235,7 +235,7 @@ class Admin extends CI_Controller
 		$data = [
 
 			'id_user' => $res['id'],
-			'terapi' => $terapi,
+			'id_layanan' => $terapi,
 			'status' => 0,
 			'tanggal_terapi' => $tanggal_terapi,
 			'date_created' => date('Y-m-d H:i:sa')
@@ -258,9 +258,7 @@ class Admin extends CI_Controller
 
 
 		$data = [
-
-
-			'id_terapi' => $terapi,
+			'id_layanan' => $terapi,
 			'tanggal_terapi' => $tanggal_terapi,
 			'status' => $status,
 			'date_created' => date('Y-m-d H:i:sa')

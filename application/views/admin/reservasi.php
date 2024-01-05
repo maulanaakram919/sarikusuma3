@@ -311,7 +311,7 @@
                                                                         <p>:</p>
                                                                     </div>
                                                                     <div class="col-sm-2">
-                                                                        <p><?= $d['jk'] ?></p>
+                                                                        <p><?= $d['jk'] == 'W' ? 'Wanita' : 'Pria'; ?></p>
 
                                                                     </div>
                                                                 </div>
