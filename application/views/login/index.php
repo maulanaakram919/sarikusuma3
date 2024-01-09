@@ -168,13 +168,13 @@
 
             <div class="row">
 
-                <div class="col-sm-6">
+                <!-- <div class="col-sm-6">
                     <a href="/sarikusuma/layanan" target="_blank">Daftar</a>
                 </div>
                 <div class="col-sm-6">
 
                     <a href="/sarikusuma/contact" target="_blank">Lupa Password</a>
-                </div>
+                </div> -->
             </div>
 
 
