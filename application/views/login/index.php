@@ -156,7 +156,7 @@
 
         <form method="POST" action="<?= base_url('login') ?>">
             <div class="input-group">
-                <input type="text" id="username" autocomplete="off" name="username" class="input-field" placeholder="Email">
+                <input type="text" id="username" autocomplete="off" name="username" class="input-field" placeholder="Username">
                 <?= form_error('username', '<small class="text-danger mt-1">', '</small>') ?>
             </div>
 

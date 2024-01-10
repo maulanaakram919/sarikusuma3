@@ -1,9 +1,15 @@
 <div class="p-4">
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <h2>DATA RESERVASI</h2>
+        </div>
+    </div>
     <div class="row mb-3">
 
         <div class="flash mt-5 mb-3">
             <?= $this->session->flashdata('message') ?>
         </div>
+
 
         <div class="col-sm-4">
             <button class="btn btn-purple" data-toggle="modal" data-target="#addReservasi">Tambah Reservasi</button>
@@ -12,7 +18,7 @@
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Reservasi</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Tambah Reservasi</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>

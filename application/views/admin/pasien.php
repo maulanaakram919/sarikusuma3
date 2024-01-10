@@ -1,6 +1,10 @@
 <div class="p-4">
     <div class="row mb-3">
-
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <h2>DATA PASIEN</h2>
+            </div>
+        </div>
         <div class="flash mt-5 mb-3">
             <?= $this->session->flashdata('message') ?>
         </div>

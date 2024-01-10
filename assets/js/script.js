@@ -462,34 +462,35 @@ $(document).ready(function () {
             success: function (data) {
                 $('.loadDataTransaksi').html('');
                 let isi = '';
+
                 let no = 1;
                 data.forEach(e => {
+                    let status_payment = '';
+                    let color = '';
+                    let jk = '';
+                    let id_layanan = '';
+                    status_payment = e.status_payment == 1 ? 'Selesai' : 'Menunggu';
+                    color = e.status_payment == 1 ? 'success' : 'danger';
+                    id_layanan = e.id_layanan == 1 ? 'Mata' : '';
+                    jk = e.jk == 'w' ? 'Wanita' : 'Pria';
                     isi += `    <tr>
                                     <td class="align-middle text-center">`+ no + `</td>
                                     <td class="align-middle">`+ e.nama + `</td>
                                     <td class="align-middle text-center">`+ e.tgl_lahir + `</td>
                                     <td class="align-middle text-center"><?= hitung_umur(`+ e.tgl_lahir + `) ?></td>
-                                    <?php if ($d['jk'] == 'p') : ?>
-                                        <td class="align-middle text-center">Laki laki</td>
-                                    <?php elseif ($d['jk'] == 'w') : ?>
-                                        <td class="align-middle text-center">Perempuan</td>
-                                    <?php else : ?>
-                                        <td class="align-middle text-center"></td>
-                                    <?php endif; ?>
+                                    <td class="align-middle text-center">`+ jk + `</td>
+                                  
 
-                                    <td class="align-middle"><?= $d['terapi'] ?></td>
-                                    <td class="align-middle"><?= $d['tanggal_terapi'] ?></td>
-                                    <?php if ($d['status_payment'] == 1) : ?>
-                                        <td class="align-middle text-success">Selesai</td>
-                                    <?php else : ?>
-                                        <td class="align-middle text-danger">Menunggu</td>
-                                    <?php endif ?>
+                                    <td class="align-middle">`+ id_layanan + `</td>
+                                    <td class="align-middle">`+ e.tanggal_terapi + `</td>
+                                    <td class="align-middle text-`+ color + `">` + status_payment + `</td>
+                                
                                     <td class="align-middle p-2 text-nowrap">
                                         <div class="row">
                                             <div class="col">
-                                                <button class="btn btn-primary detNota" data-rekam="<?= $d['id_reservasi'] ?>" data-bs-toggle="modal" data-bs-target="#pembayaran<?= $d['id_reservasi'] ?>">Lihat Nota</button>
+                                                <button class="btn btn-primary detNota" data-rekam="<?= $d['id_reservasi'] ?>" data-bs-toggle="modal" data-bs-target="#pembayaran`+ e.id_reservasi + `">Lihat Nota</button>
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="pembayaran<?= $d['id_reservasi'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="pembayaran`+ e.id_reservasi + `" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-lg">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
