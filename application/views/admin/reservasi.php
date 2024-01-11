@@ -1,7 +1,17 @@
 <div class="p-4">
     <div class="row">
         <div class="col-sm-12 text-center">
-            <h2>DATA RESERVASI</h2>
+            <h2>Data Reservasi</h2>
+        </div>
+    </div>
+    <div class="row mb-3 mt-3 justify-content-end">
+        <div class="col-sm-3">
+            <label for="">Mulai</label>
+            <input type="date" class="form-control mulai rentang">
+        </div>
+        <div class="col-sm-3">
+            <label for="">Sampai</label>
+            <input type="date" class="form-control sampai rentang" value="<?= date('Y-m-d') ?>">
         </div>
     </div>
     <div class="row mb-3">
@@ -211,7 +221,7 @@
                     </tr>
                 </thead>
 
-                <tbody>
+                <tbody class="tableReservasi">
                     <?php $i = 1; ?>
 
                     <?php foreach ($detail_user as $d) : ?>

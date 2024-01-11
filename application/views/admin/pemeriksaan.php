@@ -1,4 +1,14 @@
 <div class="p-4">
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <?php if ($this->uri->segment(2) == 'historyRekamMedis') : ?>
+                <h2>History Pemeriksaan</h2>
+            <?php else : ?>
+                <h2>Pemeriksaan</h2>
+            <?php endif ?>
+
+        </div>
+    </div>
     <div class="row mb-3">
 
         <div class="flash mt-5 mb-3">

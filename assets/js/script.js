@@ -700,7 +700,7 @@ $(document).ready(function () {
 
 
     function updateNota(id_reservasi) {
-        console.log(id_reservasi)
+
         $.ajax({
             url: base_url + "/admin/detNota",
             type: 'post',
@@ -969,6 +969,265 @@ $(document).ready(function () {
     }
 
     $.fn.modal.Constructor.prototype._enforceFocus = function () { };
+
+
+    $('.rentang').change(function () {
+        let mulai = $('.mulai').val();
+        let sampai = $('.sampai').val();
+
+        $.ajax({
+            url: base_url + "/admin/userRegistered",
+            type: 'post',
+            dataType: 'json',
+            data: {
+                mulai: mulai,
+                sampai: sampai
+            },
+            beforeSend: function () {
+
+            },
+            success: function (data) {
+                $('.dataUserRegistered').html('');
+                $('.tableReservasi').html('');
+                let isi = '';
+                let no = 1;
+                data.userRegistered.forEach(e => {
+                    isi += `  <tr>
+                                <td class="text-center">`+ no + `</td>
+                                <td>`+ e.nama + `</td>
+                                <td>`+ e.email + `></td>
+                                <td>`+ e.whatsapp + `</td>
+                            </tr>`;
+                    no++;
+                });
+                data.reservasi.forEach(e => {
+                    let jk = e.jk == 'P' ? 'Pria' : 'Wanita';
+                    let status = e.status_reservasi == 1 ? 'Selesai' : 'Menunggu';
+                    let color = e.status_reservasi == 1 ? 'success' : 'danger';
+                    isi += `   <tr>
+                                    <td class="align-middle text-center">`+ no + `</td>
+                                    <td class="align-middle">`+ e.nama + `</td>
+                                    <td class="align-middle text-center">`+ e.tgl_lahir + `</td>
+                                    <td class="align-middle text-center"><?= hitung_umur(`+ e.tgl_lahir + `) ?></td>
+
+                                    <td class="align-middle text-center">`+ jk + `</td>
+                                  
+
+                                    <td class="align-middle">`+ e.layanan + `</td>
+                                    <td class="align-middle">`+ e.tanggal_terapi + `</td>
+                                    <td class="align-middle text-`+ color + `">` + status + `</td>
+                                  
+
+                                    <td class="align-middle p-2">
+                                        <button class="btn btn-sm btn-info mx-1" data-toggle="modal" data-target="#editReservasi<?= $d['id_reservasi'] ?>">Edit</button>
+
+                                        <div class="modal fade" id="editReservasi<?= $d['id_reservasi'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Edit Data Reservasi</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <form action="<?= $d['status'] == 1 ?  ''  : base_url('admin/editReservasi') ?>" method="POST">
+                                                        <div class="modal-body">
+                                                            <div class="form-group">
+                                                                <input type="text" value="<?= $d['id_reservasi'] ?>" hidden name="id">
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <div class="smaller">
+                                                                        <div class="row text-dark">
+                                                                            <div class="col-sm-2">
+                                                                                <p>Nama</p>
+                                                                            </div>
+                                                                            <div class="col-sm-1 text-center">
+                                                                                <p>:</p>
+                                                                            </div>
+                                                                            <div class="col-sm-2">
+                                                                                <p><?= $d['nama'] ?></p>
+                                                                            </div>
+                                                                            <div class="col-sm-1"></div>
+                                                                            <div class="col-sm-2">
+                                                                                <p>Tanggal Lahir</p>
+                                                                            </div>
+                                                                            <div class="col-sm-1 text-center">
+                                                                                <p>:</p>
+                                                                            </div>
+                                                                            <div class="col-sm-2">
+                                                                                <p><?= $d['tgl_lahir'] ?></p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row text-dark">
+                                                                            <div class="col-sm-2">
+                                                                                <p>Email</p>
+                                                                            </div>
+                                                                            <div class="col-sm-1 text-center">
+                                                                                <p>:</p>
+                                                                            </div>
+                                                                            <div class="col-sm-2">
+                                                                                <p><?= $d['email'] ?></p>
+                                                                            </div>
+                                                                            <div class="col-sm-1"></div>
+                                                                            <div class="col-sm-2">
+                                                                                <p>Agama</p>
+                                                                            </div>
+                                                                            <div class="col-sm-1 text-center">
+                                                                                <p>:</p>
+                                                                            </div>
+                                                                            <div class="col-sm-2">
+                                                                                <p><?= $d['agama'] ?></p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row text-dark">
+                                                                            <div class="col-sm-2">
+                                                                                <p>Whatsapp</p>
+                                                                            </div>
+                                                                            <div class="col-sm-1 text-center">
+                                                                                <p>:</p>
+                                                                            </div>
+                                                                            <div class="col-sm-2">
+                                                                                <p><?= $d['whatsapp'] ?></p>
+                                                                            </div>
+                                                                            <div class="col-sm-1"></div>
+                                                                            <div class="col-sm-2">
+                                                                                <p>Jenis Kelamin</p>
+                                                                            </div>
+                                                                            <div class="col-sm-1 text-center">
+                                                                                <p>:</p>
+                                                                            </div>
+                                                                            <div class="col-sm-2">
+                                                                                <p><?= $d['jk'] == 'W' ? 'Wanita' : 'Pria'; ?></p>
+
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row text-dark">
+                                                                            <div class="col-sm-2">
+                                                                                <p>Alamat</p>
+                                                                            </div>
+                                                                            <div class="col-sm-1 text-center">
+                                                                                <p>:</p>
+                                                                            </div>
+                                                                            <div class="col-sm-2">
+                                                                                <p><?= $d['alamat'] ?></p>
+                                                                            </div>
+                                                                            <div class="col-sm-1"></div>
+                                                                            <div class="col-sm-2">
+                                                                                <p>Kota</p>
+                                                                            </div>
+                                                                            <div class="col-sm-1 text-center">
+                                                                                <p>:</p>
+                                                                            </div>
+                                                                            <div class="col-sm-2">
+                                                                                <p><?= $d['kota'] ?></p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row text-dark">
+                                                                            <div class="col-sm-2">
+                                                                                <p>Provinsi</p>
+                                                                            </div>
+                                                                            <div class="col-sm-1 text-center">
+                                                                                <p>:</p>
+                                                                            </div>
+                                                                            <div class="col-sm-2">
+                                                                                <p><?= $d['provinsi'] ?></p>
+                                                                            </div>
+                                                                            <div class="col-sm-1"></div>
+                                                                            <div class="col-sm-2">
+                                                                                <p>Negara</p>
+                                                                            </div>
+                                                                            <div class="col-sm-1 text-center">
+                                                                                <p>:</p>
+                                                                            </div>
+                                                                            <div class="col-sm-2">
+                                                                                <p><?= $d['negara'] ?></p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <hr>
+                                                            <div class="row">
+                                                                <div class="col-sm-2">
+                                                                    <label class="mt-3" for="">Tujuan Terapi</label>
+                                                                </div>
+                                                                <div class="col-sm-5">
+                                                                    <select name="terapi" <?= $d['status'] == 1 ? 'disabled' : '' ?> id="" class="form-control" required>
+
+                                                                        <?php foreach ($layanan as $l) : ?>
+                                                                            <option <?= $l['id'] == $d['id_layanan'] ? 'selected' : '' ?> value="<?= $l['id'] ?>"><?= $l['layanan'] ?></option>
+                                                                        <?php endforeach; ?>
+
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-sm-2">
+                                                                    <label class="mt-3" for="">Tanggal Terapi</label>
+                                                                </div>
+                                                                <div class="col-sm-5">
+                                                                    <div class="input-group date">
+                                                                        <input type="text" <?= $d['status'] == 1 ? 'disabled' : '' ?> required name="tanggal_terapi" class="form-control datepicker mt-2" value="<?= $d['tanggal_terapi'] ?>">
+                                                                        <div class="input-group-addon">
+                                                                            <span class="glyphicon glyphicon-th"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-sm-2">
+                                                                    <label class="mt-3" for="">Status</label>
+                                                                </div>
+                                                                <div class="col-sm-5">
+                                                                    <div class="input-group status">
+                                                                        <select name="status" <?= $d['status'] == 1 ? 'disabled' : '' ?> id="" class="form-control mt-2" required>
+                                                                            <?php if ($d['status'] == 1) : ?>
+                                                                                <option value="1">Selesai</option>
+                                                                                <option value="0">Menunggu</option>
+                                                                            <?php else : ?>
+                                                                                <option value="0">Menunggu</option>
+                                                                                <option value="1">Selesai</option>
+                                                                            <?php endif ?>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="<?= $d['status'] == 1 ? 'Status yang sudah selesai, tidak dapat diupdate' : '' ?>">
+                                                                <button type="submit" <?= $d['status'] == 1 ? 'disabled' : '' ?> class="btn btn-primary">Update</button>
+                                                            </span>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button data-delete="<?= $d['id_reservasi'] ?>" class="btn btn-danger deleteReservasi btn-sm">Delete</button>
+                                    </td>
+                                </tr>`;
+                });
+
+                $('.dataUserRegistered').html(isi);
+                $('.tableReservasi').html(isi);
+
+
+
+
+            }
+        })
+    })
+    function getDate() {
+        var today = new Date();
+
+        document.getElementsByClassName("sampai").value = ('0' + (today.getMonth() + 1)).slice(-2) + '/' + ('0' + today.getDate()).slice(-2) + '/' + today.getFullYear();
+
+
+    }
 
 
 

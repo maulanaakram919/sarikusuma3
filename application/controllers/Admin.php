@@ -820,4 +820,18 @@ class Admin extends CI_Controller
 		$res = $this->db->get_where('data_user', ['no_ktp' => $cari])->row_array();
 		echo json_encode($res);
 	}
+
+	public function userRegistered()
+	{
+		$mulai = date("d-m-Y", strtotime($this->input->post('mulai')));
+		$sampai = date("d-m-Y", strtotime($this->input->post('sampai')));
+		$resUserRegistered = $this->Admin_model->userRegistered($mulai, $sampai)->result_array();
+		$resReservasi = $this->Admin_model->tableReservasi($mulai, $sampai)->result_array();
+		echo json_encode(
+			[
+				'userRegistered' => $resUserRegistered,
+				'reservasi' => $resReservasi
+			]
+		);
+	}
 }

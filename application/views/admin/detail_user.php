@@ -1,7 +1,23 @@
-<div class="p-4">
+<div>
     <div class="row">
+        <div class="col-sm-12 text-center">
+            <h2>Data Registrasi Pasien</h2>
+        </div>
+    </div>
+    <div class="row mb-3 mt-3 justify-content-end">
+        <div class="col-sm-3">
+            <label for="">Mulai</label>
+            <input type="date" class="form-control mulai rentang">
+        </div>
+        <div class="col-sm-3">
+            <label for="">Sampai</label>
+            <input type="date" class="form-control sampai rentang">
+        </div>
+    </div>
+    <div class="row">
+
         <div class="col">
-            <table class="table table-bordered tabledata">
+            <table class="table table-bordered tabledata tableUser">
                 <thead>
                     <tr>
                         <th class="text-center align-middle">No</th>
@@ -10,7 +26,7 @@
                         <th class="text-center align-middle">WhatsApp</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="dataUserRegistered">
                     <?php $i = 1; ?>
                     <?php foreach ($detail_user as $du) : ?>
                         <tr>

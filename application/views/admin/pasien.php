@@ -2,7 +2,7 @@
     <div class="row mb-3">
         <div class="row">
             <div class="col-sm-12 text-center">
-                <h2>DATA PASIEN</h2>
+                <h2>Data Pasien</h2>
             </div>
         </div>
         <div class="flash mt-5 mb-3">

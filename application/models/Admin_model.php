@@ -118,4 +118,38 @@ class Admin_model extends CI_Model
         $res = $this->db->query($query)->result_array();
         return $res;
     }
+
+
+    public function userRegistered($mulai, $sampai)
+    {
+        $query = "  SELECT
+                    *
+                    FROM
+                    data_user
+                    WHERE
+                    date_created BETWEEN '" . $mulai . "' AND '" . $sampai . "'";
+
+        $res = $this->db->query($query);
+        return $res;
+    }
+    public function tableReservasi($mulai, $sampai)
+    {
+        $query = "  SELECT
+                    *,
+                    reservasi.`status` as status_reservasi
+                    FROM
+                    reservasi
+                    LEFT JOIN
+                    data_user
+                    ON data_user.id = reservasi.id_user
+                    LEFT JOIN
+                    layanan
+                    ON
+                    layanan.id = reservasi.id_layanan
+                    WHERE
+                    tanggal_terapi BETWEEN '" . $mulai . "' AND '" . $sampai . "'";
+
+        $res = $this->db->query($query);
+        return $res;
+    }
 }
