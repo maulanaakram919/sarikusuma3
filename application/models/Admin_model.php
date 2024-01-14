@@ -136,7 +136,8 @@ class Admin_model extends CI_Model
     {
         $query = "  SELECT
                     *,
-                    reservasi.`status` as status_reservasi
+                    reservasi.`status` as status_reservasi,
+                    reservasi.id id_reservasi
                     FROM
                     reservasi
                     LEFT JOIN

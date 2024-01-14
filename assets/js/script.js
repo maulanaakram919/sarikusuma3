@@ -276,7 +276,8 @@ $(document).ready(function () {
         });
 
     })
-    $('.deleteReservasi').click(function () {
+    // $('.deleteReservasi').click(function () {
+    $('body').on('click', '.deleteReservasi', function () {
         let id = $(this).data('delete');
 
         Swal.fire({
@@ -989,6 +990,7 @@ $(document).ready(function () {
             success: function (data) {
                 $('.dataUserRegistered').html('');
                 $('.tableReservasi').html('');
+                $('.tabledata ').dataTable().fnDestroy();
                 let isi = '';
                 let no = 1;
                 data.userRegistered.forEach(e => {
@@ -1000,12 +1002,18 @@ $(document).ready(function () {
                             </tr>`;
                     no++;
                 });
+                let isiReservasi = '';
+                let noReservasi = 1;
+
                 data.reservasi.forEach(e => {
+                    let statusReservase = e.status == 1 ? '' : base_url + '/admin/editReservasi';
+                    let statusDisable = e.status == 1 ? 'disabled' : '';
                     let jk = e.jk == 'P' ? 'Pria' : 'Wanita';
                     let status = e.status_reservasi == 1 ? 'Selesai' : 'Menunggu';
                     let color = e.status_reservasi == 1 ? 'success' : 'danger';
-                    isi += `   <tr>
-                                    <td class="align-middle text-center">`+ no + `</td>
+
+                    isiReservasi += `   <tr>
+                                    <td class="align-middle text-center">`+ noReservasi + `</td>
                                     <td class="align-middle">`+ e.nama + `</td>
                                     <td class="align-middle text-center">`+ e.tgl_lahir + `</td>
                                     <td class="align-middle text-center"><?= hitung_umur(`+ e.tgl_lahir + `) ?></td>
@@ -1019,9 +1027,9 @@ $(document).ready(function () {
                                   
 
                                     <td class="align-middle p-2">
-                                        <button class="btn btn-sm btn-info mx-1" data-toggle="modal" data-target="#editReservasi<?= $d['id_reservasi'] ?>">Edit</button>
+                                        <button class="btn btn-sm btn-info mx-1" data-toggle="modal" data-target="#editReservasi`+ e.id_reservasi + `">Edit</button>
 
-                                        <div class="modal fade" id="editReservasi<?= $d['id_reservasi'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="editReservasi`+ e.id_reservasi + `" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-lg" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -1030,10 +1038,10 @@ $(document).ready(function () {
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    <form action="<?= $d['status'] == 1 ?  ''  : base_url('admin/editReservasi') ?>" method="POST">
+                                                    <form action="`+ statusReservase + `" method="POST">
                                                         <div class="modal-body">
                                                             <div class="form-group">
-                                                                <input type="text" value="<?= $d['id_reservasi'] ?>" hidden name="id">
+                                                                <input type="text" value="`+ e.id_reservasi + `" hidden name="id">
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col">
@@ -1046,7 +1054,7 @@ $(document).ready(function () {
                                                                                 <p>:</p>
                                                                             </div>
                                                                             <div class="col-sm-2">
-                                                                                <p><?= $d['nama'] ?></p>
+                                                                                <p>`+ e.nama + `</p>
                                                                             </div>
                                                                             <div class="col-sm-1"></div>
                                                                             <div class="col-sm-2">
@@ -1056,7 +1064,7 @@ $(document).ready(function () {
                                                                                 <p>:</p>
                                                                             </div>
                                                                             <div class="col-sm-2">
-                                                                                <p><?= $d['tgl_lahir'] ?></p>
+                                                                                <p>`+ e.tgl_lahir + `</p>
                                                                             </div>
                                                                         </div>
                                                                         <div class="row text-dark">
@@ -1067,7 +1075,7 @@ $(document).ready(function () {
                                                                                 <p>:</p>
                                                                             </div>
                                                                             <div class="col-sm-2">
-                                                                                <p><?= $d['email'] ?></p>
+                                                                                <p>`+ e.email + `</p>
                                                                             </div>
                                                                             <div class="col-sm-1"></div>
                                                                             <div class="col-sm-2">
@@ -1077,7 +1085,7 @@ $(document).ready(function () {
                                                                                 <p>:</p>
                                                                             </div>
                                                                             <div class="col-sm-2">
-                                                                                <p><?= $d['agama'] ?></p>
+                                                                                <p>`+ e.agama + `</p>
                                                                             </div>
                                                                         </div>
                                                                         <div class="row text-dark">
@@ -1088,7 +1096,7 @@ $(document).ready(function () {
                                                                                 <p>:</p>
                                                                             </div>
                                                                             <div class="col-sm-2">
-                                                                                <p><?= $d['whatsapp'] ?></p>
+                                                                                <p>`+ e.whatsapp + `</p>
                                                                             </div>
                                                                             <div class="col-sm-1"></div>
                                                                             <div class="col-sm-2">
@@ -1098,7 +1106,7 @@ $(document).ready(function () {
                                                                                 <p>:</p>
                                                                             </div>
                                                                             <div class="col-sm-2">
-                                                                                <p><?= $d['jk'] == 'W' ? 'Wanita' : 'Pria'; ?></p>
+                                                                                <p>`+ jk + `</p>
 
                                                                             </div>
                                                                         </div>
@@ -1110,7 +1118,7 @@ $(document).ready(function () {
                                                                                 <p>:</p>
                                                                             </div>
                                                                             <div class="col-sm-2">
-                                                                                <p><?= $d['alamat'] ?></p>
+                                                                                <p>`+ e.alamat + `</p>
                                                                             </div>
                                                                             <div class="col-sm-1"></div>
                                                                             <div class="col-sm-2">
@@ -1120,7 +1128,7 @@ $(document).ready(function () {
                                                                                 <p>:</p>
                                                                             </div>
                                                                             <div class="col-sm-2">
-                                                                                <p><?= $d['kota'] ?></p>
+                                                                                <p>`+ e.kota + `</p>
                                                                             </div>
                                                                         </div>
                                                                         <div class="row text-dark">
@@ -1131,7 +1139,7 @@ $(document).ready(function () {
                                                                                 <p>:</p>
                                                                             </div>
                                                                             <div class="col-sm-2">
-                                                                                <p><?= $d['provinsi'] ?></p>
+                                                                                <p>`+ e.provinsi + `</p>
                                                                             </div>
                                                                             <div class="col-sm-1"></div>
                                                                             <div class="col-sm-2">
@@ -1141,7 +1149,7 @@ $(document).ready(function () {
                                                                                 <p>:</p>
                                                                             </div>
                                                                             <div class="col-sm-2">
-                                                                                <p><?= $d['negara'] ?></p>
+                                                                                <p>`+ e.negara + `</p>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -1154,13 +1162,16 @@ $(document).ready(function () {
                                                                     <label class="mt-3" for="">Tujuan Terapi</label>
                                                                 </div>
                                                                 <div class="col-sm-5">
-                                                                    <select name="terapi" <?= $d['status'] == 1 ? 'disabled' : '' ?> id="" class="form-control" required>
+                                                                    <select name="terapi" `+ statusDisable + ` id="" class="form-control" required> `;
+                    data.layanan.forEach(l => {
+                        let selected = l.id == e.id_layanan ? 'selected' : '';
+                        console.log(l.layanan)
+                        isiReservasi += ` <option ` + selected + ` value="` + l.id + `">` + l.layanan + `</option>`
+                    });
 
-                                                                        <?php foreach ($layanan as $l) : ?>
-                                                                            <option <?= $l['id'] == $d['id_layanan'] ? 'selected' : '' ?> value="<?= $l['id'] ?>"><?= $l['layanan'] ?></option>
-                                                                        <?php endforeach; ?>
 
-                                                                    </select>
+
+                    isiReservasi += ` </select>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
@@ -1169,7 +1180,7 @@ $(document).ready(function () {
                                                                 </div>
                                                                 <div class="col-sm-5">
                                                                     <div class="input-group date">
-                                                                        <input type="text" <?= $d['status'] == 1 ? 'disabled' : '' ?> required name="tanggal_terapi" class="form-control datepicker mt-2" value="<?= $d['tanggal_terapi'] ?>">
+                                                                        <input type="text" `+ statusDisable + ` required name="tanggal_terapi" class="form-control datepicker mt-2" value="` + e.tanggal_terapi + `">
                                                                         <div class="input-group-addon">
                                                                             <span class="glyphicon glyphicon-th"></span>
                                                                         </div>
@@ -1182,14 +1193,11 @@ $(document).ready(function () {
                                                                 </div>
                                                                 <div class="col-sm-5">
                                                                     <div class="input-group status">
-                                                                        <select name="status" <?= $d['status'] == 1 ? 'disabled' : '' ?> id="" class="form-control mt-2" required>
-                                                                            <?php if ($d['status'] == 1) : ?>
-                                                                                <option value="1">Selesai</option>
-                                                                                <option value="0">Menunggu</option>
-                                                                            <?php else : ?>
+                                                                        <select name="status" `+ statusDisable + ` id="" class="form-control mt-2" required>
+                                                                                <option selected value="`+ e.status + `">` + status + `</option>
                                                                                 <option value="0">Menunggu</option>
                                                                                 <option value="1">Selesai</option>
-                                                                            <?php endif ?>
+                                                                           
                                                                         </select>
                                                                     </div>
                                                                 </div>
@@ -1200,20 +1208,22 @@ $(document).ready(function () {
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                             <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="<?= $d['status'] == 1 ? 'Status yang sudah selesai, tidak dapat diupdate' : '' ?>">
-                                                                <button type="submit" <?= $d['status'] == 1 ? 'disabled' : '' ?> class="btn btn-primary">Update</button>
+                                                                <button type="submit" `+ statusDisable + ` class="btn btn-primary">Update</button>
                                                             </span>
                                                         </div>
                                                     </form>
                                                 </div>
                                             </div>
                                         </div>
-                                        <button data-delete="<?= $d['id_reservasi'] ?>" class="btn btn-danger deleteReservasi btn-sm">Delete</button>
+                                        <button data-delete="`+ e.id_reservasi + `" class="btn btn-danger deleteReservasi btn-sm">Delete</button>
                                     </td>
                                 </tr>`;
+                    noReservasi++;
                 });
 
                 $('.dataUserRegistered').html(isi);
-                $('.tableReservasi').html(isi);
+                $('.tableReservasi').html(isiReservasi);
+                $('.tabledata ').dataTable();
 
 
 
