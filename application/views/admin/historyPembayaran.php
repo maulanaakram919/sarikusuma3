@@ -4,6 +4,18 @@
             <h2>Data History Pembayaran</h2>
         </div>
     </div>
+
+    <div class="row mb-3 mt-3 justify-content-end">
+        <div class="col-sm-3">
+            <label for="">Mulai</label>
+            <input type="date" class="form-control mulai rentang">
+        </div>
+        <div class="col-sm-3">
+            <label for="">Sampai</label>
+            <input type="date" class="form-control sampai rentang" value="<?= date('Y-m-d') ?>">
+        </div>
+    </div>
+
     <div class="row mb-3">
 
         <div class="flash mt-5 mb-3">

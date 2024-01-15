@@ -782,7 +782,8 @@ $(document).ready(function () {
         })
     }
 
-    $('.detNota').click(function () {
+    // $('.detNota').click(function () {
+    $('body').on('click', '.detNota', function () {
         let id_reservasi = $(this).data('rekam');
         updateNota(id_reservasi);
     })
@@ -990,6 +991,8 @@ $(document).ready(function () {
             success: function (data) {
                 $('.dataUserRegistered').html('');
                 $('.tableReservasi').html('');
+                $('.loadDataTransaksi').html('');
+                $('.tablePemeriksaan').html('');
                 $('.tabledata ').dataTable().fnDestroy();
                 let isi = '';
                 let no = 1;
@@ -1004,7 +1007,6 @@ $(document).ready(function () {
                 });
                 let isiReservasi = '';
                 let noReservasi = 1;
-
                 data.reservasi.forEach(e => {
                     let statusReservase = e.status == 1 ? '' : base_url + '/admin/editReservasi';
                     let statusDisable = e.status == 1 ? 'disabled' : '';
@@ -1220,9 +1222,260 @@ $(document).ready(function () {
                                 </tr>`;
                     noReservasi++;
                 });
+                let isiHistoryPembayaran = '';
+                let noHistoryPembayaran = 1;
+                let jk = '';
+                let statusPayment = '';
+                let colorPayment = '';
+                data.historyPembayaran.forEach(hp => {
+                    jk = hp.jk == 'w' ? 'Wanita' : 'Pria';
+                    statusPayment = hp['status_payment'] == 1 ? 'Selesai' : 'Menunggu';
+                    colorPayment = hp['status_payment'] == 1 ? 'success' : 'danger';
+                    isiHistoryPembayaran += `  <tr>
+                                                    <td class="align-middle text-center">`+ noHistoryPembayaran + `</td>
+                                                    <td class="align-middle">`+ hp['nama'] + `</td>
+                                                    <td class="align-middle text-center">`+ hp['tgl_lahir'] + `</td>
+                                                    <td class="align-middle text-center"><?= hitung_umur($d['tgl_lahir']) ?></td>
+                                                    <td class="align-middle text-center">`+ jk + `</td>
+                                                    <td class="align-middle">`+ hp['layanan'] + `</td>
+                                                    <td class="align-middle">`+ hp['tanggal_terapi'] + `</td>
+                                                    <td class="align-middle text-`+ colorPayment + `">` + statusPayment + `</td>
+                                                    <td class="align-middle p-2 text-nowrap">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <button class="btn btn-primary detNota" data-rekam="`+ hp['id_reservasi'] + `" data-bs-toggle="modal" data-bs-target="#pembayaran` + hp['id_reservasi'] + `">Lihat Nota</button>
+                                                                <!-- Modal -->
+                                                                <div class="modal fade" id="pembayaran`+ hp['id_reservasi'] + `" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-lg">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">History Pembayaran</h1>
+                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+
+                                                                                <div class="sidebar-header d-flex  align-items-center px-3 py-4">
+                                                                                    <img class="rounded-pill img-fluid" width="65" src="`+ base_url + `/assets/image/logo1.jpeg" alt="">
+                                                                                    <div class="ms-2">
+                                                                                        <h5 class="fs-6 mb-0">
+                                                                                            <a class="text-decoration-none" href="#">Sari Kusuma 99</a>
+                                                                                        </h5>
+                                                                                        <p class="mt-1 mb-0">Sehat Optimal | Ibadah Sempurna</p>
+                                                                                    </div>
+                                                                                    <hr>
+
+                                                                                </div>
+
+                                                                                <div class="row mb-5">
+                                                                                    <div class="col">
+                                                                                        <div class="smaller">
+                                                                                            <div class="row text-dark">
+                                                                                                <div class="col-sm-2">
+                                                                                                    <p>Nama</p>
+                                                                                                </div>
+                                                                                                <div class="col-sm-1 text-center">
+                                                                                                    <p>:</p>
+                                                                                                </div>
+                                                                                                <div class="col-sm-2">
+                                                                                                    <p>`+ hp['nama'] + `</p>
+                                                                                                </div>
+                                                                                                <div class="col-sm-1"></div>
+                                                                                                <div class="col-sm-2">
+                                                                                                    <p>Tanggal Lahir</p>
+                                                                                                </div>
+                                                                                                <div class="col-sm-1 text-center">
+                                                                                                    <p>:</p>
+                                                                                                </div>
+                                                                                                <div class="col-sm-2">
+                                                                                                    <p>`+ hp['tgl_lahir'] + `</p>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="row text-dark">
+                                                                                                <div class="col-sm-2">
+                                                                                                    <p>Email</p>
+                                                                                                </div>
+                                                                                                <div class="col-sm-1 text-center">
+                                                                                                    <p>:</p>
+                                                                                                </div>
+                                                                                                <div class="col-sm-2">
+                                                                                                    <p>`+ hp['email'] + `</p>
+                                                                                                </div>
+                                                                                                <div class="col-sm-1"></div>
+                                                                                                <div class="col-sm-2">
+                                                                                                    <p>Agama</p>
+                                                                                                </div>
+                                                                                                <div class="col-sm-1 text-center">
+                                                                                                    <p>:</p>
+                                                                                                </div>
+                                                                                                <div class="col-sm-2">
+                                                                                                    <p>`+ hp['agama'] + `</p>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="row text-dark">
+                                                                                                <div class="col-sm-2">
+                                                                                                    <p>Whatsapp</p>
+                                                                                                </div>
+                                                                                                <div class="col-sm-1 text-center">
+                                                                                                    <p>:</p>
+                                                                                                </div>
+                                                                                                <div class="col-sm-2">
+                                                                                                    <p>`+ hp['whatsapp'] + `</p>
+                                                                                                </div>
+                                                                                                <div class="col-sm-1"></div>
+                                                                                                <div class="col-sm-2">
+                                                                                                    <p>Jenis Kelamin</p>
+                                                                                                </div>
+                                                                                                <div class="col-sm-1 text-center">
+                                                                                                    <p>:</p>
+                                                                                                </div>
+                                                                                                <div class="col-sm-2">
+                                                                                                        <p>`+ jk + `</p>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="row text-dark">
+                                                                                                <div class="col-sm-2">
+                                                                                                    <p>Alamat</p>
+                                                                                                </div>
+                                                                                                <div class="col-sm-1 text-center">
+                                                                                                    <p>:</p>
+                                                                                                </div>
+                                                                                                <div class="col-sm-2">
+                                                                                                    <p>`+ hp['alamat'] + `</p>
+                                                                                                </div>
+                                                                                                <div class="col-sm-1"></div>
+                                                                                                <div class="col-sm-2">
+                                                                                                    <p>Kota</p>
+                                                                                                </div>
+                                                                                                <div class="col-sm-1 text-center">
+                                                                                                    <p>:</p>
+                                                                                                </div>
+                                                                                                <div class="col-sm-2">
+                                                                                                    <p>`+ hp['kota'] + `</p>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="row text-dark">
+                                                                                                <div class="col-sm-2">
+                                                                                                    <p>Provinsi</p>
+                                                                                                </div>
+                                                                                                <div class="col-sm-1 text-center">
+                                                                                                    <p>:</p>
+                                                                                                </div>
+                                                                                                <div class="col-sm-2">
+                                                                                                    <p>`+ hp['provinsi'] + `</p>
+                                                                                                </div>
+                                                                                                <div class="col-sm-1"></div>
+                                                                                                <div class="col-sm-2">
+                                                                                                    <p>Negara</p>
+                                                                                                </div>
+                                                                                                <div class="col-sm-1 text-center">
+                                                                                                    <p>:</p>
+                                                                                                </div>
+                                                                                                <div class="col-sm-2">
+                                                                                                    <p>`+ hp['negara'] + `</p>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+
+                                                                                <div class="row">
+                                                                                    <div class="col-sm-2">Tanggal Terapi</div>
+                                                                                    <div class="col-sm-1 text-center">:</div>
+                                                                                    <div class="col-sm-3">`+ hp['tanggal_terapi'] + `</div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col-sm-2">Tanggal</div>
+                                                                                    <div class="col-sm-1 text-center">:</div>
+                                                                                    <div class="col-sm-3">`+ hp['date_created'] + `</div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col-sm-2">Layanan</div>
+                                                                                    <div class="col-sm-1 text-center">:</div>
+                                                                                    <div class="col-sm-3">`+ hp['layanan'] + `</div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col">
+                                                                                        <table class="table table-bordered">
+                                                                                            <thead>
+                                                                                                <tr>
+                                                                                                    <th>Pelayanan</th>
+                                                                                                    <th>Harga</th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody class="detail_nota">
+                                                                                                <tr>
+                                                                                                    <td></td>
+                                                                                                    <td></td>
+                                                                                                </tr>
+                                                                                            </tbody>
+                                                                                            <tfoot class="detail_nota_footer"></tfoot>
+
+                                                                                        </table>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row metodePembayaran">
+                                                                                    <h5>Metode Pembayaran</h5>
+                                                                                    <div class="col-sm-1 text-center">
+                                                                                        <button class="btn btn-primary cash">Cash</button>
+
+                                                                                        <button class="btn btn-info ewalet">e-Wallet</button>
+                                                                                    </div>
+
+                                                                                </div>
+
+
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>`;
+                });
+                let isiPemeriksan = '';
+                let np = 1;
+                let status_reservasi = '';
+                let jkReservasi = '';
+                data.pemeriksaan.forEach(p => {
+                    status_reservasi = p['status_reservasi'] == 1 ? 'Selesai' : 'Menunggu';
+                    color_reservasi = p['status_reservasi'] == 1 ? 'success' : 'danger';
+                    color_reservasi = p['status_reservasi'] == 1 ? 'success' : 'danger';
+                    jkReservasi = p['jk'] == 'w' ? 'Wanita' : 'Pria';
+                    isiPemeriksan += `  <tr>
+                                            <td class="align-middle text-center">`+ np + `</td>
+                                            <td class="align-middle">`+ p['nama'] + `</td>
+                                            <td class="align-middle text-center">`+ p['tgl_lahir'] + `</td>
+                                            <td class="align-middle text-center"><?= hitung_umur($d['tgl_lahir']) ?></td>
+                                            <td class="align-middle text-center">`+ jkReservasi + `</td>
+                                           
+
+                                            <td class="align-middle">`+ p['layanan'] + `</td>
+                                            <td class="align-middle">`+ p['tanggal_terapi'] + `</td>
+                                            <td class="align-middle text-`+ color_reservasi + `">` + status_reservasi + `</td>
+                                            <td class="align-middle p-2 text-nowrap">
+
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <a href="`+ base_url + `/admin/kelolaRekamMedis/` + p['id_reservasi'] + `/` + p['iduser'] + `" class="btn btn-info mt-1 kelolaRekamMedis btn-sm" target="_blank">Lihat Rekam Medis</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>`;
+                    np++;
+                });
+
+
 
                 $('.dataUserRegistered').html(isi);
                 $('.tableReservasi').html(isiReservasi);
+                $('.loadDataTransaksi').html(isiHistoryPembayaran);
+                $('.tablePemeriksaan').html(isiPemeriksan);
                 $('.tabledata ').dataTable();
 
 

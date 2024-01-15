@@ -153,4 +153,70 @@ class Admin_model extends CI_Model
         $res = $this->db->query($query);
         return $res;
     }
+    public function historyPembayaran($mulai, $sampai, $mulaiUser, $sampaiUser)
+    {
+        $query = "  SELECT
+                    *,
+                    reservasi.status status_reservasi,
+                    nota.status_pembayaran status_payment,
+                    reservasi.id id_reservasi,
+                    data_user.id as iduser
+                    FROM
+                    reservasi
+                    LEFT JOIN
+                    data_user
+                    ON
+                    data_user.id = reservasi.id_user
+                    LEFT JOIN
+                    rekam_medis
+                    ON
+                    rekam_medis.id_user = reservasi.id_user
+                    LEFT JOIN
+                    nota
+                    ON nota.id_reservasi = reservasi.id
+                    LEFT JOIN 
+                    history_transaksi
+                    ON history_transaksi.id_reservasi = reservasi.id
+                    WHERE
+                    reservasi.tanggal_terapi BETWEEN '" . $mulai . "' AND '" . $sampai . "'
+                   
+                    AND 
+                    reservasi.status = 1
+                  
+                    GROUP BY reservasi.tanggal_terapi,data_user.id
+                    ORDER BY reservasi.id asc";
+
+        $res = $this->db->query($query);
+        return $res;
+    }
+    public function tablePemeriksaan($mulai, $sampai)
+    {
+        $query = "  SELECT
+                    reservasi.*,
+					data_user.*,
+                    reservasi.status status_reservasi,
+                    reservasi.id id_reservasi,
+                    data_user.id as iduser,
+					layanan.layanan
+                    FROM
+                    reservasi
+                    LEFT JOIN
+                    data_user
+                    ON
+                    data_user.id = reservasi.id_user
+                    LEFT JOIN
+                    rekam_medis
+                    ON
+                    rekam_medis.id_user = reservasi.id_user
+                    LEFT JOIN
+					layanan
+					ON
+					layanan.id = reservasi.id_layanan
+                    WHERE
+                    reservasi.tanggal_terapi BETWEEN '" . $mulai . "' AND '" . $sampai . "'
+                    GROUP BY reservasi.tanggal_terapi,data_user.id";
+
+        $res = $this->db->query($query);
+        return $res;
+    }
 }

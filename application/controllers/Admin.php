@@ -823,18 +823,22 @@ class Admin extends CI_Controller
 
 	public function userRegistered()
 	{
-		$mulai 				= date("d-m-Y", strtotime($this->input->post('mulai')));
-		$sampai 			= date("d-m-Y", strtotime($this->input->post('sampai')));
-		$mulaiUser 			= $this->input->post('mulai');
-		$sampaiUser 		= $this->input->post('sampai');
-		$resUserRegistered 	= $this->Admin_model->userRegistered($mulaiUser, $sampaiUser)->result_array();
-		$resReservasi 		= $this->Admin_model->tableReservasi($mulai, $sampai)->result_array();
-		$resLayanan 		= $this->db->get('layanan')->result_array();
+		$mulai 						= date("d-m-Y", strtotime($this->input->post('mulai')));
+		$sampai 					= date("d-m-Y", strtotime($this->input->post('sampai')));
+		$mulaiUser 					= $this->input->post('mulai');
+		$sampaiUser 				= $this->input->post('sampai');
+		$resUserRegistered 			= $this->Admin_model->userRegistered($mulaiUser, $sampaiUser)->result_array();
+		$resReservasi 				= $this->Admin_model->tableReservasi($mulai, $sampai)->result_array();
+		$resPemeriksaan 			= $this->Admin_model->tablePemeriksaan($mulai, $sampai)->result_array();
+		$resHistoryPembayaran 		= $this->Admin_model->historyPembayaran($mulai, $sampai, $mulaiUser, $sampaiUser)->result_array();
+		$resLayanan 				= $this->db->get('layanan')->result_array();
 		echo json_encode(
 			[
 				'userRegistered' => $resUserRegistered,
 				'reservasi' => $resReservasi,
-				'layanan' => $resLayanan
+				'layanan' => $resLayanan,
+				'historyPembayaran' => $resHistoryPembayaran,
+				'pemeriksaan' => $resPemeriksaan
 			]
 		);
 	}
