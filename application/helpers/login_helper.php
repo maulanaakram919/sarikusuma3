@@ -138,11 +138,12 @@ function hitung_umur($tanggal_lahir)
 	$today = new DateTime("today");
 	// var_dump($birthDate);
 	if ($birthDate >= $today) {
-		return "0 tahun 0 bulan 0 hari";
+		return "0 tahun";
 		exit();
 	}
 	$y = $today->diff($birthDate)->y;
 	$m = $today->diff($birthDate)->m;
 	$d = $today->diff($birthDate)->d;
-	return $y . " tahun " . $m . " bulan " . $d . " hari";
+	// return $y . " tahun " . $m . " bulan " . $d . " hari";
+	return $y . " tahun ";
 }

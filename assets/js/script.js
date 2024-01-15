@@ -972,6 +972,24 @@ $(document).ready(function () {
 
     $.fn.modal.Constructor.prototype._enforceFocus = function () { };
 
+    function usia(dob) {
+        // var dob = new Date("04/13/1992");
+        //calculate month difference from current date in time
+        var month_diff = Date.now() - dob.getTime();
+
+        //convert the calculated difference in date format
+        var age_dt = new Date(month_diff);
+
+        //extract year from date    
+        var year = age_dt.getUTCFullYear();
+
+        //now calculate the age of the user
+        var age = Math.abs(year - 1970);
+
+        //display the calculated age
+        return age + " Tahun";
+
+    }
 
     $('.rentang').change(function () {
         let mulai = $('.mulai').val();
@@ -1010,7 +1028,7 @@ $(document).ready(function () {
                 data.reservasi.forEach(e => {
                     let statusReservase = e.status == 1 ? '' : base_url + '/admin/editReservasi';
                     let statusDisable = e.status == 1 ? 'disabled' : '';
-                    let jk = e.jk == 'P' ? 'Pria' : 'Wanita';
+                    let jk = e.jk == 'p' ? 'Pria' : 'Wanita';
                     let status = e.status_reservasi == 1 ? 'Selesai' : 'Menunggu';
                     let color = e.status_reservasi == 1 ? 'success' : 'danger';
 
@@ -1018,7 +1036,7 @@ $(document).ready(function () {
                                     <td class="align-middle text-center">`+ noReservasi + `</td>
                                     <td class="align-middle">`+ e.nama + `</td>
                                     <td class="align-middle text-center">`+ e.tgl_lahir + `</td>
-                                    <td class="align-middle text-center"><?= hitung_umur(`+ e.tgl_lahir + `) ?></td>
+                                    <td class="align-middle text-center">`+ usia(new Date(e.tgl_lahir)) + `</td>
 
                                     <td class="align-middle text-center">`+ jk + `</td>
                                   
@@ -1235,7 +1253,7 @@ $(document).ready(function () {
                                                     <td class="align-middle text-center">`+ noHistoryPembayaran + `</td>
                                                     <td class="align-middle">`+ hp['nama'] + `</td>
                                                     <td class="align-middle text-center">`+ hp['tgl_lahir'] + `</td>
-                                                    <td class="align-middle text-center"><?= hitung_umur($d['tgl_lahir']) ?></td>
+                                                    <td class="align-middle text-center">`+ usia(new Date(hp.tgl_lahir)) + `</td>
                                                     <td class="align-middle text-center">`+ jk + `</td>
                                                     <td class="align-middle">`+ hp['layanan'] + `</td>
                                                     <td class="align-middle">`+ hp['tanggal_terapi'] + `</td>
