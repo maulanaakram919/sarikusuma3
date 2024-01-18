@@ -181,7 +181,7 @@
                                             </div>
                                             <div class="col-sm-5">
                                                 <div class="input-group date">
-                                                    <input type="text" name="tanggal_terapi" class="form-control datepicker mt-2" value="<?= date('d-m-Y') ?>" required>
+                                                    <input type="date" name="tanggal_terapi" class="form-control  mt-2" value="<?= date('d-m-Y') ?>" required>
                                                     <div class="input-group-addon">
                                                         <span class="glyphicon glyphicon-th"></span>
                                                     </div>
@@ -240,7 +240,7 @@
                             <?php endif; ?>
 
                             <td class="align-middle"><?= $d['layanan'] ?></td>
-                            <td class="align-middle"><?= $d['tanggal_terapi'] ?></td>
+                            <td class="align-middle"><?= date("d-m-Y", strtotime($d['tanggal_terapi'])) ?></td>
                             <?php if ($d['status'] == 1) : ?>
                                 <td class="align-middle text-success">Selesai</td>
                             <?php else : ?>
@@ -398,7 +398,7 @@
                                                         </div>
                                                         <div class="col-sm-5">
                                                             <div class="input-group date">
-                                                                <input type="text" <?= $d['status'] == 1 ? 'disabled' : '' ?> required name="tanggal_terapi" class="form-control datepicker mt-2" value="<?= $d['tanggal_terapi'] ?>">
+                                                                <input type="date" <?= $d['status'] == 1 ? 'disabled' : '' ?> required name="tanggal_terapi" class="form-control  mt-2" value="<?= $d['tanggal_terapi'] ?>">
                                                                 <div class="input-group-addon">
                                                                     <span class="glyphicon glyphicon-th"></span>
                                                                 </div>

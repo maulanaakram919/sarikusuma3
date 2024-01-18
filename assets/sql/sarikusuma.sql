@@ -11,7 +11,7 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 01/01/2024 22:45:42
+ Date: 18/01/2024 22:06:01
 */
 
 SET NAMES utf8mb4;
@@ -83,7 +83,7 @@ CREATE TABLE `data_user`  (
   `negara` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `date_created` timestamp NOT NULL DEFAULT current_timestamp ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of data_user
@@ -93,6 +93,7 @@ INSERT INTO `data_user` VALUES (15, 0, 'Vinna', '3174085904920003', 'Vinna@gmail
 INSERT INTO `data_user` VALUES (16, 0, 'fdsaf', 'fdsfa', 'fdsaf', 'fdsa', '2023-12-06', 'fdsa', 'p', NULL, 'fdsa', 'fdsaf', 'fdsaf', '2023-12-21 21:10:29');
 INSERT INTO `data_user` VALUES (17, 0, 'pinna', '3201076810020020', 'qwert', '12345', '4444-04-04', 'gugu', 'w', NULL, 's', 's', 's', '2023-12-23 23:57:51');
 INSERT INTO `data_user` VALUES (18, 0, 'john doe', '3174082102990005', 'john@mail.com', '08123456789', '1993-02-21', 'Islam', 'p', NULL, 'Indonesia', 'DKI Jakarta', 'Jakarta selatan', '2023-12-26 22:28:43');
+INSERT INTO `data_user` VALUES (19, 0, 'asdf', '1242143241', 'fdsaf', 'fdsaf', '2024-01-04', 'fdaf', 'p', 'fdsadafdsfads', 'fdafdfaf', 'fda', 'fdaf', '2024-01-06 00:49:42');
 
 -- ----------------------------
 -- Table structure for history_transaksi
@@ -106,20 +107,12 @@ CREATE TABLE `history_transaksi`  (
   `date_created` datetime NULL DEFAULT NULL,
   `date_modified` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of history_transaksi
 -- ----------------------------
-INSERT INTO `history_transaksi` VALUES (12, '21', 'Cash', '315000', '2023-12-26 22:31:21', NULL);
-INSERT INTO `history_transaksi` VALUES (13, '20', 'Cash', '1000000', '2023-12-26 23:17:41', NULL);
-INSERT INTO `history_transaksi` VALUES (14, '15', 'Cash', '1000000000', '2023-12-26 23:18:58', NULL);
-INSERT INTO `history_transaksi` VALUES (22, '13', 'OVO', '250000', '2023-12-31 01:05:12', NULL);
-INSERT INTO `history_transaksi` VALUES (23, '22', 'OVO', '315000', '2023-12-31 01:11:36', NULL);
-INSERT INTO `history_transaksi` VALUES (24, '12', 'OVO', '250000', '2024-01-01 21:06:13', NULL);
-INSERT INTO `history_transaksi` VALUES (25, '16', 'Dana', '2215000', '2024-01-01 21:08:24', NULL);
-INSERT INTO `history_transaksi` VALUES (26, '17', 'Dana', '2180000', '2024-01-01 21:09:08', NULL);
-INSERT INTO `history_transaksi` VALUES (27, '18', 'Gopay', '285000', '2024-01-01 21:11:33', NULL);
+INSERT INTO `history_transaksi` VALUES (31, '1', 'Cash', '400000', '2024-01-18 22:02:27', NULL);
 
 -- ----------------------------
 -- Table structure for hubungisaya
@@ -190,21 +183,12 @@ CREATE TABLE `nota`  (
   `date_created` datetime NULL DEFAULT NULL,
   `date_modified` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of nota
 -- ----------------------------
-INSERT INTO `nota` VALUES (19, 21, 'Cash', '1', '2023-12-26 22:31:21', NULL);
-INSERT INTO `nota` VALUES (20, 20, 'Cash', '1', '2023-12-26 23:17:41', NULL);
-INSERT INTO `nota` VALUES (21, 15, 'Cash', '1', '2023-12-26 23:18:58', NULL);
-INSERT INTO `nota` VALUES (24, 15, 'Cash', '1', '2023-12-31 00:45:13', NULL);
-INSERT INTO `nota` VALUES (25, 14, 'Cash', '1', '2023-12-31 00:48:03', NULL);
-INSERT INTO `nota` VALUES (29, 13, 'OVO', '1', '2023-12-31 01:05:12', NULL);
-INSERT INTO `nota` VALUES (30, 22, 'OVO', '1', '2023-12-31 01:11:36', NULL);
-INSERT INTO `nota` VALUES (31, 12, 'OVO', '1', '2024-01-01 21:06:13', NULL);
-INSERT INTO `nota` VALUES (32, 16, 'Dana', '1', '2024-01-01 21:08:24', NULL);
-INSERT INTO `nota` VALUES (33, 17, 'Dana', '1', '2024-01-01 21:09:08', NULL);
+INSERT INTO `nota` VALUES (1, 1, 'Cash', '1', '2024-01-18 22:02:27', NULL);
 
 -- ----------------------------
 -- Table structure for rekam_medis
@@ -236,23 +220,12 @@ CREATE TABLE `rekam_medis`  (
   `date_created` datetime NULL DEFAULT NULL,
   `date_modified` date NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of rekam_medis
 -- ----------------------------
-INSERT INTO `rekam_medis` VALUES (4, 1, 2, NULL, 'Terapi Mata', '2023-12-04', '01:53:29am', 'tidak_kacamata', 'tidak_kacamata', 'tidak_kacamata', 'tidak_kacamata', 'tidak', 'tidak', 'tidak', 'ok', 0, 'ok', 'ok', 'ok', 'ok', 'semua normal', '', '2023-12-09 02:15:54', NULL);
-INSERT INTO `rekam_medis` VALUES (10, 11, 2, NULL, 'Terapi Mata', '2023-12-21', '02:11:14am', 'Mata Kanan', 'Mata Kanan', 'Mata Kiri', 'Mata Kiri', 'ya', 'ya', 'ya', 'Lampu 15 Titik', 1, 'Lampu Terang Gelap', 'Stik Magnet', 'Osilator Listrik', 'Snellend Chart minus & plus', 'KESIMPULAN', '', '2023-12-21 02:11:14', NULL);
-INSERT INTO `rekam_medis` VALUES (11, 11, 2, NULL, 'Terapi Mata', '2023-12-21', '22:16:02pm', 'fdsaf', 'fdsfads', 'fdfads', 'fdsfad', '      Tidak', 'Tidak', '   Tidak', 'lampu15Titik', 1, 'lampuTerangGelap', 'fdsaf', 'fdsa', 'fdsaf', 'kkkkk', NULL, '2023-12-21 02:16:23', '2023-12-21');
-INSERT INTO `rekam_medis` VALUES (13, 16, 2, NULL, 'Terapi Mata', '2023-12-21', '21:22:50pm', 'Mata Kanan', 'Mata Kanan', 'Mata Kiri', 'Mata Kiri', 'ya', 'ya', 'ya', 'Lampu 15 Titik', 1, 'Lampu Terang Gelap', 'Stik Magnet', 'Osilator Listrik', 'Snellen Chart minus & plus', 'KESIMPULAN\r\n', NULL, '2023-12-21 21:22:50', NULL);
-INSERT INTO `rekam_medis` VALUES (14, 17, 2, NULL, 'Terapi Mata', '2023-12-24', '02:47:41am', 'fdsafds', 'fdsaf', 'fdsfad', 'fdsaf', '                      Ya', 'Ya', '           Ya', 'lampu15Titik', 1, 'lampuTerangGelap', 'fdsa', 'fdsaf', 'fdsaf', 'fdsafdsfads', '2,3,7', '2023-12-24 00:38:34', '2023-12-24');
-INSERT INTO `rekam_medis` VALUES (17, 17, 2, 14, 'Terapi Mata', '2023-12-24', '10:53:09am', 'fdsfa', 'fdsfa', 'fdsaf', 'fdsafds', '  Ya', 'Ya', ' Ya', 'lampu15Titik', 1, 'lampuTerangGelap', 'fdsaf', 'fdsaf', 'fdsaf', 'fdsfadfafdsfa', '3,6', '2023-12-24 10:52:56', '2023-12-24');
-INSERT INTO `rekam_medis` VALUES (18, 15, 2, 16, 'Terapi Mata', '2023-12-24', '13:43:43pm', 'asdf', 'fdsa', 'asdfasfd', 'fdsa', 'ya', 'tidak', 'tidak', 'fdsafds', 1, 'fdfsad', 'fdfafdsa', 'fdfsafd', 'fdfsad', 'adsadASDdsaDSA', '3', '2023-12-24 13:43:43', NULL);
-INSERT INTO `rekam_medis` VALUES (19, 11, 2, 17, 'Terapi Mata', '2023-12-25', '21:54:39pm', 'fdsaf', 'fdsaf', 'fdsfa', 'fdsa', 'ya', 'ya', 'ya', 'fdsa', 1, 'fdsa', 'fdsa', 'fdsa', 'fdsa', 'fdsafsdfa', '3,7,9', '2023-12-25 21:54:39', NULL);
-INSERT INTO `rekam_medis` VALUES (20, 15, 2, 18, 'Terapi Mata', '2023-12-25', '21:57:40pm', 'ok', 'ok', 'ok', 'ok', 'tidak', 'tidak', 'tidak', 'ok', 1, 'ok', 'ok', 'ok', 'ok', 'sudah cukup baik ', '2', '2023-12-25 21:57:40', NULL);
-INSERT INTO `rekam_medis` VALUES (21, 15, 2, 20, 'Terapi Mata', '2023-12-26', '01:13:30am', 'fdsa', 'fdsa', 'fdsa', 'fdsa', 'ya', 'ya', 'ya', 'fdsa', 1, 'fdsa', 'fdsa', 'fdsa', 'fdsa', 'fdsa', '8', '2023-12-26 01:13:30', NULL);
-INSERT INTO `rekam_medis` VALUES (22, 18, 2, 21, 'Terapi Mata', '2023-12-26', '22:30:49pm', 'ok', 'ok', 'ok', 'ok', 'tidak', 'ya', 'tidak', 'ok', 1, 'ok', 'ok', 'ok', 'ok', 'sehat wal afiat', '3', '2023-12-26 22:30:49', NULL);
-INSERT INTO `rekam_medis` VALUES (23, 11, 1, 22, 'Terapi Mata', '2024-01-01', '21:14:08pm', 'www', 'wert', 'www', 'tret', '  Ya', 'Tidak', ' Ya', 'lampu15Titik', 1, 'lampuTerangGelap', 'trewt', 'trew', 'trewt', 'afdsfa', '3', '2023-12-31 01:10:07', '2024-01-01');
+INSERT INTO `rekam_medis` VALUES (1, 11, 1, 1, 'Terapi Mata', '2024-01-18', '22:01:43pm', 'ok', 'ok', 'ok', 'ok', 'tidak', 'tidak', 'tidak', 'ok', 1, 'ok', 'ok', 'ok', 'ok', 'bagus', '3,7', '2024-01-18 22:01:43', NULL);
 
 -- ----------------------------
 -- Table structure for resep
@@ -265,27 +238,13 @@ CREATE TABLE `resep`  (
   `date_created` datetime NULL DEFAULT NULL,
   `date_modified` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 48 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of resep
 -- ----------------------------
-INSERT INTO `resep` VALUES (15, 16, 2, NULL, '2023-12-24 02:24:13');
-INSERT INTO `resep` VALUES (16, 16, 3, NULL, '2023-12-24 02:24:13');
-INSERT INTO `resep` VALUES (17, 16, 9, NULL, '2023-12-24 02:24:13');
-INSERT INTO `resep` VALUES (35, 14, 3, NULL, '2023-12-24 10:53:09');
-INSERT INTO `resep` VALUES (36, 14, 6, NULL, '2023-12-24 10:53:09');
-INSERT INTO `resep` VALUES (37, 16, 3, '2023-12-24 13:43:43', NULL);
-INSERT INTO `resep` VALUES (38, 17, 3, '2023-12-25 21:54:38', NULL);
-INSERT INTO `resep` VALUES (39, 17, 7, '2023-12-25 21:54:39', NULL);
-INSERT INTO `resep` VALUES (40, 17, 9, '2023-12-25 21:54:39', NULL);
-INSERT INTO `resep` VALUES (41, 18, 2, '2023-12-25 21:57:40', NULL);
-INSERT INTO `resep` VALUES (42, 20, 8, '2023-12-26 01:13:30', NULL);
-INSERT INTO `resep` VALUES (43, 21, 3, '2023-12-26 22:30:49', NULL);
-INSERT INTO `resep` VALUES (44, 15, 3, '2023-12-26 22:49:36', NULL);
-INSERT INTO `resep` VALUES (45, 15, 6, '2023-12-26 22:49:36', NULL);
-INSERT INTO `resep` VALUES (46, 22, 3, '2023-12-31 01:10:07', NULL);
-INSERT INTO `resep` VALUES (47, 9, 3, NULL, '2024-01-01 21:14:08');
+INSERT INTO `resep` VALUES (1, 1, 3, '2024-01-18 22:01:43', NULL);
+INSERT INTO `resep` VALUES (2, 1, 7, '2024-01-18 22:01:43', NULL);
 
 -- ----------------------------
 -- Table structure for reservasi
@@ -294,29 +253,21 @@ DROP TABLE IF EXISTS `reservasi`;
 CREATE TABLE `reservasi`  (
   `id` int NOT NULL AUTO_INCREMENT,
   `id_user` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `tanggal_terapi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `tanggal_terapi` date NULL DEFAULT NULL,
   `id_layanan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `status` int NULL DEFAULT NULL,
   `date_created` datetime NULL DEFAULT NULL,
   `date_modified` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of reservasi
 -- ----------------------------
-INSERT INTO `reservasi` VALUES (7, '15', '16-12-2023', '1', NULL, '2023-12-17 23:32:03', NULL);
-INSERT INTO `reservasi` VALUES (9, '11', '22-12-2023', '1', 0, '2023-12-21 21:49:24', NULL);
-INSERT INTO `reservasi` VALUES (12, '11', '23-12-2023', '1', 1, '2023-12-24 00:17:22', NULL);
-INSERT INTO `reservasi` VALUES (13, '16', '21-12-2023', '1', 1, '2023-12-24 00:05:51', NULL);
-INSERT INTO `reservasi` VALUES (14, '17', '24-12-2023', '1', 1, '2023-12-24 00:21:46', NULL);
-INSERT INTO `reservasi` VALUES (15, '17', '26-12-2023', '1', 1, '2023-12-24 00:21:24', NULL);
-INSERT INTO `reservasi` VALUES (16, '15', '24-12-2023', '1', 1, '2023-12-24 13:43:04', NULL);
-INSERT INTO `reservasi` VALUES (17, '11', '25-12-2023', '1', 1, '2023-12-25 21:37:59', NULL);
-INSERT INTO `reservasi` VALUES (18, '15', '25-12-2023', '1', 1, '2023-12-25 21:56:10', NULL);
-INSERT INTO `reservasi` VALUES (19, '11', '25-12-2023', '1', 0, '2023-12-25 23:35:57', NULL);
-INSERT INTO `reservasi` VALUES (20, '15', '26-12-2023', '1', 1, '2023-12-26 01:12:56', NULL);
-INSERT INTO `reservasi` VALUES (21, '18', '26-12-2023', '1', 1, '2023-12-26 22:29:44', NULL);
-INSERT INTO `reservasi` VALUES (22, '11', '31-12-2023', '1', 1, '2023-12-31 01:09:28', NULL);
+INSERT INTO `reservasi` VALUES (1, '11', '2024-01-18', '1', 1, '2024-01-18 21:52:14', NULL);
+INSERT INTO `reservasi` VALUES (2, '11', '2023-12-05', '1', 0, '2024-01-18 21:53:44', NULL);
+INSERT INTO `reservasi` VALUES (3, '17', '2023-12-26', '1', 0, '2024-01-18 21:54:04', NULL);
+INSERT INTO `reservasi` VALUES (4, '15', '2023-12-01', '1', 0, '2024-01-18 21:56:49', NULL);
+INSERT INTO `reservasi` VALUES (5, '17', '2023-12-16', '1', 0, '2024-01-18 21:59:28', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;

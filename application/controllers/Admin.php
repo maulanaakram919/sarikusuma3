@@ -115,7 +115,7 @@ class Admin extends CI_Controller
 		$data['title'] 					= 'Pembayaran';
 		$data['username'] 				= $this->session->userdata();
 		$data['detail_user']			= $this->Admin_model->reservasi();
-		$today							= date('d-m-Y');
+		$today							= date('Y-m-d');
 		$data['pembayaran']				= $this->Admin_model->pembayaran($today);
 
 		$this->load->view('admin/header', $data);
@@ -825,11 +825,12 @@ class Admin extends CI_Controller
 	{
 		$mulai 						= date("d-m-Y", strtotime($this->input->post('mulai')));
 		$sampai 					= date("d-m-Y", strtotime($this->input->post('sampai')));
+
 		$mulaiUser 					= $this->input->post('mulai');
 		$sampaiUser 				= $this->input->post('sampai');
 		$resUserRegistered 			= $this->Admin_model->userRegistered($mulaiUser, $sampaiUser)->result_array();
-		$resReservasi 				= $this->Admin_model->tableReservasi($mulai, $sampai)->result_array();
-		$resPemeriksaan 			= $this->Admin_model->tablePemeriksaan($mulai, $sampai)->result_array();
+		$resReservasi 				= $this->Admin_model->tableReservasi($mulaiUser, $sampaiUser)->result_array();
+		$resPemeriksaan 			= $this->Admin_model->tablePemeriksaan($mulaiUser, $sampaiUser)->result_array();
 		$resHistoryPembayaran 		= $this->Admin_model->historyPembayaran($mulai, $sampai, $mulaiUser, $sampaiUser)->result_array();
 		$resLayanan 				= $this->db->get('layanan')->result_array();
 		echo json_encode(
