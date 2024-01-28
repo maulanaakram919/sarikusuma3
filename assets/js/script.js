@@ -992,6 +992,7 @@ $(document).ready(function () {
     }
 
     $('.rentang').change(function () {
+
         let mulai = $('.mulai').val();
         let sampai = $('.sampai').val();
 
@@ -1025,31 +1026,32 @@ $(document).ready(function () {
                 });
                 let isiReservasi = '';
                 let noReservasi = 1;
-                data.reservasi.forEach(e => {
-                    let statusReservase = e.status == 1 ? '' : base_url + '/admin/editReservasi';
-                    let statusDisable = e.status == 1 ? 'disabled' : '';
-                    let jk = e.jk == 'p' ? 'Pria' : 'Wanita';
-                    let status = e.status_reservasi == 1 ? 'Selesai' : 'Menunggu';
-                    let color = e.status_reservasi == 1 ? 'success' : 'danger';
+                data.reservasi.forEach(f => {
+                    let statusReservase = f.status == 1 ? '' : base_url + '/admin/editReservasi';
+                    let statusDisable = f.status == 1 ? 'disabled' : '';
+                    let jk = f.jk == 'p' ? 'Pria' : 'Wanita';
+                    let status = f.status_reservasi == 1 ? 'Selesai' : 'Menunggu';
+                    let color = f.status_reservasi == 1 ? 'success' : 'danger';
 
                     isiReservasi += `   <tr>
                                     <td class="align-middle text-center">`+ noReservasi + `</td>
-                                    <td class="align-middle">`+ e.nama + `</td>
-                                    <td class="align-middle text-center">`+ e.tgl_lahir + `</td>
-                                    <td class="align-middle text-center">`+ usia(new Date(e.tgl_lahir)) + `</td>
+                                    <td class="align-middle">`+ f.nama + `</td>
+                                    <td class="align-middle text-center">`+ f.tgl_lahir + `</td>
+
+                                    <td class="align-middle text-center">`+ usia(new Date(f.tgl_lahir)) + `</td>
 
                                     <td class="align-middle text-center">`+ jk + `</td>
                                   
 
-                                    <td class="align-middle">`+ e.layanan + `</td>
-                                    <td class="align-middle">`+ e.tanggal_terapi + `</td>
+                                    <td class="align-middle">`+ f.layanan + `</td>
+                                    <td class="align-middle">`+ f.tanggal_terapi + `</td>
                                     <td class="align-middle text-`+ color + `">` + status + `</td>
                                   
 
                                     <td class="align-middle p-2">
-                                        <button class="btn btn-sm btn-info mx-1" data-toggle="modal" data-target="#editReservasi`+ e.id_reservasi + `">Edit</button>
+                                        <button class="btn btn-sm btn-info mx-1" data-toggle="modal" data-target="#editReservasi`+ f.id_reservasi + `">Edit</button>
 
-                                        <div class="modal fade" id="editReservasi`+ e.id_reservasi + `" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="editReservasi`+ f.id_reservasi + `" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-lg" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -1061,7 +1063,7 @@ $(document).ready(function () {
                                                     <form action="`+ statusReservase + `" method="POST">
                                                         <div class="modal-body">
                                                             <div class="form-group">
-                                                                <input type="text" value="`+ e.id_reservasi + `" hidden name="id">
+                                                                <input type="text" value="`+ f.id_reservasi + `" hidden name="id">
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col">
@@ -1074,7 +1076,7 @@ $(document).ready(function () {
                                                                                 <p>:</p>
                                                                             </div>
                                                                             <div class="col-sm-2">
-                                                                                <p>`+ e.nama + `</p>
+                                                                                <p>`+ f.nama + `</p>
                                                                             </div>
                                                                             <div class="col-sm-1"></div>
                                                                             <div class="col-sm-2">
@@ -1084,7 +1086,7 @@ $(document).ready(function () {
                                                                                 <p>:</p>
                                                                             </div>
                                                                             <div class="col-sm-2">
-                                                                                <p>`+ e.tgl_lahir + `</p>
+                                                                                <p>`+ f.tgl_lahir + `</p>
                                                                             </div>
                                                                         </div>
                                                                         <div class="row text-dark">
@@ -1095,7 +1097,7 @@ $(document).ready(function () {
                                                                                 <p>:</p>
                                                                             </div>
                                                                             <div class="col-sm-2">
-                                                                                <p>`+ e.email + `</p>
+                                                                                <p>`+ f.email + `</p>
                                                                             </div>
                                                                             <div class="col-sm-1"></div>
                                                                             <div class="col-sm-2">
@@ -1105,7 +1107,7 @@ $(document).ready(function () {
                                                                                 <p>:</p>
                                                                             </div>
                                                                             <div class="col-sm-2">
-                                                                                <p>`+ e.agama + `</p>
+                                                                                <p>`+ f.agama + `</p>
                                                                             </div>
                                                                         </div>
                                                                         <div class="row text-dark">
@@ -1116,7 +1118,7 @@ $(document).ready(function () {
                                                                                 <p>:</p>
                                                                             </div>
                                                                             <div class="col-sm-2">
-                                                                                <p>`+ e.whatsapp + `</p>
+                                                                                <p>`+ f.whatsapp + `</p>
                                                                             </div>
                                                                             <div class="col-sm-1"></div>
                                                                             <div class="col-sm-2">
@@ -1138,7 +1140,7 @@ $(document).ready(function () {
                                                                                 <p>:</p>
                                                                             </div>
                                                                             <div class="col-sm-2">
-                                                                                <p>`+ e.alamat + `</p>
+                                                                                <p>`+ f.alamat + `</p>
                                                                             </div>
                                                                             <div class="col-sm-1"></div>
                                                                             <div class="col-sm-2">
@@ -1148,7 +1150,7 @@ $(document).ready(function () {
                                                                                 <p>:</p>
                                                                             </div>
                                                                             <div class="col-sm-2">
-                                                                                <p>`+ e.kota + `</p>
+                                                                                <p>`+ f.kota + `</p>
                                                                             </div>
                                                                         </div>
                                                                         <div class="row text-dark">
@@ -1159,7 +1161,7 @@ $(document).ready(function () {
                                                                                 <p>:</p>
                                                                             </div>
                                                                             <div class="col-sm-2">
-                                                                                <p>`+ e.provinsi + `</p>
+                                                                                <p>`+ f.provinsi + `</p>
                                                                             </div>
                                                                             <div class="col-sm-1"></div>
                                                                             <div class="col-sm-2">
@@ -1169,7 +1171,7 @@ $(document).ready(function () {
                                                                                 <p>:</p>
                                                                             </div>
                                                                             <div class="col-sm-2">
-                                                                                <p>`+ e.negara + `</p>
+                                                                                <p>`+ f.negara + `</p>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -1184,8 +1186,8 @@ $(document).ready(function () {
                                                                 <div class="col-sm-5">
                                                                     <select name="terapi" `+ statusDisable + ` id="" class="form-control" required> `;
                     data.layanan.forEach(l => {
-                        let selected = l.id == e.id_layanan ? 'selected' : '';
-                        console.log(l.layanan)
+                        let selected = l.id == f.id_layanan ? 'selected' : '';
+
                         isiReservasi += ` <option ` + selected + ` value="` + l.id + `">` + l.layanan + `</option>`
                     });
 
@@ -1200,7 +1202,7 @@ $(document).ready(function () {
                                                                 </div>
                                                                 <div class="col-sm-5">
                                                                     <div class="input-group date">
-                                                                        <input type="text" `+ statusDisable + ` required name="tanggal_terapi" class="form-control datepicker mt-2" value="` + e.tanggal_terapi + `">
+                                                                        <input type="text" `+ statusDisable + ` required name="tanggal_terapi" class="form-control datepicker mt-2" value="` + f.tanggal_terapi + `">
                                                                         <div class="input-group-addon">
                                                                             <span class="glyphicon glyphicon-th"></span>
                                                                         </div>
@@ -1214,7 +1216,7 @@ $(document).ready(function () {
                                                                 <div class="col-sm-5">
                                                                     <div class="input-group status">
                                                                         <select name="status" `+ statusDisable + ` id="" class="form-control mt-2" required>
-                                                                                <option selected value="`+ e.status + `">` + status + `</option>
+                                                                                <option selected value="`+ f.status + `">` + status + `</option>
                                                                                 <option value="0">Menunggu</option>
                                                                                 <option value="1">Selesai</option>
                                                                            
@@ -1235,7 +1237,7 @@ $(document).ready(function () {
                                                 </div>
                                             </div>
                                         </div>
-                                        <button data-delete="`+ e.id_reservasi + `" class="btn btn-danger deleteReservasi btn-sm">Delete</button>
+                                        <button data-delete="`+ f.id_reservasi + `" class="btn btn-danger deleteReservasi btn-sm">Delete</button>
                                     </td>
                                 </tr>`;
                     noReservasi++;
@@ -1493,7 +1495,7 @@ $(document).ready(function () {
                 $('.dataUserRegistered').html(isi);
                 $('.tableReservasi').html(isiReservasi);
                 $('.loadDataTransaksi').html(isiHistoryPembayaran);
-                $('.tablePemeriksaan').html(isiPemeriksan);
+                $('.tablePemeriksaan').html(isiReservasi);
                 $('.tabledata ').dataTable();
 
 
@@ -1509,23 +1511,39 @@ $(document).ready(function () {
 
 
     }
+    $('.no_ktp').removeClass('is-invalid');
+    $('.no_ktp').change(function () {
+        let ktp = $(this).val();
+        $.ajax({
+            url: base_url + '/admin/cekUser',
+            method: 'post',
+            data: {
+                ktp: ktp
+            },
+            beforeSend: function () {
+
+            },
+            success: function (data) {
+                $('.no_ktp').removeClass('is-invalid');
+                if (data == 1) {
+                    Swal.fire({
+                        title: "Stop!",
+                        text: "NIK Ini Sudah Terdaftar",
+                        icon: "error"
+                    });
+                    $('.no_ktp').addClass('is-invalid');
+                } else {
+                    $('.no_ktp').addClass('is-valid');
+                }
+            }
+        })
+    });
 
 
 
 
 
 
-
-
-
-
-});
-
-
-
-
-
-
-
+})
 
 

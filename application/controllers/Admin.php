@@ -843,4 +843,17 @@ class Admin extends CI_Controller
 			]
 		);
 	}
+
+	public function cekUser()
+	{
+		$ktp = $this->input->post('ktp');
+		$cek = $this->db->get_where('data_user', ['no_ktp' => $ktp])->num_rows();
+		if ($ktp != '') {
+			if ($cek > 0) {
+				echo 1;
+			} else {
+				echo 0;
+			}
+		}
+	}
 }

@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="no_ktp">No KTP</label>
-                                    <input type="text" class="form-control" id="no_ktp" required name="no_ktp" aria-describedby="no_ktp" placeholder="Masukan No KTP Pasien">
+                                    <input type="text" class="form-control no_ktp is-invalid" id="no_ktp" required name="no_ktp" aria-describedby="no_ktp" placeholder="Masukan No KTP Pasien">
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="email">email</label>
