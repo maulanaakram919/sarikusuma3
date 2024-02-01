@@ -1512,8 +1512,16 @@ $(document).ready(function () {
 
     }
     $('.no_ktp').removeClass('is-invalid');
+    $('.daftar_pasien').click(function () {
+        let ktp = $('.no_ktp').val();
+        cek_ktp(ktp)
+    })
     $('.no_ktp').change(function () {
         let ktp = $(this).val();
+        cek_ktp(ktp)
+    });
+
+    function cek_ktp(ktp) {
         $.ajax({
             url: base_url + '/admin/cekUser',
             method: 'post',
@@ -1537,7 +1545,7 @@ $(document).ready(function () {
                 }
             }
         })
-    });
+    }
 
 
 
