@@ -134,7 +134,7 @@ class Admin extends CI_Controller
 		$data['title'] 					= 'Pemeriksaan';
 		$data['username'] 				= $this->session->userdata();
 		$data['detail_user']			= $this->Admin_model->reservasi();
-		$today							= date('d-m-Y');
+		$today							= date('d-m-Y') + 1;
 		$data['pemeriksaan']			= $this->Admin_model->pemeriksaan($today);
 
 		$this->load->view('admin/header', $data);

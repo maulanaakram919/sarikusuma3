@@ -16,7 +16,7 @@
         </div>
         <div class="col-sm-3">
             <label for="">Sampai</label>
-            <input type="date" class="form-control sampai rentang" value="<?= date('Y-m-d') ?>">
+            <input type="date" class="form-control sampai rentang" value="<?= date('Y-m-d', strtotime(date('Y-m-d') . ' +1 day')) ?>">
         </div>
     </div>
     <div class="row mb-3">

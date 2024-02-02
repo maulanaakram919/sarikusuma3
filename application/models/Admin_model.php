@@ -87,7 +87,8 @@ class Admin_model extends CI_Model
                     GROUP BY reservasi.tanggal_terapi,data_user.id
                     ORDER BY reservasi.id asc
                     ";
-
+        // var_dump($query);
+        // die;
         $res = $this->db->query($query);
         return $res->result_array();
     }
@@ -185,8 +186,8 @@ class Admin_model extends CI_Model
                   
                     GROUP BY reservasi.tanggal_terapi,data_user.id
                     ORDER BY reservasi.id asc";
-        var_dump($query);
-        die;
+        // var_dump($query);
+        // die;
         $res = $this->db->query($query);
         return $res;
     }
