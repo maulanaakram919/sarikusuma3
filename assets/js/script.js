@@ -1540,6 +1540,7 @@ $(document).ready(function () {
                         icon: "error"
                     });
                     $('.no_ktp').addClass('is-invalid');
+                    return false;
                 } else {
                     $('.no_ktp').addClass('is-valid');
                 }
