@@ -7,6 +7,8 @@
         </div>
         <div class="flash mt-5 mb-3">
             <?= $this->session->flashdata('message') ?>
+            <?= form_error('no_ktp', '<p class="text-danger">', '</p>') ?>
+
         </div>
 
         <div class="col-sm-3">
@@ -21,31 +23,42 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="<?= base_url('admin/addPasien') ?>" method="POST">
+                        <form action="<?= base_url('admin/pasien') ?>" method="POST">
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label for="nama">Nama</label>
-                                    <input type="text" class="form-control" id="nama" required name="nama" aria-describedby="nama" placeholder="Masukan Nama Pasien">
+                                    <input type="text" class="form-control" id="nama" required name="nama" aria-describedby="nama" placeholder="Masukan Nama Pasien" value="<?= set_value('nama') ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="no_ktp">No KTP</label>
-                                    <input type="text" class="form-control no_ktp is-invalid" id="no_ktp" required name="no_ktp" aria-describedby="no_ktp" placeholder="Masukan No KTP Pasien">
+                                    <input type="number" class="form-control no_ktp is-invalid" id="no_ktp" required name="no_ktp" aria-describedby="no_ktp" placeholder="Masukan No KTP Pasien" value="<?= set_value('no_ktp') ?>">
+                                    <?= form_error('no_ktp', '<small class="text-danger">', '</small>') ?>
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="email">email</label>
-                                    <input type="text" class="form-control" id="email" required name="email" aria-describedby="email" placeholder="Masukan email Pasien">
+                                    <input type="email" class="form-control" id="email" required name="email" aria-describedby="email" placeholder="Masukan email Pasien" value="<?= set_value('email') ?>">
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="whatsapp">whatsapp</label>
-                                    <input type="text" class="form-control" id="whatsapp" required name="whatsapp" aria-describedby="whatsapp" placeholder="Masukan whatsapp Pasien">
+                                    <input type="number" class="form-control" id="whatsapp" required name="whatsapp" aria-describedby="whatsapp" placeholder="Masukan whatsapp Pasien" value="<?= set_value('whatsapp') ?>">
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="tanggal_lahir">tanggal_lahir</label>
-                                    <input type="date" class="form-control" id="tanggal_lahir" required name="ttl" aria-describedby="tanggal_lahir" placeholder="Masukan Tanggal Lahir Pasien">
+                                    <input type="date" class="form-control" id="tanggal_lahir" required name="ttl" aria-describedby="tanggal_lahir" placeholder="Masukan Tanggal Lahir Pasien" value="<?= set_value('ttl') ?>">
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="agama">agama</label>
-                                    <input type="text" class="form-control" id="agama" required name="agama" aria-describedby="agama" placeholder="Masukan agama Pasien">
+                                    <select name="agama" id="agama" class="form-control" required>
+                                        <option value="">Pilih Agama</option>
+                                        <option value="islam">Islam</option>
+                                        <option value="katholik">Katholik</option>
+                                        <option value="kristen">Kristen</option>
+                                        <option value="hindu">Hindu</option>
+                                        <option value="budha">Budha</option>
+                                    </select>
+
+
+
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="jk">Jenis Kelamin</label>
@@ -57,19 +70,19 @@
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="alamat">alamat</label>
-                                    <input type="text" class="form-control" id="alamat" required name="alamat" aria-describedby="alamat" placeholder="Masukan Alamat Pasien">
+                                    <input type="text" class="form-control" id="alamat" required name="alamat" aria-describedby="alamat" placeholder="Masukan Alamat Pasien" value="<?= set_value('alamat') ?>">
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="kota">kota</label>
-                                    <input type="text" class="form-control" id="kota" required name="negara" aria-describedby="kota" placeholder="Masukan kota Pasien">
+                                    <input type="text" class="form-control" id="kota" required name="negara" aria-describedby="kota" placeholder="Masukan kota Pasien" value="<?= set_value('kota') ?>">
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="provinsi">provinsi</label>
-                                    <input type="text" class="form-control" id="provinsi" required name="provinsi" aria-describedby="provinsi" placeholder="Masukan provinsi Pasien">
+                                    <input type="text" class="form-control" id="provinsi" required name="provinsi" aria-describedby="provinsi" placeholder="Masukan provinsi Pasien" value="<?= set_value('provinsi') ?>">
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="Negara">Negara</label>
-                                    <input type="text" class="form-control" id="Negara" required name="kota" aria-describedby="Negara" placeholder="Masukan Negara Pasien">
+                                    <input type="text" class="form-control" id="Negara" required name="kota" aria-describedby="Negara" placeholder="Masukan Negara Pasien" value="<?= set_value('negara') ?>">
                                 </div>
 
 

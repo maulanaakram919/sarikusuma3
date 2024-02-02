@@ -55,13 +55,64 @@ class Admin extends CI_Controller
 		$data['title'] 					= 'Daftar Pasien';
 		$data['username'] 				= $this->session->userdata();
 		$data['detail_user']			= $this->db->get('data_user')->result_array();
-		$this->load->view('admin/header', $data);
-		$this->load->view('admin/sidebar', $data);
-		$this->load->view('admin/navbar', $data);
-		$this->load->view('admin/pasien', $data);
-		// $this->load->view('admin/main', $data);
-		$this->load->view('admin/script', $data);
-		// $this->load->view('admin/footer', $data);
+		$nama 			= htmlspecialchars($this->input->post('nama'));
+		$no_ktp 		= htmlspecialchars($this->input->post('no_ktp'));
+		$email 			= htmlspecialchars($this->input->post('email'));
+		$whatsapp 		= htmlspecialchars($this->input->post('whatsapp'));
+		$ttl 			= htmlspecialchars($this->input->post('ttl'));
+		$agama 			= htmlspecialchars($this->input->post('agama'));
+		$jk 			= htmlspecialchars($this->input->post('jk'));
+		$alamat 		= htmlspecialchars($this->input->post('alamat'));
+		$kota 			= htmlspecialchars($this->input->post('kota'));
+		$provinsi 		= htmlspecialchars($this->input->post('provinsi'));
+		$negara 		= htmlspecialchars($this->input->post('negara'));
+		$this->form_validation->set_rules('nama', 'Nama Pasien', 'trim|required');
+		$this->form_validation->set_rules('no_ktp', 'KTP', 'trim|required|is_unique[data_user.no_ktp]');
+		$this->form_validation->set_rules('email', 'Email', 'trim|required');
+		$this->form_validation->set_rules('whatsapp', 'No WhatsApp', 'trim|required');
+		$this->form_validation->set_rules('ttl', 'Tanggal Lahir', 'trim|required');
+		$this->form_validation->set_rules('agama', 'Agama', 'trim|required');
+		$this->form_validation->set_rules('jk', 'Jenis Kelamin', 'trim|required');
+		$this->form_validation->set_rules('alamat', 'Alamat', 'trim|required');
+		$this->form_validation->set_rules('kota', 'Kota', 'trim|required');
+		$this->form_validation->set_rules('provinsi', 'Provinsi', 'trim|required');
+		$this->form_validation->set_rules('negara', 'Negara', 'trim|required');
+		if ($this->form_validation->run() == false) {
+			$this->load->view('admin/header', $data);
+			$this->load->view('admin/sidebar', $data);
+			$this->load->view('admin/navbar', $data);
+			$this->load->view('admin/pasien', $data);
+			// $this->load->view('admin/main', $data);
+			$this->load->view('admin/script', $data);
+			// $this->load->view('admin/footer', $data);
+		} else {
+			$data = [
+				'nama'  => $nama,
+				'no_ktp'  => $no_ktp,
+				'email'  => $email,
+				'whatsapp'  => $whatsapp,
+				'tgl_lahir'  => $ttl,
+				'agama'  => $agama,
+				'jk'  => $jk,
+				'alamat'  => $alamat,
+				'kota'  => $kota,
+				'provinsi'  => $provinsi,
+				'negara'  => $negara,
+				'date_created' 		=> date('Y-m-d H:i:sa')
+			];
+			$res = $this->db->insert('data_user', $data);
+			if ($res) {
+				$this->session->set_flashdata('message', '<div class="alert alert-success  text-center" 												role="alert">
+							  Data Berhasil Ditambahkan
+							</div>');
+				redirect('admin/pasien');
+			} else {
+				$this->session->set_flashdata('message', '<div class="alert alert-danger  text-center" 												role="alert">
+							  Data Gagal Ditambahkan
+							</div>');
+				redirect('admin/pasien');
+			}
+		}
 	}
 	public function reservasi()
 	{
@@ -511,32 +562,35 @@ class Admin extends CI_Controller
 		$kota 			= $this->input->post('kota');
 		$provinsi 		= $this->input->post('provinsi');
 		$negara 		= $this->input->post('negara');
-
-		$data = [
-			'nama'  => $nama,
-			'no_ktp'  => $no_ktp,
-			'email'  => $email,
-			'whatsapp'  => $whatsapp,
-			'tgl_lahir'  => $ttl,
-			'agama'  => $agama,
-			'jk'  => $jk,
-			'alamat'  => $alamat,
-			'kota'  => $kota,
-			'provinsi'  => $provinsi,
-			'negara'  => $negara,
-			'date_created' 		=> date('Y-m-d H:i:sa')
-		];
-		$res = $this->db->insert('data_user', $data);
-		if ($res) {
-			$this->session->set_flashdata('message', '<div class="alert alert-success  text-center" 												role="alert">
+		$this->form_validation->set_rules('no_ktp', 'KTP', 'trim|required|is_unique[data_user.no_ktp]');
+		if ($this->form_validation->run() == false) {
+		} else {
+			$data = [
+				'nama'  => $nama,
+				'no_ktp'  => $no_ktp,
+				'email'  => $email,
+				'whatsapp'  => $whatsapp,
+				'tgl_lahir'  => $ttl,
+				'agama'  => $agama,
+				'jk'  => $jk,
+				'alamat'  => $alamat,
+				'kota'  => $kota,
+				'provinsi'  => $provinsi,
+				'negara'  => $negara,
+				'date_created' 		=> date('Y-m-d H:i:sa')
+			];
+			$res = $this->db->insert('data_user', $data);
+			if ($res) {
+				$this->session->set_flashdata('message', '<div class="alert alert-success  text-center" 												role="alert">
 							  Data Berhasil Ditambahkan
 							</div>');
-			redirect('admin/pasien');
-		} else {
-			$this->session->set_flashdata('message', '<div class="alert alert-danger  text-center" 												role="alert">
+				redirect('admin/pasien');
+			} else {
+				$this->session->set_flashdata('message', '<div class="alert alert-danger  text-center" 												role="alert">
 							  Data Gagal Ditambahkan
 							</div>');
-			redirect('admin/pasien');
+				redirect('admin/pasien');
+			}
 		}
 	}
 	public function addTerapis()

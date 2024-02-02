@@ -18,6 +18,8 @@ class Login extends CI_Controller
 		}
 	}
 
+
+	// function untuk login
 	private function _login()
 	{
 		$username 		 	= htmlspecialchars($this->input->post('username'));
@@ -37,4 +39,5 @@ class Login extends CI_Controller
 			redirect('admin');
 		}
 	}
+	// end function untuk login
 }
