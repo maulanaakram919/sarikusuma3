@@ -178,14 +178,15 @@ class Admin_model extends CI_Model
                     history_transaksi
                     ON history_transaksi.id_reservasi = reservasi.id
                     WHERE
-                    reservasi.tanggal_terapi BETWEEN '" . $mulai . "' AND '" . $sampai . "'
+                    reservasi.tanggal_terapi BETWEEN '" . $mulaiUser . "' AND '" . $sampaiUser . "'
                    
                     AND 
                     reservasi.status = 1
                   
                     GROUP BY reservasi.tanggal_terapi,data_user.id
                     ORDER BY reservasi.id asc";
-
+        var_dump($query);
+        die;
         $res = $this->db->query($query);
         return $res;
     }
