@@ -54,7 +54,8 @@ class Admin extends CI_Controller
 	{
 		$data['title'] 					= 'Daftar Pasien';
 		$data['username'] 				= $this->session->userdata();
-		$data['detail_user']			= $this->db->get('data_user')->result_array();
+		$data['detail_user']			= $this->db->get_where('data_user', ['active' => 1])->result_array();
+
 		$nama 			= htmlspecialchars($this->input->post('nama'));
 		$no_ktp 		= htmlspecialchars($this->input->post('no_ktp'));
 		$email 			= htmlspecialchars($this->input->post('email'));
@@ -98,6 +99,7 @@ class Admin extends CI_Controller
 				'kota'  => $kota,
 				'provinsi'  => $provinsi,
 				'negara'  => $negara,
+				'active'  => 1,
 				'date_created' 		=> date('Y-m-d H:i:sa')
 			];
 			$res = $this->db->insert('data_user', $data);
@@ -120,7 +122,7 @@ class Admin extends CI_Controller
 		$data['username'] 				= $this->session->userdata();
 		$data['detail_user']			= $this->Admin_model->reservasi();
 		$data['layanan']				= $this->db->get('layanan')->result_array();
-		$data['nik']					= $this->db->get('data_user')->result_array();
+		$data['nik']					= $this->db->get_where('data_user', ['active' => 1])->result_array();
 		$this->load->view('admin/header', $data);
 		$this->load->view('admin/sidebar', $data);
 		$this->load->view('admin/navbar', $data);
@@ -134,7 +136,7 @@ class Admin extends CI_Controller
 		$data['title'] 					= 'Pemeriksaan';
 		$data['username'] 				= $this->session->userdata();
 		$data['detail_user']			= $this->Admin_model->reservasi();
-		$today							= date('d-m-Y') + 1;
+		$today							= '';
 		$data['pemeriksaan']			= $this->Admin_model->pemeriksaan($today);
 
 		$this->load->view('admin/header', $data);
@@ -150,7 +152,7 @@ class Admin extends CI_Controller
 		$data['title'] 					= 'History Rekam Medis';
 		$data['username'] 				= $this->session->userdata();
 		$data['detail_user']			= $this->Admin_model->reservasi();
-		$today							= '';
+		$today							= date('d-m-Y') + 1;
 		$data['pemeriksaan']			= $this->Admin_model->pemeriksaan($today);
 
 		$this->load->view('admin/header', $data);
@@ -797,9 +799,10 @@ class Admin extends CI_Controller
 	public function hapusUser()
 	{
 		$id = $this->input->post('id');
-
+		$id_user = $this->input->post('id_user');
 		$this->db->where('id', $id);
-		$res = $this->db->delete('data_user');
+		$this->db->set('active', 0);
+		$res = $this->db->update('data_user');
 		if ($res) {
 			echo 1;
 		} else {

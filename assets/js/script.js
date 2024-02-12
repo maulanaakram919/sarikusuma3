@@ -40,6 +40,7 @@ $(document).ready(function () {
 
     $('.deleteUser').click(function () {
         let id = $(this).data('delete');
+        let id_user = $(this).data('user');
 
         Swal.fire({
             title: "Apakah Anda Yakin?",
@@ -55,7 +56,9 @@ $(document).ready(function () {
                     url: base_url + '/admin/hapusUser',
                     method: 'post',
                     data: {
-                        id: id
+                        id: id,
+                        id_user: id_user
+
                     },
                     beforeSend: function () {
 

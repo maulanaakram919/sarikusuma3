@@ -218,7 +218,7 @@
                                         </div>
 
 
-                                        <button data-delete="<?= $d['id'] ?>" class="btn btn-danger deleteUser btn-sm">Delete</button>
+                                        <button data-user="<?= $d['id_user'] ?>" data-delete="<?= $d['id'] ?>" class="btn btn-danger deleteUser btn-sm">Delete</button>
                                     </div>
                                 </div>
 

@@ -24,6 +24,7 @@
                         <th class="text-center align-middle">Nama</th>
                         <th class="text-center align-middle">Email</th>
                         <th class="text-center align-middle">WhatsApp</th>
+                        <th class="text-center align-middle">Status</th>
                     </tr>
                 </thead>
                 <tbody class="dataUserRegistered">
@@ -34,6 +35,7 @@
                             <td><?= $du['nama'] ?></td>
                             <td><?= $du['email'] ?></td>
                             <td><?= $du['whatsapp'] ?></td>
+                            <td class="text-center"><?= $du['active'] == 1 ? 'Aktif' : 'Tidak Aktif' ?></td>
                         </tr>
                         <?php $i++ ?>
                     <?php endforeach; ?>

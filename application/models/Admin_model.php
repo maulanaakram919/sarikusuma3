@@ -17,6 +17,8 @@ class Admin_model extends CI_Model
                     data_user.id = reservasi.id_user
                     LEFT JOIN
                                     layanan ON layanan.id = reservasi.id_layanan
+                                    WHERE
+                                    data_user.active = 1
                                     ORDER BY
                                     reservasi.id DESC";
 
@@ -48,6 +50,8 @@ class Admin_model extends CI_Model
 					ON
 					layanan.id = reservasi.id_layanan
                     WHERE
+                    data_user.active = 1
+                    AND
                     reservasi.tanggal_terapi LIKE '%" . $date . "%'
                     GROUP BY reservasi.tanggal_terapi,data_user.id
                     ";
@@ -80,6 +84,8 @@ class Admin_model extends CI_Model
                     history_transaksi
                     ON history_transaksi.id_reservasi = reservasi.id
                     WHERE
+                    data_user.active = 1
+                    AND
                     reservasi.tanggal_terapi LIKE '%" . $date . "%'
                     AND 
                     reservasi.status = 1
@@ -128,6 +134,8 @@ class Admin_model extends CI_Model
                     FROM
                     data_user
                     WHERE
+                    active = 1
+                    AND
                     date_created BETWEEN '" . $mulai . "' AND '" . $sampai . "'";
 
         $res = $this->db->query($query);
@@ -149,6 +157,8 @@ class Admin_model extends CI_Model
                     ON
                     layanan.id = reservasi.id_layanan
                     WHERE
+                    data_user.active = 1
+                    AND
                     tanggal_terapi BETWEEN '" . $mulai . "' AND '" . $sampai . "'";
 
         $res = $this->db->query($query);
@@ -179,6 +189,8 @@ class Admin_model extends CI_Model
                     history_transaksi
                     ON history_transaksi.id_reservasi = reservasi.id
                     WHERE
+                    data_user.active = 1
+                    AND
                     reservasi.tanggal_terapi BETWEEN '" . $mulaiUser . "' AND '" . $sampaiUser . "'
                    
                     AND 
@@ -215,6 +227,8 @@ class Admin_model extends CI_Model
 					ON
 					layanan.id = reservasi.id_layanan
                     WHERE
+                    data_user.active = 1
+                    AND
                     reservasi.tanggal_terapi BETWEEN '" . $mulai . "' AND '" . $sampai . "'
                     GROUP BY reservasi.tanggal_terapi,data_user.id";
 
