@@ -82,7 +82,7 @@
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="Negara">Negara</label>
-                                    <input type="text" class="form-control" id="Negara" required name="kota" aria-describedby="Negara" placeholder="Masukan Negara Pasien" value="<?= set_value('negara') ?>">
+                                    <input type="text" class="form-control" id="Negara" required name="negara" aria-describedby="Negara" placeholder="Masukan Negara Pasien" value="<?= set_value('negara') ?>">
                                 </div>
 
 
@@ -193,14 +193,17 @@
                                                                 <label for="alamat">alamat</label>
                                                                 <input type="text" class="form-control" id="alamat" required name="alamat" aria-describedby="alamat" placeholder="Masukan Alamat Pasien" value="<?= $d['alamat'] ?>">
                                                             </div>
+
                                                             <div class="form-group mt-3">
                                                                 <label for="negara">Negara</label>
                                                                 <input type="text" class="form-control" id="negara" required name="negara" aria-describedby="negara" placeholder="Masukan Negara Pasien" value="<?= $d['negara'] ?>">
                                                             </div>
+
                                                             <div class="form-group mt-3">
                                                                 <label for="provinsi">provinsi</label>
                                                                 <input type="text" class="form-control" id="provinsi" required name="provinsi" aria-describedby="provinsi" placeholder="Masukan provinsi Pasien" value="<?= $d['provinsi'] ?>">
                                                             </div>
+
                                                             <div class="form-group mt-3">
                                                                 <label for="kota">Kota</label>
                                                                 <input type="text" class="form-control" id="kota" required name="kota" aria-describedby="kota" placeholder="Masukan kota Pasien" value="<?= $d['kota'] ?>">

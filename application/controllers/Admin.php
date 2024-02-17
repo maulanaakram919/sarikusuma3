@@ -50,6 +50,35 @@ class Admin extends CI_Controller
 		$this->load->view('admin/script', $data);
 		// $this->load->view('admin/footer', $data);
 	}
+	public function detal_laporan_rekam_medis()
+	{
+		$data['title'] 					= 'Detail Laporan Rekam Medis';
+		$data['username'] 				= $this->session->userdata();
+		$data['detail_user']			= $this->db->get('data_user')->result_array();
+		$this->load->view('admin/header', $data);
+		$this->load->view('admin/sidebar', $data);
+		$this->load->view('admin/navbar', $data);
+		$this->load->view('admin/detailLaporanRekamMedis', $data);
+		// $this->load->view('admin/main', $data);
+		$this->load->view('admin/script', $data);
+		// $this->load->view('admin/footer', $data);
+	}
+	public function detailLaporanPasien($id_user)
+	{
+		$data['title'] 					= 'Detail Laporan Rekam Medis Pasien';
+		$data['username'] 				= $this->session->userdata();
+		$data['detail_user']			= $this->db->get_where('data_user', ['id' => $id_user])->result_array();
+
+		$data['rekam_medis']			= $this->Admin_model->rekam_medis_pasien($id_user)->result_array();
+
+		$this->load->view('admin/header', $data);
+		$this->load->view('admin/sidebar', $data);
+		$this->load->view('admin/navbar', $data);
+		$this->load->view('admin/detailLaporanRekamMedisPasien', $data);
+		// $this->load->view('admin/main', $data);
+		$this->load->view('admin/script', $data);
+		// $this->load->view('admin/footer', $data);
+	}
 	public function pasien()
 	{
 		$data['title'] 					= 'Daftar Pasien';
@@ -623,16 +652,54 @@ class Admin extends CI_Controller
 	}
 	public function addObat()
 	{
+		$nama_obat 			= $this->input->post('nama_obat');
+		$harga 				= $this->input->post('harga');
+		$keterangan 		= $this->input->post('keterangan');
+		$upload_image 		= $_FILES['foto_obat'];
+		if ($upload_image['name'] != '') {
+			$config['allowed_types'] 	= '*';
+			$config['max_size']     	= '2048';
+			$config['upload_path'] 		= './assets/obat/';
 
-		$nama_obat 		= $this->input->post('nama_obat');
-		$harga 		= $this->input->post('harga');
+			$this->load->library('upload', $config);
+
+			// var_dump($this->upload->do_upload('icon'));die;
+			// jika upload icon berhasil
+
+			if (!$this->upload->do_upload('foto_obat')) {
+				$error = $this->upload->display_errors();
+				echo $error;
+
+				$this->session->set_flashdata('message', '<div class="alert alert-danger text-center"  												role="alert">
+															  ' . $error . '
+															</div>');
+				redirect('admin/dataObat');
+			}
+
+			if ($this->upload->do_upload('foto_obat')) {
+				$new_icon = $this->upload->data('file_name');
+				$data = [
+					'nama_obat'  		=> $nama_obat,
+					'image'  			=> $new_icon,
+					'harga'  			=> $harga,
+					'keterangan'  		=> $keterangan,
+					'date_created' 		=> date('Y-m-d H:i:sa')
+				];
+
+				$addMenu 		= $this->db->insert('data_obat', $data);
+				if ($addMenu) {
+					$this->session->set_flashdata('message', '<div class="alert alert-success text-center" 												role="alert">
+												  Your Menu Added
+												</div>');
+					redirect('admin/dataObat');
+				}
+			}
+		}
 
 
-		$data = [
-			'nama_obat'  => $nama_obat,
-			'harga'  => $harga,
-			'date_created' 		=> date('Y-m-d H:i:sa')
-		];
+
+
+
 		$res = $this->db->insert('data_obat', $data);
 		if ($res) {
 			$this->session->set_flashdata('message', '<div class="alert alert-success  text-center" 												role="alert">
@@ -720,24 +787,71 @@ class Admin extends CI_Controller
 		$id 				= $this->input->post('id');
 		$nama_obat 			= $this->input->post('nama_obat');
 		$harga 				= $this->input->post('harga');
-		$data = [
-			'nama_obat'  => $nama_obat,
-			'harga'  => $harga,
-			'date_modified' => date('Y-m-d H:i:sa')
-		];
-		$this->db->where('id', $id);
-		$res = $this->db->update('data_obat', $data);
+		$keterangan 		= $this->input->post('keterangan');
 
-		if ($res) {
-			$this->session->set_flashdata('message', '<div class="alert alert-success  text-center" 												role="alert">
+		$upload_image = $_FILES['foto_obat'];
+		if ($upload_image['name'] != '') {
+			$config['allowed_types'] 	= '*';
+			$config['max_size']     	= '2048';
+			$config['upload_path'] 		= './assets/obat/';
+
+			$this->load->library('upload', $config);
+
+			if (!$this->upload->do_upload('foto_obat')) {
+				$error = $this->upload->display_errors();
+				echo $error;
+
+				$this->session->set_flashdata('message', '<div class="alert alert-danger text-center"  												role="alert">
+															  ' . $error . '
+															</div>');
+				redirect('admin/dataObat');
+			}
+
+			if ($this->upload->do_upload('foto_obat')) {
+				$new_icon = $this->upload->data('file_name');
+				$data = [
+					'image'  => $new_icon,
+					'nama_obat'  => $nama_obat,
+					'harga'  => $harga,
+					'keterangan'  => $keterangan,
+					'date_modified' => date('Y-m-d H:i:sa')
+				];
+				$this->db->where('id', $id);
+				$res = $this->db->update('data_obat', $data);
+
+				if ($res) {
+					$this->session->set_flashdata('message', '<div class="alert alert-success  text-center" 												role="alert">
 							  Data Berhasil Diupdate
 							</div>');
-			redirect('admin/dataObat');
-		} else {
-			$this->session->set_flashdata('message', '<div class="alert alert-danger  text-center" 												role="alert">
+					redirect('admin/dataObat');
+				} else {
+					$this->session->set_flashdata('message', '<div class="alert alert-danger  text-center" 												role="alert">
 							  Data Gagal Diupdate
 							</div>');
-			redirect('admin/dataObat');
+					redirect('admin/dataObat');
+				}
+			}
+		} else {
+			$data = [
+				'nama_obat'  => $nama_obat,
+				'harga'  => $harga,
+				'keterangan'  => $keterangan,
+				'date_modified' => date('Y-m-d H:i:sa')
+			];
+			$this->db->where('id', $id);
+			$res = $this->db->update('data_obat', $data);
+
+			if ($res) {
+				$this->session->set_flashdata('message', '<div class="alert alert-success  text-center" 												role="alert">
+							  Data Berhasil Diupdate
+							</div>');
+				redirect('admin/dataObat');
+			} else {
+				$this->session->set_flashdata('message', '<div class="alert alert-danger  text-center" 												role="alert">
+							  Data Gagal Diupdate
+							</div>');
+				redirect('admin/dataObat');
+			}
 		}
 	}
 	public function editLayanan()

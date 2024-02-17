@@ -235,4 +235,45 @@ class Admin_model extends CI_Model
         $res = $this->db->query($query);
         return $res;
     }
+    public function rekam_medis_pasien($id_user)
+    {
+        $query = "  SELECT
+                    data_user.nama,
+                    reservasi.tanggal_terapi,
+                    rekam_medis.layanan,
+                    rekam_medis.mata_kanan_minus,
+                    rekam_medis.mata_kiri_minus,
+                    rekam_medis.mata_kanan_plus,
+                    rekam_medis.mata_kiri_plus,
+                    rekam_medis.buta_warna,
+                    rekam_medis.buta_warna_parsial,
+                    rekam_medis.buta_warna_total,
+                    rekam_medis.lampu15Titik,
+                    rekam_medis.lampuTerangGelap,
+                    rekam_medis.stikMagnet,
+                    rekam_medis.osilatorListrik,
+                    rekam_medis.snelled,
+                    rekam_medis.kesimpulan,
+                    data_obat.nama_obat
+                    FROM
+                    rekam_medis
+                    LEFT JOIN
+                    reservasi
+                    ON reservasi.id = rekam_medis.id_reservasi
+                    LEFT JOIN
+                    data_user
+                    ON
+                    data_user.id = rekam_medis.id_user
+                    LEFT JOIN
+                    data_obat
+                    ON
+                    data_obat.id = rekam_medis.obat
+                    WHERE
+                    rekam_medis.id_user = $id_user
+                    ORDER BY rekam_medis.id desc
+                    ";
+
+        $res = $this->db->query($query);
+        return $res;
+    }
 }

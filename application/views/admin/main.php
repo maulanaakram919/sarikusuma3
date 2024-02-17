@@ -12,7 +12,7 @@
 
 
     <section class="statis mt-4 text-center">
-        <div class="row justify-content-around">
+        <div class="row justify-content-center">
 
             <div class="col-md-6 col-lg-3 mb-4 mb-lg-0 rekap_user">
                 <div class="box bg-danger p-3">
@@ -20,6 +20,14 @@
                     <h3><?= $jumlah_register["id"] ?></h3>
                     <p class="lead">User registered</p>
                     <small><a href="<?= base_url('admin/detail_user') ?>">detail</a></small>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-4 mb-lg-0 rekap_user">
+                <div class="box bg-info p-3">
+                    <i class="uil-document-layout-center"></i>
+                    <h3>Laporan Rekam Medis</h3>
+                    <p class="lead">Sari Kusuma</p>
+                    <small><a href="<?= base_url('admin/detal_laporan_rekam_medis') ?>">detail</a></small>
                 </div>
             </div>
             <!-- <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
