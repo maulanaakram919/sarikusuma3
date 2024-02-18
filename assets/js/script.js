@@ -1498,7 +1498,16 @@ $(document).ready(function () {
                 $('.dataUserRegistered').html(isi);
                 $('.tableReservasi').html(isiReservasi);
                 $('.loadDataTransaksi').html(isiHistoryPembayaran);
-                $('.tablePemeriksaan').html(isiReservasi);
+                let URL = window.location.href;
+                var arr = URL.split('/');//arr[0]='example.com'
+                if (arr[5] == 'historyRekamMedis') {
+                    $('.tablePemeriksaan').html(isiReservasi);
+                } else {
+                    $('.tablePemeriksaan').html(isiPemeriksan);
+                }
+
+
+
                 $('.tabledata ').dataTable();
 
 

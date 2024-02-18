@@ -35,7 +35,9 @@
                             <td><?= $du['nama'] ?></td>
                             <td><?= $du['email'] ?></td>
                             <td><?= $du['whatsapp'] ?></td>
-                            <td class="text-center"><?= $du['active'] == 1 ? 'Aktif' : 'Tidak Aktif' ?></td>
+                            <td class="text-center <?= $du['active'] == 1 ? "text-success" : "text-danger" ?>">
+                                <?= $du['active'] == 1 ? 'Aktif' : 'Tidak Aktif' ?>
+                            </td>
                         </tr>
                         <?php $i++ ?>
                     <?php endforeach; ?>

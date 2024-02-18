@@ -26,7 +26,7 @@
                 <div class="card-header">
                     <?= $title ?>
                 </div>
-                <div class="card-body">
+                <div class="card-body ">
                     <p>Data Pasien</p>
 
 
@@ -145,67 +145,72 @@
                         </div>
                     <?php endfor ?>
 
-                    <table class="table table-sm table-bordered table-hover table-striped mt-5 tabledata">
-                        <thead>
-                            <tr>
-                                <th rowspan="2" class="align-middle text-center">No</th>
-                                <th rowspan="2" class="align-middle text-center">Tanggal Terapi</th>
-                                <th rowspan="2" class="align-middle text-center">Layanan</th>
-                                <th colspan="2" class="align-middle text-center">Tajam Pengelihatan Minus</th>
-                                <th colspan="2" class="align-middle text-center">Tajam Pengelihatan Plus</th>
-                                <th colspan="3" class="align-middle text-center">Tajam Penglihatan Warna</th>
-                                <th colspan="5" class="align-middle text-center">Pemeriksaan Meliputi</th>
-                                <th rowspan="2" class="align-middle text-center">Vitamin</th>
-                                <th rowspan="2" class="align-middle text-center">Kesimpulan</th>
-                            </tr>
-                            <tr>
-                                <th class="align-middle text-center">Mata Kanan</th>
-                                <th class="align-middle text-center">Mata Kiri</th>
-                                <th class="align-middle text-center">Mata Kanan</th>
-                                <th class="align-middle text-center">Mata Kiri</th>
-                                <th class="align-middle text-center">Buta Warna </th>
-                                <th class="align-middle text-center">Buta Warna Parsial</th>
-                                <th class="align-middle text-center">Buta Warna Total</th>
-                                <th class="align-middle text-center">Lampu 15 Titik</th>
-                                <th class="align-middle text-center">Lampu Terang Gelap</th>
-                                <th class="align-middle text-center">Osilator Listrik</th>
-                                <th class="align-middle text-center">Stik Magnet</th>
-                                <th class="align-middle text-center">Snellen Chart minus & plus</th>
+                    <div class="row">
+                        <div class="col table-responsive">
+                            <table class="table table-sm table-bordered table-hover table-striped mt-5 tabledata">
+                                <thead>
+                                    <tr>
+                                        <th rowspan="2" class="align-middle text-center">No</th>
+                                        <th rowspan="2" class="align-middle text-center">Tanggal Terapi</th>
+                                        <th rowspan="2" class="align-middle text-center">Layanan</th>
+                                        <th colspan="2" class="align-middle text-center">Tajam Pengelihatan Minus</th>
+                                        <th colspan="2" class="align-middle text-center">Tajam Pengelihatan Plus</th>
+                                        <th colspan="3" class="align-middle text-center">Tajam Penglihatan Warna</th>
+                                        <th colspan="5" class="align-middle text-center">Pemeriksaan Meliputi</th>
+                                        <th rowspan="2" class="align-middle text-center">Vitamin</th>
+                                        <th rowspan="2" class="align-middle text-center">Kesimpulan</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="align-middle text-center">Mata Kanan</th>
+                                        <th class="align-middle text-center">Mata Kiri</th>
+                                        <th class="align-middle text-center">Mata Kanan</th>
+                                        <th class="align-middle text-center">Mata Kiri</th>
+                                        <th class="align-middle text-center">Buta Warna </th>
+                                        <th class="align-middle text-center">Buta Warna Parsial</th>
+                                        <th class="align-middle text-center">Buta Warna Total</th>
+                                        <th class="align-middle text-center">Lampu 15 Titik</th>
+                                        <th class="align-middle text-center">Lampu Terang Gelap</th>
+                                        <th class="align-middle text-center">Osilator Listrik</th>
+                                        <th class="align-middle text-center">Stik Magnet</th>
+                                        <th class="align-middle text-center">Snellen Chart minus & plus</th>
 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php $i = 1; ?>
-                            <?php foreach ($rekam_medis as $re) : ?>
-                                <?php
-                                $diss = $id_terapis == $re['id_terapis'] ? "" : "disabled";
-                                ?>
-                                <tr data-toggle="modal" data-target="#updateRekamMedis<?= $re['id_rekam'] ?>">
-                                    <td class="text-center align-middle"><?= $i; ?></td>
-                                    <td class="text-center align-middle"><?= $re['tanggal_terapi']; ?></td>
-                                    <td class="text-center align-middle"><?= $re['layanan']; ?></td>
-                                    <td class="text-center align-middle"><?= $re['mata_kanan_minus']; ?></td>
-                                    <td class="text-center align-middle"><?= $re['mata_kiri_minus']; ?></td>
-                                    <td class="text-center align-middle"><?= $re['mata_kanan_plus']; ?></td>
-                                    <td class="text-center align-middle"><?= $re['mata_kiri_plus']; ?></td>
-                                    <td class="text-center align-middle"><?= $re['buta_warna']; ?></td>
-                                    <td class="text-center align-middle"><?= $re['buta_warna_parsial']; ?></td>
-                                    <td class="text-center align-middle"><?= $re['buta_warna_total']; ?></td>
-                                    <td class="text-center align-middle"><?= $re['lampu15Titik']; ?></td>
-                                    <td class="text-center align-middle"><?= $re['lampuTerangGelap']; ?></td>
-                                    <td class="text-center align-middle"><?= $re['stikMagnet']; ?></td>
-                                    <td class="text-center align-middle"><?= $re['osilatorListrik']; ?></td>
-                                    <td class="text-center align-middle"><?= $re['snelled']; ?></td>
-                                    <td class="text-center align-middle"><?= $re['nama_obat']; ?></td>
-                                    <td class="text-center align-middle"><?= $re['kesimpulan']; ?></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php $i = 1; ?>
+                                    <?php foreach ($rekam_medis as $re) : ?>
+                                        <?php
+                                        $diss = $id_terapis == $re['id_terapis'] ? "" : "disabled";
+                                        ?>
+                                        <tr data-toggle="modal" data-target="#updateRekamMedis<?= $re['id_rekam'] ?>">
+                                            <td class="text-center align-middle"><?= $i; ?></td>
+                                            <td class="text-center align-middle"><?= $re['tanggal_terapi']; ?></td>
+                                            <td class="text-center align-middle"><?= $re['layanan']; ?></td>
+                                            <td class="text-center align-middle"><?= $re['mata_kanan_minus']; ?></td>
+                                            <td class="text-center align-middle"><?= $re['mata_kiri_minus']; ?></td>
+                                            <td class="text-center align-middle"><?= $re['mata_kanan_plus']; ?></td>
+                                            <td class="text-center align-middle"><?= $re['mata_kiri_plus']; ?></td>
+                                            <td class="text-center align-middle"><?= $re['buta_warna']; ?></td>
+                                            <td class="text-center align-middle"><?= $re['buta_warna_parsial']; ?></td>
+                                            <td class="text-center align-middle"><?= $re['buta_warna_total']; ?></td>
+                                            <td class="text-center align-middle"><?= $re['lampu15Titik']; ?></td>
+                                            <td class="text-center align-middle"><?= $re['lampuTerangGelap']; ?></td>
+                                            <td class="text-center align-middle"><?= $re['stikMagnet']; ?></td>
+                                            <td class="text-center align-middle"><?= $re['osilatorListrik']; ?></td>
+                                            <td class="text-center align-middle"><?= $re['snelled']; ?></td>
+                                            <td class="text-center align-middle"><?= $re['nama_obat']; ?></td>
+                                            <td class="text-center align-middle"><?= $re['kesimpulan']; ?></td>
 
 
-                                </tr>
-                                <?php $i++; ?>
-                            <?php endforeach; ?>
+                                        </tr>
+                                        <?php $i++; ?>
+                                    <?php endforeach; ?>
 
-                        </tbody>
-                    </table>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
 
 
                 </div>

@@ -25,8 +25,8 @@
             <div class="col-md-6 col-lg-3 mb-4 mb-lg-0 rekap_user">
                 <div class="box bg-info p-3">
                     <i class="uil-document-layout-center"></i>
-                    <h3>Laporan Rekam Medis</h3>
-                    <p class="lead">Sari Kusuma</p>
+                    <h3>Laporan </h3>
+                    <p class="lead">Rekam Medis</p>
                     <small><a href="<?= base_url('admin/detal_laporan_rekam_medis') ?>">detail</a></small>
                 </div>
             </div>
