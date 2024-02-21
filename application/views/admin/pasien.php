@@ -74,7 +74,7 @@
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="kota">kota</label>
-                                    <input type="text" class="form-control" id="kota" required name="negara" aria-describedby="kota" placeholder="Masukan kota Pasien" value="<?= set_value('kota') ?>">
+                                    <input type="text" class="form-control" id="kota" required name="kota" aria-describedby="kota" placeholder="Masukan kota Pasien" value="<?= set_value('kota') ?>">
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="provinsi">provinsi</label>
