@@ -108,6 +108,9 @@ class Admin extends CI_Controller
 		$this->form_validation->set_rules('provinsi', 'Provinsi', 'trim|required');
 		$this->form_validation->set_rules('negara', 'Negara', 'trim|required');
 		if ($this->form_validation->run() == false) {
+
+			// var_dump(1);
+			// die;
 			$this->load->view('admin/header', $data);
 			$this->load->view('admin/sidebar', $data);
 			$this->load->view('admin/navbar', $data);
@@ -116,6 +119,9 @@ class Admin extends CI_Controller
 			$this->load->view('admin/script', $data);
 			// $this->load->view('admin/footer', $data);
 		} else {
+
+			// var_dump(2);
+			// die;
 			$data = [
 				'nama'  => $nama,
 				'no_ktp'  => $no_ktp,
