@@ -1017,13 +1017,31 @@ $(document).ready(function () {
                 $('.tablePemeriksaan').html('');
                 $('.tabledata ').dataTable().fnDestroy();
                 let isi = '';
+                let isiLaporanRekamMEdis = '';
                 let no = 1;
+                let active = '';
+                let color = "";
                 data.userRegistered.forEach(e => {
+                    if (e.active == 1) {
+                        active = "Aktif";
+                        color = "text-success";
+                    } else {
+                        active = "Tidak Aktif";
+                        color = "text-danger";
+                    }
                     isi += `  <tr>
                                 <td class="text-center">`+ no + `</td>
                                 <td>`+ e.nama + `</td>
                                 <td>`+ e.email + `></td>
                                 <td>`+ e.whatsapp + `</td>
+                                <td class="`+ color + `">` + active + `</td>
+                            </tr>`;
+                    isiLaporanRekamMEdis += `  <tr>
+                                <td class="text-center">`+ no + `</td>
+                                <td>`+ e.nama + `</td>
+                                <td>`+ e.email + `></td>
+                                <td>`+ e.whatsapp + `</td>
+                                <td><a href="detailLaporanPasien/`+ e.id + `">Lihat Laporan Pasien</a></td>
                             </tr>`;
                     no++;
                 });
@@ -1474,7 +1492,7 @@ $(document).ready(function () {
                                             <td class="align-middle text-center">`+ np + `</td>
                                             <td class="align-middle">`+ p['nama'] + `</td>
                                             <td class="align-middle text-center">`+ p['tgl_lahir'] + `</td>
-                                            <td class="align-middle text-center"><?= hitung_umur($d['tgl_lahir']) ?></td>
+                                            <td class="align-middle text-center">`+ usia(new Date(p.tgl_lahir)) + `</td>
                                             <td class="align-middle text-center">`+ jkReservasi + `</td>
                                            
 
@@ -1496,6 +1514,7 @@ $(document).ready(function () {
 
 
                 $('.dataUserRegistered').html(isi);
+                $('.dataUserLaporanRekamMedis').html(isiLaporanRekamMEdis);
                 $('.tableReservasi').html(isiReservasi);
                 $('.loadDataTransaksi').html(isiHistoryPembayaran);
                 let URL = window.location.href;
